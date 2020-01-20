@@ -4,7 +4,7 @@
 
 1. Download the source files using the following command:
 ```bash
-wget https://www.dropbox.com/s/c9lyuwz0yg2q0ik/PoSePath.zip
+wget https://www.dropbox.com/s/7xk5p7db3d9ij7l/PoSePath.zip
 ```
 2. After downloading, unzip the file and change the working directory to the `PoSePath` directory.
 
