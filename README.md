@@ -19,7 +19,7 @@ python run.py 88 95 846 2
 ```
   - A higher regularization score returns a smaller graph
   - use `python run.py -h` for detailed expalination and help
-  - the results are saved in `fig` (for a visulized graphs) and `pkl`(for a `dict` object) directories
+  - the results are saved in `fig` (for a visulized graphs - [[example]](https://github.com/Flower-Mt/PoSePath/blob/master/README.md)) and `pkl`(for a `dict` object) directories
   - index maps for drug and protein are in the `index-map` directory
   - results in `pool` directory help to select (drug, drug, side_effect) triples to analyse
   
