@@ -1,22 +1,39 @@
-import pickle
 from src.layers import *
 from src.utils import visualize_graph
 import argparse
+import textwrap
+import pickle
 import os
 
-
 # -------------- parse input parameters --------------
-parser = argparse.ArgumentParser()
-# parser.add_argument("root", type=str,
-#                     help="str - the path of ")
-parser.add_argument("drug_1", type=int,
-                    help="int - drug index from 0 to 283")
-parser.add_argument("drug_2", type=int,
-                    help="int - drug index from 0 to 283")
-parser.add_argument("side_effect", type=int,
-                    help="int - side effect index from 0 to 1152")
-parser.add_argument("regul_sore", type=float,
-                    help="float - higher sore --> smaller pp-subgraph")
+parser = argparse.ArgumentParser(
+    prog='PoSePath',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description="A package for detecting polypharmacy side effects pathway",
+    epilog=textwrap.dedent("""\
+        Examples:
+          - for the drug pair (D-88, D-95) and the side effect (SE-846)
+                $ python run.py 88 95 846 1
+          - for all drug pairs causing the side effect (SE-846 and SE-848)
+                $ python run.py * * 846,848 1
+          - for all side effects caused by the drug pairs (D-2, D-95), (D-2, D-107), (D-88, D-95), (D-88, D-107)
+                $ python run.py 2,88 95,107 2, * 1
+          - for the side effects (SE-846 and SE-848) caused by all drug pairs which include the durg (D-88)
+                $ python run.py 88 * * 1
+        """),
+)
+# //TODO: add combination mods
+parser.add_argument("drug_index_1", type=str, default='88',
+                    help="[int/int_list/*] from 0 to 283")
+parser.add_argument("drug_index_2", type=str, default='95',
+                    help="[int/int_list/*] from 0 to 283")
+parser.add_argument("side_effect_index", type=str, default='846',
+                    help="[int/int_list/*] from 0 to 1152")
+parser.add_argument("regul_sore", type=float, default=1.0,
+                    help="[float] higher sore -> smaller pp-subgraph")
+parser.add_argument("-v", "--version", action='version', version='%(prog)s 1.0')
+parser.print_help()
+
 args = parser.parse_args()
 
 
@@ -60,11 +77,14 @@ exp = Tip_explainer(model, data, device)
 
 
 # -------------- given a drug pair and a side effect --------------
-drug1, drug2, side_effect = args.drug_1, args.drug_2, args.side_effect
-result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
+# //TODO: change args from int to string (list of int)
+drug1, drug2, side_effect = args.drug_index_1, args.drug_index_2, args.side_effect_index
+# //TODO: the input of explain() has been changed
+result = exp.explain(int(drug1), int(drug2), int(side_effect), regulization=args.regul_sore)
 
 
 # -------------- visualize p-p subgraph and save with png format --------------
+# //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
 fig_name = '-'.join([str(drug1), str(drug2), str(side_effect), str(args.regul_sore)])
 
