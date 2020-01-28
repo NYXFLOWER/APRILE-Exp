@@ -275,7 +275,7 @@ class Tip_explainer(object):
         self.data = data
         self.device = device
 
-    def explain(self, drug1, drug2, side_effect, regulization=1):
+    def explain(self, drug_list_1, drug_list_2, side_effect_list, regulization=1):
 
         data = self.data
         model = self.model
@@ -299,9 +299,9 @@ class Tip_explainer(object):
         z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
         z = model.pd(z, data.pd_index, pd_static_edge_weights)
 
-        P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+        # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+        P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1)).mean()
         print(P.tolist())
-
 
         tmp = 0.0
         pre_mask.reset_parameters()
@@ -324,7 +324,8 @@ class Tip_explainer(object):
             z = model.pd(z, data.pd_index, pd_mask)
             # TODO:
 
-            P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+            # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+            P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1)).mean()
 
             EPS = 1e-7
 
