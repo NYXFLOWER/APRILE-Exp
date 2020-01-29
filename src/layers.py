@@ -300,12 +300,12 @@ class Tip_explainer(object):
         z = model.pd(z, data.pd_index, pd_static_edge_weights)
 
         # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
-        P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1)).mean()
+        P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
         print(P.tolist())
 
         tmp = 0.0
         pre_mask.reset_parameters()
-        for i in range(300):
+        for i in range(800):
             model.train()
             pre_mask.desaturate()
             optimizer.zero_grad()
@@ -325,24 +325,25 @@ class Tip_explainer(object):
             # TODO:
 
             # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
-            P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1)).mean()
-
+            P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
             EPS = 1e-7
 
             # TODO:
-            loss = torch.log(1 - P + EPS) / regulization + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
+            loss = torch.log(1 - P + EPS).sum() / regulization + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
             # loss = -  torch.log(P) + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
             # TODO:
 
             loss.backward()
             optimizer.step()
+            # print("Epoch:{}, loss:{}, prob:{}, pp_link_sum:{}, pd_link_sum:{}".format(i, loss.tolist(), P.tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
 
-            print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
+            print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
 
             if tmp == pp_mask.sum().tolist() + pd_mask.sum().tolist():
                 break
             else:
                 tmp = pp_mask.sum().tolist() + pd_mask.sum().tolist()
+
 
         pre_mask.saturate()
 
