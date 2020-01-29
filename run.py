@@ -1,5 +1,6 @@
 from src.layers import *
 from src.utils import visualize_graph
+from itertools import product
 import argparse
 import textwrap
 import pickle
@@ -23,26 +24,39 @@ parser = argparse.ArgumentParser(
         """),
 )
 # //TODO: add combination mods
-parser.add_argument("drug_index_1", type=str, default='88',
+parser.add_argument("drug_index_1", type=str,
                     help="[int/int_list/*] from 0 to 283")
-parser.add_argument("drug_index_2", type=str, default='95',
+parser.add_argument("drug_index_2", type=str,
                     help="[int/int_list/*] from 0 to 283")
-parser.add_argument("side_effect_index", type=str, default='846',
+parser.add_argument("side_effect_index", type=str,
                     help="[int/int_list/*] from 0 to 1152")
-parser.add_argument("regul_sore", type=float, default=1.0,
+parser.add_argument("regul_sore", type=float, default=1,
                     help="[float] higher sore -> smaller pp-subgraph")
 parser.add_argument("-v", "--version", action='version', version='%(prog)s 1.0')
-parser.print_help()
+parser.add_argument('-s', action='store_true', default=False,
+                    help="additional [flag] for training edges separately")
 
-args = parser.parse_args()
+args = parser.parse_args('88,57 1,95,55 28 1'.split())
 
+
+def args_parse(in_str):
+    if not isinstance(in_str, str):
+        print('the input arg parameter is not a string')
+        return
+    out = in_str.split(',')
+    return [int(i) for i in out]
+
+
+args.drug_index_1 = args_parse(args.drug_index_1)
+args.drug_index_2 = args_parse(args.drug_index_2)
+args.side_effect_index = args_parse(args.side_effect_index)
 
 # -------------- set working directory --------------
 root = os.path.abspath(os.getcwd())
 data_dir = root + '/data/'
 out_dir = root + '/out/'
 
-out_pkl_dir, out_fig_dir = out_dir + "/pkl", out_dir + "/fig"
+out_pkl_dir, out_fig_dir = out_dir + "pkl", out_dir + "fig"
 if not os.path.exists(out_pkl_dir):
     os.makedirs(out_pkl_dir)
 if not os.path.exists(out_fig_dir):
@@ -52,6 +66,26 @@ if not os.path.exists(out_fig_dir):
 # -------------- load data --------------
 with open(data_dir + 'tipexp_data.pkl', 'rb') as f:
     data = pickle.load(f)
+
+
+# -------------- parse drug pairs and side effects --------------
+# //TODO: change args from int to string (list of int)
+s = 28
+p = 0.98
+args.regul_score = 2.0
+r = data.train_range[s]
+tmp = data.train_idx[:, r[0]: r[1]]
+drug1, drug2 = tmp[0].tolist(), tmp[1].tolist()
+side_effect = [s for i in range(len(drug1))]
+#
+# for d1, d2, s in product(args.drug_index_1, args.drug_index_2, args.side_effect_index):
+#     s_data = data.dd_edge_index[s]
+#     d1, d2 = (d1, d2) if d1 < d2 else (d2, d1)
+#     if d2 in s_data[1, s_data[0]==d1]:
+#         drug1.append(d1)
+#         drug2.append(d2)
+#         side_effect.append(s)
+
 
 
 # -------------- identify device --------------
@@ -72,32 +106,46 @@ name = 'poly-' + str(nhids_gcn) + '-' + str(drug_dim)
 model.load_state_dict(torch.load(data_dir + name + '-model.pt'))
 
 
-# -------------- load explainer --------------
+# -------------- edge filter --------------
+data = data.to(device)
+model = model.to(device)
+model.eval()
+pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
+pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
+z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
+z = model.pd(z, data.pd_index, pd_static_edge_weights)
+P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1))
+# print(P.tolist())
+
+drug1 = torch.Tensor(drug1)[P > p].tolist()
+drug2 = torch.Tensor(drug2)[P > p].tolist()
+side_effect = [s for i in range(len(drug2))]
+
+# -------------- load and train explainer --------------
 exp = Tip_explainer(model, data, device)
-
-
-# -------------- given a drug pair and a side effect --------------
-# //TODO: change args from int to string (list of int)
-drug1, drug2, side_effect = args.drug_index_1, args.drug_index_2, args.side_effect_index
 # //TODO: the input of explain() has been changed
-result = exp.explain(int(drug1), int(drug2), int(side_effect), regulization=args.regul_sore)
-
+result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
+# print(result)
 
 # -------------- visualize p-p subgraph and save with png format --------------
 # //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
 fig_name = '-'.join([str(drug1), str(drug2), str(side_effect), str(args.regul_sore)])
 
-visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index,
-                out_fig_dir+"/{}.png".format(fig_name),
-                protein_name_dict=data.prot_idx_to_id,
-                drug_name_dict=data.drug_idx_to_id)
-
+# visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index,
+#                 out_fig_dir+"/{}.png".format(fig_name),
+#                 protein_name_dict=data.prot_idx_to_id,
+#                 drug_name_dict=data.drug_idx_to_id)
+visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
+                out_fig_dir+"/{}.png".format('test'))       # //TODO
 
 # -------------- save results as dictionary in a pickle file --------------
 out = {"pp_idx": pp_idx,
        "pp_weight": pp_weight,
        "pd_idx": pd_idx,
        "pd_weight": pd_weight}
-with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
+with open(out_pkl_dir + "/{}.pkl".format('test'), "wb") as f:
     pickle.dump(out, f)
+
+print(drug1)
+print(drug2)
