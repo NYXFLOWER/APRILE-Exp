@@ -75,16 +75,11 @@ p = 0.98
 args.regul_score = 2.0
 r = data.train_range[s]
 tmp = data.train_idx[:, r[0]: r[1]]
-drug1, drug2 = tmp[0].tolist(), tmp[1].tolist()
+
+
+# drug1, drug2 = tmp[0].tolist(), tmp[1].tolist()
+drug1, drug2 = [91], [84]
 side_effect = [s for i in range(len(drug1))]
-#
-# for d1, d2, s in product(args.drug_index_1, args.drug_index_2, args.side_effect_index):
-#     s_data = data.dd_edge_index[s]
-#     d1, d2 = (d1, d2) if d1 < d2 else (d2, d1)
-#     if d2 in s_data[1, s_data[0]==d1]:
-#         drug1.append(d1)
-#         drug2.append(d2)
-#         side_effect.append(s)
 
 
 
@@ -137,14 +132,14 @@ fig_name = '-'.join([str(drug1), str(drug2), str(side_effect), str(args.regul_so
 #                 protein_name_dict=data.prot_idx_to_id,
 #                 drug_name_dict=data.drug_idx_to_id)
 visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
-                out_fig_dir+"/{}.png".format('test'), hiden=False)       # //TODO
+                out_fig_dir+"/{}.png".format(fig_name), hiden=False)       # //TODO
 
 # -------------- save results as dictionary in a pickle file --------------
 out = {"pp_idx": pp_idx,
        "pp_weight": pp_weight,
        "pd_idx": pd_idx,
        "pd_weight": pd_weight}
-with open(out_pkl_dir + "/{}.pkl".format('test'), "wb") as f:
+with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
     pickle.dump(out, f)
 
 print(drug1)
