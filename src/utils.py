@@ -129,9 +129,9 @@ def get_edge_index_from_coo(mat, bidirection):
         return torch.from_numpy(tmp.astype(np.int64))
 
 
-def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, out_path,
-                    protein_name_dict=None, drug_name_dict=None):
-    '''
+def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, d1, d2, out_path,
+                    protein_name_dict=None, drug_name_dict=None, hiden=True):
+    """
     :param pp_idx: integer tensor of the shape (2, n_pp_edges)
     :param pp_weight: float tensor of the shape (1, n_pp_edges), values within (0,1)
     :param pd_idx: integer tensor of the shape (2, n_pd_edges)
@@ -142,7 +142,7 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, out_path,
     1. use different color for pp and pd edges
     2. annotate the weight of each edge near the edge (or annotate with the tranparentness of edges for each edge)
     3. annotate the name of each node near the node, if name_dict=None, then annotate with node's index
-    '''
+    """
     G = nx.Graph()
     pp_edge, pd_edge, pp_link = [], [], []
     p_node, d_node = set(), set()
@@ -168,20 +168,28 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, out_path,
         p_node.add(t1)
         d_node.add(t2)
 
-    # add underline pp edges
-    pp_edge_idx = pp_idx.tolist()
-    pp_edge_idx = set(zip(pp_edge_idx[0], pp_edge_idx[1]))
-    p_node_idx = list(set(pp_idx.flatten().tolist()))
-    pp_adj_idx = pp_adj.tolist()
-    pp_adj_idx = set(zip(pp_adj_idx[0], pp_adj_idx[1]))
+    # add dd edges
+    dd_edge =[]
+    for e in zip(d1, d2):
+        t1, t2 = drug_name_dict[int(e[0])], drug_name_dict[int(e[1])]
+        G.add_edge(t1, t2, weights=999)
+        dd_edge.append((t1, t2))
 
-    combins = [c for c in combinations(p_node_idx, 2)]
-    for i, j in combins:
-        if (i, j) in pp_adj_idx or (j, i) in pp_adj_idx:
-            if (i, j) not in pp_edge_idx and (j, i) not in pp_edge_idx:
-                G.add_edge(protein_name_dict[i], protein_name_dict[j], weights='0')
-                pp_link.append((protein_name_dict[i], protein_name_dict[j]))
-    print(len(pp_link))
+    if hiden:
+        # add underline pp edges
+        pp_edge_idx = pp_idx.tolist()
+        pp_edge_idx = set(zip(pp_edge_idx[0], pp_edge_idx[1]))
+        p_node_idx = list(set(pp_idx.flatten().tolist()))
+        pp_adj_idx = pp_adj.tolist()
+        pp_adj_idx = set(zip(pp_adj_idx[0], pp_adj_idx[1]))
+
+        combins = [c for c in combinations(p_node_idx, 2)]
+        for i, j in combins:
+            if (i, j) in pp_adj_idx or (j, i) in pp_adj_idx:
+                if (i, j) not in pp_edge_idx and (j, i) not in pp_edge_idx:
+                    G.add_edge(protein_name_dict[i], protein_name_dict[j], weights='0')
+                    pp_link.append((protein_name_dict[i], protein_name_dict[j]))
+        print(len(pp_link))
     # draw figure
     plt.figure(figsize=(40, 40))
 
@@ -194,8 +202,11 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, out_path,
 
     # draw edges and edge labels
     nx.draw_networkx_edges(G, pos, edgelist=pp_edge, width=2)
-    nx.draw_networkx_edges(G, pos, edgelist=pp_link, width=2, edge_color='gray', alpha=0.5)
+    if hiden:
+        nx.draw_networkx_edges(G, pos, edgelist=pp_link, width=2, edge_color='gray', alpha=0.5)
     nx.draw_networkx_edges(G, pos, edgelist=pd_edge, width=2, edge_color='g')
+    nx.draw_networkx_edges(G, pos, edgelist=dd_edge, width=2, edge_color='black', alpha=0.5)
+
     nx.draw_networkx_edge_labels(G, pos, font_size=10,
                                  edge_labels={(u, v): str(d['weights'])[:4] for
                                               u, v, d in G.edges(data=True)})

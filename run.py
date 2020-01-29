@@ -137,7 +137,7 @@ fig_name = '-'.join([str(drug1), str(drug2), str(side_effect), str(args.regul_so
 #                 protein_name_dict=data.prot_idx_to_id,
 #                 drug_name_dict=data.drug_idx_to_id)
 visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
-                out_fig_dir+"/{}.png".format('test'))       # //TODO
+                out_fig_dir+"/{}.png".format('test'), hiden=False)       # //TODO
 
 # -------------- save results as dictionary in a pickle file --------------
 out = {"pp_idx": pp_idx,
