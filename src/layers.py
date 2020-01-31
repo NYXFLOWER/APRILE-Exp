@@ -227,7 +227,6 @@ class Model(torch.nn.Module):
         self.mip = mip
 
 
-
 class Pre_mask(torch.nn.Module):
     def __init__(self, pp_n_link, pd_n_link):
         super(Pre_mask, self).__init__()
@@ -241,6 +240,7 @@ class Pre_mask(torch.nn.Module):
         self.pp_weight.data.fill_(0.99)
         self.pd_weight.data.fill_(0.99)
 
+    # no change when at 0 or 1
     def desaturate(self):
         mask = self.pp_weight.data > 0.99
         self.pp_weight.data[mask] = 0.99
@@ -301,11 +301,13 @@ class Tip_explainer(object):
 
         # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
         P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
-        print(P.tolist())
+
+        if len(drug_list_1) < 10:
+            print(P.tolist())
 
         tmp = 0.0
         pre_mask.reset_parameters()
-        for i in range(800):
+        for i in range(2000):
             model.train()
             pre_mask.desaturate()
             optimizer.zero_grad()
@@ -339,6 +341,7 @@ class Tip_explainer(object):
 
             print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
 
+            # 没有update就结束，所有weight都做比较，几乎update前后和是不变的
             if tmp == pp_mask.sum().tolist() + pd_mask.sum().tolist():
                 break
             else:

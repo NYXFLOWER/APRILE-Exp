@@ -1,6 +1,5 @@
 from src.layers import *
-from src.utils import visualize_graph
-from itertools import product
+from src.utils import visualize_graph, args_parse
 import argparse
 import textwrap
 import pickle
@@ -30,26 +29,15 @@ parser.add_argument("drug_index_2", type=str,
                     help="[int/int_list/*] from 0 to 283")
 parser.add_argument("side_effect_index", type=str,
                     help="[int/int_list/*] from 0 to 1152")
-parser.add_argument("regul_sore", type=float, default=1,
+parser.add_argument("regul_sore", type=float, default=1.0,
                     help="[float] higher sore -> smaller pp-subgraph")
-parser.add_argument("-v", "--version", action='version', version='%(prog)s 1.0')
-parser.add_argument('-s', action='store_true', default=False,
-                    help="additional [flag] for training edges separately")
+parser.add_argument('-f', '--filter', action='store_const', default=0.98,
+                    help='[float] threshold probability')
+parser.add_argument('-a', '--ifaddition', action='store_true', default=False,
+                    help='add this flag for draw additional interactions')
+parser.add_argument("-v", "--version", action='version', version='%(prog)s 2.0')
+args = parser.parse_args()
 
-args = parser.parse_args('88,57 1,95,55 28 1'.split())
-
-
-def args_parse(in_str):
-    if not isinstance(in_str, str):
-        print('the input arg parameter is not a string')
-        return
-    out = in_str.split(',')
-    return [int(i) for i in out]
-
-
-args.drug_index_1 = args_parse(args.drug_index_1)
-args.drug_index_2 = args_parse(args.drug_index_2)
-args.side_effect_index = args_parse(args.side_effect_index)
 
 # -------------- set working directory --------------
 root = os.path.abspath(os.getcwd())
@@ -70,17 +58,9 @@ with open(data_dir + 'tipexp_data.pkl', 'rb') as f:
 
 # -------------- parse drug pairs and side effects --------------
 # //TODO: change args from int to string (list of int)
-s = 28
-p = 0.98
-args.regul_score = 2.0
-r = data.train_range[s]
-tmp = data.train_idx[:, r[0]: r[1]]
-
-
-# drug1, drug2 = tmp[0].tolist(), tmp[1].tolist()
-drug1, drug2 = [91], [84]
-side_effect = [s for i in range(len(drug1))]
-
+drug1, drug2, side_effect = args_parse(args.drug_index_1, args.drug_index_2,
+                                       args.side_effect_index, data.train_range,
+                                       data.train_et, data.train_idx)
 
 
 # -------------- identify device --------------
@@ -112,9 +92,9 @@ z = model.pd(z, data.pd_index, pd_static_edge_weights)
 P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1))
 # print(P.tolist())
 
-drug1 = torch.Tensor(drug1)[P > p].tolist()
-drug2 = torch.Tensor(drug2)[P > p].tolist()
-side_effect = [s for i in range(len(drug2))]
+drug1 = torch.Tensor(drug1)[P > args.filter].tolist()
+drug2 = torch.Tensor(drug2)[P > args.filter].tolist()
+side_effect = torch.Tensor(side_effect)[P > args.filter].tolist()
 
 # -------------- load and train explainer --------------
 exp = Tip_explainer(model, data, device)
@@ -125,14 +105,24 @@ result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
 # -------------- visualize p-p subgraph and save with png format --------------
 # //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
-fig_name = '-'.join([str(drug1), str(drug2), str(side_effect), str(args.regul_sore)])
+
+if len(drug1) > 5:
+    fig_name = 'tmp'
+else:
+    fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
+                         args.side_effect_index, str(args.regul_sore),
+                         str(args.filter)])
 
 # visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index,
 #                 out_fig_dir+"/{}.png".format(fig_name),
 #                 protein_name_dict=data.prot_idx_to_id,
 #                 drug_name_dict=data.drug_idx_to_id)
 visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
-                out_fig_dir+"/{}.png".format(fig_name), hiden=False)       # //TODO
+                out_fig_dir+"/{}.png".format(fig_name),
+                hiden=args.ifaddition,
+                size=(100, 100),
+                protein_name_dict=data.prot_idx_to_id,
+                drug_name_dict=data.drug_idx_to_id)       # //TODO
 
 # -------------- save results as dictionary in a pickle file --------------
 out = {"pp_idx": pp_idx,
@@ -144,3 +134,4 @@ with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
 
 print(drug1)
 print(drug2)
+print(side_effect)
