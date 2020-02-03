@@ -1,76 +1,14 @@
 # PoSePath
 
-## How To Use
+An optimization model for explaining the decision-making of the TIP-based multi-relational link prediction model.
 
-##### 1. Download the source files using the following command:
-```bash
-wget (NA)
-```
-##### 2. After downloading, unzip the file and change the working directory to the `PoSePath` directory.
+### How To Use
 
-##### 3. For an interactive job on `cac` using GPUs, run the following (this example uses 1 GPU, 10 CPUs, and 40GB of memory for 8 hours):
-```bash
-salloc -p gpu --gres gpu:1 -c 10 --mem 40g -t 8:0:0
-```
-
-##### 4. interprete the drug-protein, protein-protein paths for polypharmacy side effect prediction. Run the following (this example for drug(indexed-88), drug(indexed-95) and side effect(indexed-846) with a regularization score of 2)
-```bash
-python run.py 88 95 846 2
-```
-  - A higher regularization score returns a smaller graph
-  - use `python run.py -h` for detailed expalination and help
-  - the results are saved in `fig` (for a visulized graphs - [[example]](https://github.com/Flower-Mt/PoSePath/blob/master/README.md)) and `pkl`(for a `dict` object) directories
-  - index maps for drug and protein are in the `index-map` directory
-  - results in `pool` directory help to select (drug, drug, side_effect) triples to analyse
- 
-##### 5. More examples:
-- for the drug pair (D-88, D-95) and the side effect (SE-846)
-```bash
-python run.py 88 95 846 1
-```
-- for all drug pairs causing the side effect (SE-846 and SE-848)
-```bash
-python run.py * * 846,848 1
-```
-- for all side effects caused by the drug pairs (D-2, D-95), (D-2, D-107), (D-88, D-95), (D-88, D-107)
-```bash
-python run.py 2,88 95,107 2, * 1
-```
-- for the side effects (SE-846 and SE-848) caused by all drug pairs which include the durg (D-88)
-```bash
-python run.py 88 * * 1
-```
-
-## About file name
-
-* `-[32, 64, 64]-128`: network structure
-* `-record file`: side-effect-wise score of auprc, auroc, ap scores of the model on test set
-* `-layerwise file`: side-effect-wise and layer-wise (explained below) scores of the model train set
-* `-edgewise file`: list all layer-wise scores for all drug pairs and side effects
-* `-with_p_feat`: protein features are parameters (tunable)
-* `-with_d_p_feat`: protein and drug features are parameters (tunable)
-* `all-side_effect`: averaged scores for different models (see explanation below)
-
-## About column names
-
-#### In `*-record.csv`:
-
-* `side effect`: name of each side effect
-
-* `side_effect_index`: index of each side effect in the code
-
-* `n_instance`: the number of appearance of each side-effect in dataset
-
-* `auprc` / `auroc` / `ap`: auprc, auprc, ap
-
-#### In `*-layerwise.csv` files:
-
-* `auprc-0`: the auprc score when the protein feature is the only input to the PD network
-
-* `auprc-1`: the auprc score when the protein feature and the output of 1st GCN are the input to the PD network
-
-* `auprc-2`: the auprc score when the protein feature, the output of 1st and 2nd GCNs are the input to the PD network
-
-
-
-A higher value of "`auprc-2` - `auprc-0`" means that protein-protein link contained more information than protein node information for side effect prediction.
+- Download this repository, and change the working directory to its root directory
+- Download example data and a trained model from web, and unzip it:
+    - `wget https://www.dropbox.com/s/2vv3te17s1rfajw/data.zip `
+    - `unzip data.zip`
+- make sure the following packages have been installed with the latest version: `goatools`, `cython`, `pytorch`, `pytorch-geometric`, `matplotlib`, `scikit-learn`, `networkx`.
+    - (Optitional) Create a test environment with Anaconda using `environment.yml` file.
+- Run `python run.py -h` to see detailed instructions and examples. 
+    - (Optitional) Run with GPU is recommanded (at least 20 times faster than using CPU only). 
