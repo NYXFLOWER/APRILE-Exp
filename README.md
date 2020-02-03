@@ -2,18 +2,18 @@
 
 ## How To Use
 
-1. Download the source files using the following command:
+##### 1. Download the source files using the following command:
 ```bash
-wget https://www.dropbox.com/s/v2awp09jluex1wc/PoSePath.zip
+wget (NA)
 ```
-2. After downloading, unzip the file and change the working directory to the `PoSePath` directory.
+##### 2. After downloading, unzip the file and change the working directory to the `PoSePath` directory.
 
-3. For an interactive job on `cac` using GPUs, run the following (this example uses 1 GPU, 10 CPUs, and 40GB of memory for 8 hours):
+##### 3. For an interactive job on `cac` using GPUs, run the following (this example uses 1 GPU, 10 CPUs, and 40GB of memory for 8 hours):
 ```bash
 salloc -p gpu --gres gpu:1 -c 10 --mem 40g -t 8:0:0
 ```
 
-4. interprete the drug-protein, protein-protein paths for polypharmacy side effect prediction. Run the following (this example for drug(indexed-88), drug(indexed-95) and side effect(indexed-846) with a regularization score of 2)
+##### 4. interprete the drug-protein, protein-protein paths for polypharmacy side effect prediction. Run the following (this example for drug(indexed-88), drug(indexed-95) and side effect(indexed-846) with a regularization score of 2)
 ```bash
 python run.py 88 95 846 2
 ```
@@ -22,8 +22,26 @@ python run.py 88 95 846 2
   - the results are saved in `fig` (for a visulized graphs - [[example]](https://github.com/Flower-Mt/PoSePath/blob/master/README.md)) and `pkl`(for a `dict` object) directories
   - index maps for drug and protein are in the `index-map` directory
   - results in `pool` directory help to select (drug, drug, side_effect) triples to analyse
-  
-  ## About file name
+ 
+##### 5. More examples:
+- for the drug pair (D-88, D-95) and the side effect (SE-846)
+```bash
+python run.py 88 95 846 1
+```
+- for all drug pairs causing the side effect (SE-846 and SE-848)
+```bash
+python run.py * * 846,848 1
+```
+- for all side effects caused by the drug pairs (D-2, D-95), (D-2, D-107), (D-88, D-95), (D-88, D-107)
+```bash
+python run.py 2,88 95,107 2, * 1
+```
+- for the side effects (SE-846 and SE-848) caused by all drug pairs which include the durg (D-88)
+```bash
+python run.py 88 * * 1
+```
+
+## About file name
 
 * `-[32, 64, 64]-128`: network structure
 * `-record file`: side-effect-wise score of auprc, auroc, ap scores of the model on test set
