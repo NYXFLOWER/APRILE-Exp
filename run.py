@@ -15,23 +15,23 @@ parser = argparse.ArgumentParser(
           - for the drug pair (D-88, D-95) and the side effect (SE-846)
                 $ python run.py 88 95 846 1
           - for all drug pairs causing the side effect (SE-846 and SE-848)
-                $ python run.py * * 846,848 1
+                $ python run.py all all 846,848 1
           - for all side effects caused by the drug pairs (D-2, D-95), (D-2, D-107), (D-88, D-95), (D-88, D-107)
-                $ python run.py 2,88 95,107 2, * 1
+                $ python run.py 2,88 95,107 2, all 1
           - for the side effects (SE-846 and SE-848) caused by all drug pairs which include the durg (D-88)
-                $ python run.py 88 * * 1
+                $ python run.py 88 all all 1
         """),
 )
 # //TODO: add combination mods
 parser.add_argument("drug_index_1", type=str,
-                    help="[int/int_list/*] from 0 to 283")
+                    help="[int/int_list/all] from 0 to 283")
 parser.add_argument("drug_index_2", type=str,
-                    help="[int/int_list/*] from 0 to 283")
+                    help="[int/int_list/all] from 0 to 283")
 parser.add_argument("side_effect_index", type=str,
-                    help="[int/int_list/*] from 0 to 1152")
+                    help="[int/int_list/all] from 0 to 860")
 parser.add_argument("regul_sore", type=float, default=1.0,
                     help="[float] higher sore -> smaller pp-subgraph")
-parser.add_argument('-f', '--filter', action='store_const', default=0.98,
+parser.add_argument('filter', type=float, default=0.98,
                     help='[float] threshold probability')
 parser.add_argument('-a', '--ifaddition', action='store_true', default=False,
                     help='add this flag for draw additional interactions')
@@ -92,9 +92,18 @@ z = model.pd(z, data.pd_index, pd_static_edge_weights)
 P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1))
 # print(P.tolist())
 
-drug1 = torch.Tensor(drug1)[P > args.filter].tolist()
-drug2 = torch.Tensor(drug2)[P > args.filter].tolist()
-side_effect = torch.Tensor(side_effect)[P > args.filter].tolist()
+
+tmp = P > args.filter
+drug1 = torch.Tensor(drug1)[tmp].tolist()
+if not drug1:
+    raise ValueError("No Satisfied Edges." +
+                     "\n - Suggestion: reduce the threshold probability with [-f] flag."
+                     + "Current probability threshold is {}. ".format(args.f) +
+                     "\n - Suggestion: check if retrieved edge is in the training set."
+                     "\n - Please use -h for help")
+
+drug2 = torch.Tensor(drug2)[tmp].tolist()
+side_effect = torch.Tensor(side_effect)[tmp].tolist()
 
 # -------------- load and train explainer --------------
 exp = Tip_explainer(model, data, device)
@@ -106,7 +115,7 @@ result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
 # //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
 
-if len(drug1) > 5:
+if len(drug1) > 15:
     fig_name = 'tmp'
 else:
     fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
@@ -120,18 +129,22 @@ else:
 visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
                 out_fig_dir+"/{}.png".format(fig_name),
                 hiden=args.ifaddition,
-                size=(100, 100),
+                size=(60, 60),
                 protein_name_dict=data.prot_idx_to_id,
                 drug_name_dict=data.drug_idx_to_id)       # //TODO
+print('figure is saved in ./out/fig')
 
 # -------------- save results as dictionary in a pickle file --------------
+print(pp_idx.device)
 out = {"pp_idx": pp_idx,
        "pp_weight": pp_weight,
        "pd_idx": pd_idx,
        "pd_weight": pd_weight}
 with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
     pickle.dump(out, f)
+print('result is saved in ./out/pkl')
 
-print(drug1)
-print(drug2)
-print(side_effect)
+if len(drug1) < 15:
+    print(drug1)
+    print(drug2)
+    print(side_effect)

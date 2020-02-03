@@ -245,25 +245,25 @@ def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
     :return: three lists of int
     """
 
-    if drug_index_1 != '*':
+    if drug_index_1 != 'all':
         drug_index_1 = [int(i) for i in drug_index_1.split(',')]
-    if drug_index_2 != '*':
+    if drug_index_2 != 'all':
         drug_index_2 = [int(i) for i in drug_index_2.split(',')]
-    if side_effect_index != '*':
+    if side_effect_index != 'all':
         side_effect_index = [int(i) for i in side_effect_index.split(',')]
-        side_effect_index = [list(range(rg[i][0], rg[i][1])) for i in side_effect_index]
-        side_effect_index = list(chain(*side_effect_index))
+        # side_effect_index = [list(range(rg[i][0], rg[i][1])) for i in side_effect_index]
+        # side_effect_index = list(chain(*side_effect_index))
 
     # case - * * *
-    if drug_index_1 == '*' and drug_index_2 == '*' and side_effect_index == '*':
+    if drug_index_1 == 'all' and drug_index_2 == 'all' and side_effect_index == 'all':
         return idx[0].tolist(), idx[1].tolist(), et.tolist()
 
-    if isinstance(side_effect_index, list):
+    if isinstance(drug_index_1, list) and isinstance(drug_index_2, list):
         drug1, drug2, side_effect = [], [], []
         # case - [] [] []
         if isinstance(drug_index_2, list):
             for s, d1, d2 in product(side_effect_index, drug_index_1, drug_index_2):
-                d1_d2 = idx[:, rg[s][0]:rg[s][1]]
+                d1_d2 = idx[:, rg[s, 0]:rg[s, 1]]
                 d1, d2 = (d1, d2) if d1 < d2 else (d2, d1)
                 if d2 in d1_d2[1][d1_d2[0] == d1]:
                     drug1.append(d1)
