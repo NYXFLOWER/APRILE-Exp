@@ -286,7 +286,7 @@ def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
         # case - * * []
         et_index = [list(range(rg[i][0], rg[i][1])) for i in side_effect_index]
         et_index = list(chain(*et_index))
-        drug1, drug2, side_effect = idx[0][et_index], idx[1][et_index], et[et_index]
+        drug1, drug2, side_effect = idx[0][et_index].tolist(), idx[1][et_index].tolist(), et[et_index].tolist()
 
         # case - * [] [] or [] * []
         if isinstance(drug_index_1, list) or isinstance(drug_index_2, list):
