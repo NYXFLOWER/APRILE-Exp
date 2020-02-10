@@ -332,22 +332,22 @@ class Tip_explainer(object):
 
             # TODO:
             loss = torch.log(1 - P + EPS).sum() / regulization \
-                   + 0.5 * (pp_mask * torch.pow((2 - pp_mask), 2)).sum() \
-                   + (pd_mask * torch.pow((2 - pd_mask), 2)).sum()
+                   + 0.5 * (pp_mask * (2 - pp_mask)).sum() \
+                   + (pd_mask * (2 - pd_mask)).sum()
             # loss = -  torch.log(P) + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
             # TODO:
 
             loss.backward()
             optimizer.step()
             # print("Epoch:{}, loss:{}, prob:{}, pp_link_sum:{}, pd_link_sum:{}".format(i, loss.tolist(), P.tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
-
-            print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
+            if i % 100 == 0:
+                print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
 
             # until no weight need to be updated --> no sum of weights changes
-            if tmp == pp_mask.sum().tolist() + pd_mask.sum().tolist():
+            if tmp == (pp_mask.sum().tolist(), pd_mask.sum().tolist()):
                 break
             else:
-                tmp = pp_mask.sum().tolist() + pd_mask.sum().tolist()
+                tmp = (pp_mask.sum().tolist(), pd_mask.sum().tolist())
 
 
         pre_mask.saturate()
