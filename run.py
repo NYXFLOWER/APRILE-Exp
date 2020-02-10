@@ -98,7 +98,7 @@ drug1 = torch.Tensor(drug1)[tmp].tolist()
 if not drug1:
     raise ValueError("No Satisfied Edges." +
                      "\n - Suggestion: reduce the threshold probability with [-f] flag."
-                     + "Current probability threshold is {}. ".format(args.f) +
+                     + "Current probability threshold is {}. ".format(args.filter) +
                      "\n - Suggestion: check if retrieved edge is in the training set."
                      "\n - Please use -h for help")
 
@@ -115,12 +115,12 @@ result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
 # //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
 
-if len(drug1) > 15:
-    fig_name = 'tmp'
-else:
-    fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
+fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
                          args.side_effect_index, str(args.regul_sore),
                          str(args.filter)])
+if len(fig_name) > 30:
+    print("The output files' name are 'tmp', as it is too lang.")
+    fig_name = 'tmp'
 
 # visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index,
 #                 out_fig_dir+"/{}.png".format(fig_name),
@@ -135,7 +135,7 @@ visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug
 print('figure is saved in ./out/fig')
 
 # -------------- save results as dictionary in a pickle file --------------
-print(pp_idx.device)
+# print(pp_idx.device)
 out = {"pp_idx": pp_idx,
        "pp_weight": pp_weight,
        "pd_idx": pd_idx,
@@ -145,6 +145,6 @@ with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
 print('result is saved in ./out/pkl')
 
 if len(drug1) < 15:
-    print(drug1)
-    print(drug2)
-    print(side_effect)
+    print('drug1: ', drug1)
+    print('drug2: ', drug2)
+    print('side effect: ', side_effect)

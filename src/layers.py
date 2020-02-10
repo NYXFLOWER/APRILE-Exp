@@ -307,7 +307,7 @@ class Tip_explainer(object):
 
         tmp = 0.0
         pre_mask.reset_parameters()
-        for i in range(2000):
+        for i in range(9999):
             model.train()
             pre_mask.desaturate()
             optimizer.zero_grad()
@@ -331,7 +331,9 @@ class Tip_explainer(object):
             EPS = 1e-7
 
             # TODO:
-            loss = torch.log(1 - P + EPS).sum() / regulization + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
+            loss = torch.log(1 - P + EPS).sum() / regulization \
+                   + 0.5 * (pp_mask * torch.pow((2 - pp_mask), 2)).sum() \
+                   + (pd_mask * torch.pow((2 - pd_mask), 2)).sum()
             # loss = -  torch.log(P) + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
             # TODO:
 
@@ -341,7 +343,7 @@ class Tip_explainer(object):
 
             print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
 
-            # 没有update就结束，所有weight都做比较，几乎update前后和是不变的
+            # until no weight need to be updated --> no sum of weights changes
             if tmp == pp_mask.sum().tolist() + pd_mask.sum().tolist():
                 break
             else:
