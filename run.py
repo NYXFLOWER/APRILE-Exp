@@ -35,7 +35,7 @@ parser.add_argument('filter', type=float, default=0.98,
                     help='[float] threshold probability')
 parser.add_argument('-a', '--ifaddition', action='store_true', default=False,
                     help='add this flag for draw additional interactions')
-parser.add_argument("-v", "--version", action='version', version='%(prog)s 2.0')
+parser.add_argument("-v", "--version", action='version', version='%(prog)s 2.3')
 args = parser.parse_args()
 
 
