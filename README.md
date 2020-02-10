@@ -12,3 +12,6 @@ An optimization model for explaining the decision-making of the TIP-based multi-
     - (Optitional) Create a test environment with Anaconda using `environment.yml` file.
 - Run `python run.py -h` to see detailed instructions and examples. 
     - (Optitional) Run with GPU is recommanded (at least 20 times faster than using CPU only). 
+
+An example of allocating a gpu node with interaction: 
+- `salloc -p gpu --gres gpu:1 -c 10 --mem 40g -t 8:0:0`

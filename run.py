@@ -114,6 +114,9 @@ result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
 # -------------- visualize p-p subgraph and save with png format --------------
 # //TODO: rewrite the draw api for two mod.....
 pp_idx, pp_weight, pd_idx, pd_weight = result
+print('pp_edge: {}, pd_edge:{}, dd_edge:{}'.format(pp_idx.shape[1],
+                                                   pd_idx.shape[1],
+                                                   len(drug1)))
 
 fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
                          args.side_effect_index, str(args.regul_sore),
@@ -132,7 +135,7 @@ visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug
                 size=(60, 60),
                 protein_name_dict=data.prot_idx_to_id,
                 drug_name_dict=data.drug_idx_to_id)       # //TODO
-print('figure is saved in ./out/fig')
+print('figure is saved in ./out/fig/{}.png'.format(fig_name))
 
 # -------------- save results as dictionary in a pickle file --------------
 # print(pp_idx.device)
@@ -142,9 +145,10 @@ out = {"pp_idx": pp_idx,
        "pd_weight": pd_weight}
 with open(out_pkl_dir + "/{}.pkl".format(fig_name), "wb") as f:
     pickle.dump(out, f)
-print('result is saved in ./out/pkl')
+print('result is saved in ./out/pkl/{}.pkl'.format(fig_name))
 
 if len(drug1) < 15:
-    print('drug1: ', drug1)
-    print('drug2: ', drug2)
+    print('    drug1:   ', drug1)
+    print('    drug2:   ', drug2)
     print('side effect: ', side_effect)
+    print('probability: ', P.tolist())

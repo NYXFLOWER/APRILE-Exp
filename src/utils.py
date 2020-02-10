@@ -228,7 +228,7 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, d1, d2,
 
     # draw node labels
     for p in pos:  # raise text positions
-        pos[p][1] += 0.04
+        pos[p][1] += 0.02
     nx.draw_networkx_labels(G, pos, font_size=14)
 
     plt.savefig(out_path)
