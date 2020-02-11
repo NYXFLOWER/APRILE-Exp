@@ -151,4 +151,4 @@ if len(drug1) < 15:
     print('    drug1:   ', drug1)
     print('    drug2:   ', drug2)
     print('side effect: ', side_effect)
-    print('probability: ', P.tolist())
+    print('probability: ', torch.Tensor(P[tmp]).tolist())

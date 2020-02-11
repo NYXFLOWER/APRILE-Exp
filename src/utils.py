@@ -286,7 +286,7 @@ def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
         # case - * * []
         et_index = [list(range(rg[i][0], rg[i][1])) for i in side_effect_index]
         et_index = list(chain(*et_index))
-        drug1, drug2, side_effect = idx[0][et_index].tolist(), idx[1][et_index].tolist(), et[et_index].tolist()
+        drug1, drug2, side_effect = idx[0][et_index], idx[1][et_index], et[et_index]
 
         # case - * [] [] or [] * []
         if isinstance(drug_index_1, list) or isinstance(drug_index_2, list):
@@ -300,6 +300,9 @@ def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
                 drug2.extend(tmp)
                 side_effect.extend((iside_effect[idrug1==d1]).tolist())
                 drug1.extend([d1] * len(tmp))
+            return drug1, drug2, side_effect
+
+        drug1, drug2, side_effect = drug1.tolist(), drug2.tolist(), side_effect.tolist()
     else:
         # case - [] * * or * [] *
         drug_index_1 = drug_index_1 if isinstance(drug_index_1, list) else drug_index_2
