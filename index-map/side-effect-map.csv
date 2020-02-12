@@ -1,0 +1,862 @@
+side_effect_idx,name
+0,atelectasis
+1,Back Ache
+2,lung edema
+3,agitated
+4,abnormal movements
+5,Acidosis
+6,peliosis
+7,Apnea
+8,Drug hypersensitivity
+9,flatulence
+10,pain in throat
+11,allergies
+12,thrombocytopenia
+13,bradycardia
+14,lung infiltration
+15,Bleeding
+16,hypoglycaemia neonatal
+17,hyperglycaemia
+18,peritonitis
+19,hypoglycaemia
+20,abdominal distension
+21,asystole
+22,cerebral infarct
+23,hypoxia
+24,Difficulty breathing
+25,decreased body temperature
+26,adynamic ileus
+27,sepsis
+28,Hypomagnesaemia
+29,Acute Respiratory Distress Syndrome
+30,lipoma
+31,appendectomy
+32,flank pain
+33,pneumothorax
+34,appendicitis
+35,Strabismus
+36,Blood calcium decreased
+37,respiratory failure
+38,pulmonary hypertension
+39,Hypercapnia
+40,intestinal perforation
+41,leucocytosis
+42,Disorder Lung
+43,hot flash
+44,arterial pressure NOS decreased
+45,metabolic acidosis
+46,Bladder inflammation
+47,ascites
+48,sinus tachycardia
+49,stridor
+50,arterial pressure NOS increased
+51,Hypoventilation
+52,edema
+53,disease of liver
+54,Aspartate Aminotransferase Increase
+55,Cold extremities
+56,facial flushing
+57,anaphylactic reaction
+58,eruption
+59,acute pancreatitis
+60,neumonia
+61,adenocarcinoma
+62,confusion
+63,malnourished
+64,haemorrhoids
+65,still birth
+66,anaemia
+67,drug toxicity NOS
+68,increased white blood cell count
+69,encephalopathy
+70,Anorexia
+71,tremor
+72,Hallucination
+73,chronic obstructive airway disease
+74,drowsiness
+75,Head ache
+76,back injury
+77,erythema
+78,Diplopia
+79,enlarged spleen
+80,narcolepsy
+81,esophageal spasm
+82,erosive gastritis
+83,gastroenteritis viral
+84,Lymphocytes decreased
+85,Breast cancer
+86,itch
+87,haemolytic anaemia
+88,upper gastrointestinal bleeding
+89,icterus
+90,gastroenteritis
+91,optic disc edema
+92,sleep disorder
+93,septic shock
+94,bladder retention
+95,Aphonia
+96,Pain
+97,idiopathic thrombocytopenic purpura
+98,pneumonia staphylococcal
+99,alopecia
+100,conjunctivitis
+101,lobar pneumonia
+102,glomerulonephritis
+103,duodenal ulcer
+104,deep vein thromboses
+105,leucopenia
+106,rhinorrhea
+107,bursitis
+108,bleeding Vaginal
+109,Excoriation
+110,Ekbom Syndrome
+111,nephrocalcinosis
+112,blurred vision
+113,thrombotic microangiopathy
+114,dizziness
+115,pleurisy
+116,sunburn
+117,Hoarseness
+118,Bleeding hemorrhoids
+119,Fatigue
+120,aspiration pneumonia
+121,perirectal abscess
+122,diarrhea
+123,asthma
+124,skin lesion
+125,tinnitus
+126,muscle spasm
+127,fib
+128,Candida Infection
+129,Abnormal Gait
+130,glossodynia
+131,anal fissure
+132,Infection Viral
+133,cellulitis
+134,allergic dermatitis
+135,constipated
+136,Clotting
+137,muscle paresis
+138,deafness
+139,vocal cord paralysis
+140,dry skin
+141,eye pain
+142,Leukaemia
+143,Chronic Kidney Disease
+144,acute kidney failure
+145,retrocollis
+146,cognitive disorder
+147,Cholangitis
+148,hypothyroid
+149,dermatitides
+150,Abnormal LFTs
+151,dermatitis medicamentosa
+152,acute brain syndrome
+153,Deafness neurosensory
+154,fungal disease
+155,nasal sinus congestion
+156,Near Syncope
+157,erythema multiforme
+158,haematoma
+159,bleb
+160,nasal congestion
+161,amenorrhea
+162,epistaxis
+163,hepatitis
+164,coated tongue
+165,Neutropenia
+166,wheeze
+167,haemorrhage rectum
+168,abdominal pain
+169,chest pain
+170,Mycobacterium tuberculosis infection
+171,cholelithiasis
+172,pyoderma
+173,Blood disorder
+174,psychoses
+175,aching muscles
+176,abscess
+177,loss of consciousness
+178,attempted suicide
+179,bad breath
+180,Arthritis infective
+181,loss of weight
+182,nasopharyngitis
+183,belching
+184,Rhinitis
+185,Colon Spastic
+186,heart attack
+187,hepatic neoplasia
+188,azotaemia
+189,nervous tension
+190,muscle weakness
+191,hypochloraemia
+192,cataract
+193,abdominal pain upper
+194,insomnia
+195,dyspepsia
+196,asthenia
+197,emesis
+198,Embolism pulmonary
+199,biliary tract disorder
+200,colitis ischemic
+201,Extremity pain
+202,arteriosclerotic heart disease
+203,Small intestinal obstruction
+204,Paraesthesia
+205,neoplasia
+206,Fainting
+207,blood sodium decreased
+208,sneezing
+209,Feeling unwell
+210,hypokalaemia
+211,lower GI bleeding
+212,migraine
+213,intervertebral disc disorder
+214,osteoporosis
+215,High blood pressure
+216,road traffic accident
+217,diverticulosis
+218,Arthritis rheumatoid
+219,Abnormal vision
+220,arteriosclerosis
+221,bulging
+222,Osteoarthritis
+223,pleural pain
+224,acid reflux
+225,fibromyalgia
+226,breast pain
+227,palpitation
+228,herpes zoster
+229,Breast cyst
+230,myoglobinuria
+231,osteomalacia
+232,ischias
+233,Aching joints
+234,arthritis
+235,abuse
+236,colonic polyp
+237,cholecystitis
+238,Dyspnea exertional
+239,Extrasystoles Ventricular
+240,acne rosacea
+241,Incontinence
+242,gall bladder
+243,diabetic acidosis
+244,Diabetic Retinopathy
+245,blepharitis
+246,pyelonephritis
+247,aptyalism
+248,Blepharospasm
+249,aneurysm
+250,benign prostatic hyperplasia
+251,wrist fracture
+252,dislocation
+253,Superficial thrombophlebitis
+254,Decreased Libido
+255,decubitus ulcer
+256,kidney failure
+257,meningitides
+258,ild
+259,Atrioventricular block first degree
+260,Cough
+261,Vestibular disorder
+262,panic attack
+263,nightmare
+264,Breast Lump
+265,nocturia
+266,spinning sensation
+267,Diabetes
+268,bronchitis
+269,polyp
+270,osteomyelitis
+271,lung fibrosis
+272,enlarged liver
+273,laceration
+274,coma
+275,amyotrophy
+276,cachectic
+277,renal cyst
+278,neuropathy peripheral
+279,Bacterial infection
+280,angiitis
+281,convulsion
+282,iron deficiency anaemia
+283,Cardiomyopathy
+284,bronchial spasm
+285,femur fracture
+286,fascitis plantar
+287,Cardiac decompensation
+288,mucositis oral
+289,joint swelling
+290,hernia
+291,glaucoma
+292,mitral valve disease NOS
+293,edema extremities
+294,pulmonary mass
+295,breast dysplasia
+296,Phlebitis
+297,lung neoplasms
+298,balance disorder
+299,bone marrow failure
+300,deglutition disorder
+301,adrenal insufficiency
+302,sensory disturbance
+303,polyneuropathy
+304,Nephrolithiasis
+305,dysarthria
+306,Hypotension Orthostatic
+307,Scoliosis
+308,autonomic instability
+309,rhabdomyolysis
+310,bundle branch block left
+311,apoplexy
+312,malabsorption
+313,aphasia
+314,Amnesia
+315,body temperature increased
+316,burning sensation
+317,chill
+318,Infection Urinary Tract
+319,night sweat
+320,keratitis sicca
+321,dehydration
+322,Ataxia
+323,transient ischaemic attack
+324,cerebral haemorrhage
+325,Mod
+326,elevated cholesterol
+327,heart rate increased
+328,eye swelling
+329,psychosexual disorder
+330,Anxiety
+331,facial palsy
+332,ureteral obstruction
+333,disorder Renal
+334,nephrosclerosis
+335,psoriatic arthritis
+336,post traumatic stress disorder
+337,laryngitis
+338,angiopathy
+339,flu
+340,coeliac disease
+341,adjustment disorder
+342,carcinoid syndrome
+343,nausea
+344,dysphasia
+345,drug withdrawal
+346,Pleural Effusion
+347,Sinusitis
+348,Bilirubinaemia
+349,amentia
+350,cerebral atrophy
+351,cervicalgia
+352,hyperlipaemia
+353,metabolic encephalopathy
+354,Diabetic Nephropathy
+355,encephalitis
+356,Intervertebral Disc Herniation
+357,Atherosclerosis
+358,aortic regurgitation
+359,Neuralgia
+360,hemiplegia
+361,pneumonia Klebsiella
+362,emphysema
+363,AFIB
+364,Postherpetic Neuralgia
+365,Eosinophil Count Increased
+366,Neuritis
+367,abnormal ECG
+368,Bone Fracture Spontaneous
+369,gingivitis
+370,soft tissue infection
+371,floaters
+372,thyroid neoplasia
+373,dental abscess
+374,dental pain
+375,aseptic necrosis bone
+376,bruxism
+377,retinal bleeding
+378,gingival pain
+379,bone inflammation
+380,candidiasis of mouth
+381,tooth disease
+382,mouth pain
+383,arthropathy
+384,pericardial effusion
+385,lung neoplasm malignant
+386,infection
+387,blindness
+388,herpes simplex
+389,blood in urine
+390,Acute myeloblastic leukemia
+391,abnormal EEG
+392,gastric inflammation
+393,Transfusion reaction
+394,abortion spontaneous
+395,urosepsis
+396,eating disorder
+397,schizophrenia
+398,cardiac murmur
+399,cardiac enlargement
+400,proteinuria
+401,increased platelet count
+402,odynophagia
+403,multiple sclerosis
+404,weight gain
+405,Convulsions Grand Mal
+406,Enuresis
+407,bundle branch block right
+408,Personality disorder
+409,salivary gland inflammation
+410,cervicitis
+411,hernia hiatal
+412,adenitis
+413,ecchymoses
+414,tardive dyskinesia
+415,blood pressure abnormal
+416,muscle strain
+417,Ejaculation Premature
+418,excessive thirst
+419,ear ache
+420,elevated erythrocyte sedimentation rate
+421,Blood Calcium Increased
+422,joint stiffness
+423,esophagitis
+424,nephrotic syndrome
+425,proctalgia
+426,bone pain
+427,contracture
+428,proctitis
+429,spondylitis
+430,spondylosis
+431,hyperparathyroidism
+432,sleep apnea
+433,Raynauds phenomenon
+434,wound dehiscence
+435,head injury
+436,synovitis
+437,hyperhidrosis
+438,nystagmus
+439,gastrointestinal bleed
+440,apraxia
+441,Drug addiction
+442,prostatitis
+443,femoral neck fracture
+444,sleep walking
+445,monoclonal gammopathy
+446,bruise
+447,Scar
+448,cardiac disease
+449,pain pelvic
+450,hip fracture
+451,difficulty in walking
+452,panic disorder
+453,atrial septal defect
+454,Tendinitis
+455,obstructive uropathy
+456,Colpitis
+457,Rhagades
+458,bone spur
+459,pancreatitis
+460,allergic rhinitis
+461,otitis media
+462,intestinal functional disorder
+463,faecal incontinence
+464,carpal tunnel
+465,haematochezia
+466,ADH inappropriate
+467,neuropathy
+468,Chest infection
+469,radiculopathy
+470,dysphonia
+471,myelopathy
+472,black stools
+473,dysuria
+474,flashing lights
+475,Electrolyte disorder
+476,Decreased hearing
+477,mitral valve prolapse
+478,fatty liver
+479,mouth bleeding
+480,bipolar disorder
+481,embolism
+482,duodenitis
+483,malignant melanoma
+484,ear infection
+485,sinus bradycardia
+486,atrial ectopic beats
+487,external ear infection
+488,muscle inflammation
+489,cervical vertebral fracture
+490,hydronephrosis
+491,dental caries
+492,elevated prostate specific antigen
+493,mouth ulcer
+494,gastroduodenal ulcer
+495,fistula
+496,acute bronchitis
+497,gynaecomastia
+498,Hypophosphataemia
+499,Excess potassium
+500,esophageal ulcer
+501,renal tubular acidosis
+502,phlebothrombosis
+503,dysaesthesia
+504,goiter
+505,metabolic alkalosis
+506,Adenopathy
+507,tympanic membrane perforation
+508,Arrhythmia
+509,Hepatic failure
+510,hyperalimentation
+511,Spinal fracture
+512,Parkinson
+513,movement disorder
+514,macula lutea degeneration
+515,musculoskeletal pain
+516,Cardiac ischemia
+517,paranoia
+518,chronic sinusitis
+519,ulcer
+520,rib fracture
+521,rotator cuff syndrome
+522,fractured pelvis NOS
+523,Infection Upper Respiratory
+524,angioedema
+525,sick sinus syndrome
+526,hyperthyroidism
+527,cardiac failure
+528,atrioventricular block second degree
+529,pharyngeal inflammation
+530,adenoma
+531,epilepsy
+532,angina
+533,muscle disorder
+534,bundle branch block
+535,tachycardia ventricular
+536,melanocytic naevus
+537,cramp
+538,atrial flutter
+539,cardiovascular collapse
+540,hypernatraemia
+541,hive
+542,syncope vasovagal
+543,streptococcal infection
+544,aspergillosis
+545,Light sensitivity
+546,enteritis
+547,bone marrow transplant
+548,colitis
+549,elevated triglycerides
+550,Glucose intolerance
+551,Multiple Myeloma
+552,duodenal ulcer haemorrhage
+553,CMV infection
+554,hemiparesis
+555,polymyositis
+556,Bacteraemia
+557,onychomycosis
+558,carcinoma of the colon
+559,myocarditis
+560,cardiac valvulopathy
+561,endocarditis
+562,Atrioventricular block complete
+563,ventricular fibrillation
+564,gangrene
+565,ischaemia
+566,ADVERSE DRUG EFFECT
+567,defaecation urgency
+568,cirrhosis
+569,trigeminal neuralgia
+570,polyuria
+571,periodontal disease
+572,obesity
+573,glucosuria
+574,basal cell carcinoma
+575,pulmonary arrest
+576,haematemesis
+577,granuloma
+578,insulin dependent diabetes mellitus
+579,failure to thrive
+580,Cardiac tamponade
+581,ankle fracture
+582,hepatitis toxic
+583,endocrine disorder
+584,Sinus headache
+585,diverticulitis
+586,dermatitis exfoliative
+587,pancreatitis relapsing
+588,Thrombophlebitis
+589,shoulder pain
+590,Abnormal Laboratory Findings
+591,duodenal ulcer perforation
+592,joint effusion
+593,gouty arthritis
+594,Supraventricular tachycardia
+595,respiratory alkalosis
+596,haemorrhage intracranial
+597,major depression
+598,excessive sleepiness
+599,lymphoma
+600,substance abuse
+601,animal bite
+602,cerebral vascular disorder
+603,dry eye
+604,Ovarian Cyst
+605,micturition urgency
+606,Stress incontinence
+607,hesitancy
+608,bone fracture
+609,nodule
+610,cyst
+611,Abdominal hernia
+612,Scleroderma
+613,Cor pulmonale
+614,excessive salivation
+615,right heart failure
+616,subarachnoid haemorrhage
+617,cancer
+618,colitis pseudomembranous
+619,heavy menstrual period
+620,premature menopause
+621,umbilical hernia
+622,psoriasis
+623,contact dermatitis
+624,blepharoptosis
+625,Bleeding gums
+626,epicondylitis
+627,ingrowing nail
+628,dermatitis seborrheic
+629,candidiasis of vagina
+630,Spinal Compression Fracture
+631,palsies
+632,petit mal
+633,gout
+634,cerebral ischaemia
+635,eyelid diseases
+636,gastric ulcer
+637,periodontitis
+638,Lyell
+639,seborrhoeic keratosis
+640,actinic keratosis
+641,choking
+642,aortic stenosis
+643,coughing blood
+644,Glossitis
+645,bacterial pneumonia
+646,alcohol consumption
+647,squamous cell carcinoma of skin
+648,pancreatic cancer
+649,Tenosynovitis
+650,liver abscess
+651,myelodysplasia
+652,rectal polyp
+653,brain concussion
+654,cutaneous ulcer
+655,face pain
+656,atrioventricular block
+657,breast enlargement
+658,Eustachian tube disorder
+659,acute sinusitis
+660,Pelvic Inflammatory Disease
+661,Altered Bowel Function
+662,antinuclear antibody positive
+663,galactorrhea
+664,schizoaffective disorder
+665,borderline personality disorder
+666,injury of neck
+667,Pharyngitis Streptococcal
+668,Nephrogenic diabetes insipidus
+669,hepatic necrosis
+670,portal hypertension
+671,Diabetic neuropathy
+672,brain neoplasm
+673,reflux esophagitis
+674,Breakthrough bleeding
+675,Seroma
+676,trigger finger
+677,Interstitial nephritis
+678,Nail disorder
+679,allergic vasculitis
+680,lichen planus
+681,carotid artery stenosis
+682,gastric polyps
+683,hyperkeratosis
+684,essential hypertension
+685,hepatitis B
+686,congenital heart disease
+687,cholecystectomies
+688,Carcinoma of Prostate
+689,orthopnea
+690,renal mass
+691,Breast disorder
+692,disseminated lupus erythematosus
+693,breast tenderness
+694,Disorder Peripheral Vascular
+695,Hyperprolactinaemia
+696,acute psychosis
+697,ketoacidosis
+698,sarcoidosis
+699,Detached retina
+700,Chest wall pain
+701,hyperpigmentation
+702,costochondritis
+703,agoraphobia
+704,cheilosis
+705,Easy bruisability
+706,OPTIC NEURITIS
+707,eye injury
+708,scotoma
+709,eczema
+710,erysipelas
+711,hepatorenal syndrome
+712,Hepatitis C
+713,eye infection
+714,EBV infection
+715,Caesarean Section
+716,agranulocytoses
+717,petechia
+718,hematoma subdural
+719,pyoderma gangrenosum
+720,cerebral artery embolism
+721,hydrocephalus
+722,Acne
+723,malignant hypertension
+724,Post nasal drip
+725,labyrinthitis
+726,Nodule Skin
+727,neck mass
+728,tracheitis
+729,Vitamin D Deficiency
+730,kidney pain
+731,hyperuricaemia
+732,parotitis
+733,choreoathetosis
+734,Disorder Retinal
+735,pericarditis
+736,cerumen impaction
+737,paronychia
+738,Tooth Impacted
+739,thyroid disease
+740,aortic aneurysm
+741,dermatomyositis
+742,hyperaesthesia
+743,als
+744,bronchiectasis
+745,aplasia pure red cell
+746,furuncle
+747,birth defect
+748,autonomic neuropathy
+749,polymyalgia rheumatica
+750,diaphragmatic hernia
+751,lymphedema
+752,coronary artery bypass graft
+753,pleural fibrosis
+754,temporal arteritis
+755,polyarthritis
+756,fecal occult blood
+757,cholecystitis acute
+758,inflammatory bowel disease
+759,tendon injury
+760,hiccough
+761,serum sickness
+762,Anemia aplastic
+763,synovial cyst
+764,pneumonia primary atypical
+765,Ovarian cancer
+766,Gastric Cancer
+767,varicose vein
+768,aphthous stomatitis
+769,Cutaneous mycosis
+770,humerus fracture
+771,volvulus
+772,vaginal discharge
+773,left ventricular hypertrophy
+774,anosmia
+775,haemangioma
+776,incisional hernia
+777,abnormal mammogram
+778,Arthritis bacterial
+779,Splenic infarction
+780,Hernia Inguinal
+781,meningioma
+782,hepatic encephalopathy
+783,Dyspnoea paroxysmal nocturnal
+784,carotid bruit
+785,vitamin B 12 deficiency
+786,paraplegia
+787,Aseptic meningitis
+788,Alcoholic intoxication
+789,causalgia
+790,Irritation Skin
+791,Bradyarrhythmia
+792,conversion disorder
+793,epidural abscess
+794,cholecystitis chronic
+795,hay fever
+796,myasthenia gravis
+797,fibroids
+798,mediastinal disorder
+799,bladder cancer
+800,Breast swelling
+801,histoplasmosis
+802,ganglion
+803,Sjogrens syndrome
+804,Vitreous haemorrhage
+805,venous insufficiency
+806,Burns Second Degree
+807,tension headache
+808,night cramps
+809,pigmentation disorder
+810,keratitis
+811,kidney transplant
+812,diabetes insipidus
+813,fracture nonunion
+814,folliculitis
+815,empyema
+816,Gastric ulcer perforated
+817,platelet disorder
+818,allergic alveolitis
+819,chronic ulcerative colitis
+820,Meningitis Viral
+821,esophageal cancer
+822,neurogenic bladder
+823,uterine bleeding
+824,Uterine polyp
+825,hyperacusia
+826,enterocolitis
+827,motor retardation
+828,cryptococcosis
+829,chronic hepatitis
+830,food intolerance
+831,cluster headache
+832,connective tissue disease
+833,macrocytosis
+834,Anisocoria
+835,calculus ureteric
+836,Menstrual Disorder
+837,dysphemia
+838,irregular menstrual cycle
+839,pancreatic pseudocyst
+840,testicular swelling
+841,hyperphosphatemia
+842,status epilepticus
+843,sacroiliitis
+844,Tracheobronchitis
+845,pyuria
+846,breast inflammation
+847,xerosis
+848,postmenopausal bleeding
+849,Mumps
+850,tinea pedis
+851,hypogonadism
+852,testes pain
+853,esophageal stenosis
+854,coccydynia
+855,corneal abrasion
+856,Bunion
+857,Viral Pharyngitis
+858,Cystitis Interstitial
+859,asthenopia
+860,endometriosis
