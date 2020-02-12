@@ -302,7 +302,7 @@ class Tip_explainer(object):
         # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
         P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
 
-        if len(drug_list_1) < 10:
+        if len(drug_list_1) < 5:
             print(P.tolist())
 
         tmp = 0.0

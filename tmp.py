@@ -44,3 +44,23 @@ with open(directory + "/{}.pkl".format(fig_name), "wb") as f:
 
 
 #########################################
+from pubchempy import Compound
+import pandas as pd
+cids = [int(data.drug_idx_to_id[i][3:]) for i in range(len(data.drug_idx_to_id))]
+drugs = [Compound.from_cid(int(cid)) for cid in cids]
+drug_ids = pd.DataFrame([[data.drug_id_to_idx['CID{}'.format(d.cid)], d.cid, 'NA' if len(d.synonyms) == 0 else d.synonyms[0], d.iupac_name] for d in drugs], columns=["drug_idx", 'CID', 'synonym', 'iupac_name'])
+
+drug_ids.to_csv('./index-map/drug-map.csv', index=False)
+
+from goatools.test_data.genes_NCBI_9606_ProteinCoding import GENEID2NT as GeneID2nt_hum
+geneid2symbol = {v.GeneID: v.Symbol for k, v in GeneID2nt_hum.items()}
+genes = [int(data.prot_idx_to_id[i][6:]) for i in range(len(data.prot_idx_to_id))]
+gene_ids = pd.DataFrame([[data.prot_id_to_idx['GeneID{}'.format(gene)],
+                          gene,
+                          geneid2symbol[gene] if geneid2symbol.get(gene) else 'NA']
+                         for gene in genes],
+                        columns=['protein_idx', 'gene_id', 'gene_symbol'])
+gene_ids.to_csv('./index-map/protein-map.csv', index=False)
+
+se_ids = pd.DataFrame(data.side_effect_idx_to_name.items(), columns=['side_effect_idx', 'name'])
+se_ids.to_csv('./index-map/side-effect-map.csv', index=False)
