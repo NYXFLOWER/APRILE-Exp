@@ -1,7 +1,10 @@
 # PoSePath
-[![Releases](https://img.shields.io/github/v/release/nyxflower/pose-path?include_prereleases&style=flat-square)](https://github.com/NYXFLOWER/PoSe-Path/releases)
-[![Downloads](https://img.shields.io/github/downloads/nyxflower/pose-path/total?color=green&style=flat-square)](https://github.com/NYXFLOWER/PoSe-Path/releases)
-[![License](https://img.shields.io/github/license/nyxflower/pose-path?style=flat-square)](https://github.com/NYXFLOWER/PoSe-Path/blob/master/LICENSE)
+![Last-Commit](https://img.shields.io/github/last-commit/nyxflower/pose-path?style=plastic)
+[![License](https://img.shields.io/github/license/nyxflower/pose-path?style=plastic)](https://github.com/NYXFLOWER/PoSe-Path/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/v/release/nyxflower/pose-path?include_prereleases&style=plastic)](https://github.com/NYXFLOWER/PoSe-Path/releases)
+![Size](https://img.shields.io/github/repo-size/nyxflower/pose-path?color=green&style=plastic)
+[![Downloads](https://img.shields.io/github/downloads/nyxflower/pose-path/total?color=gray&style=plastic)](https://github.com/NYXFLOWER/PoSe-Path/releases)
+
 
 An optimization model for explaining the decision-making of the TIP-based multi-relational link prediction model.
 
