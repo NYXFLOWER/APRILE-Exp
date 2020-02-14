@@ -12,7 +12,7 @@ An optimization model for explaining the decision-making of the TIP-based multi-
 
 - Download this repository, and change the working directory to its root directory
 - Download example data and a trained model from web, and unzip it:
-    - `wget https://www.dropbox.com/s/2vv3te17s1rfajw/data.zip `
+    - `wget https://www.dropbox.com/s/khg3qrbh8klo4cf/data.zip `
     - `unzip data.zip`
 - make sure the following packages have been installed with the latest version: `goatools`, `cython`, `pytorch`, `matplotlib`, `scikit-learn`, `networkx`, `pytorch-geometric`,  `pubchempy`.
     - (Optitional) Create a test environment with Anaconda using `environment.yml` file.
