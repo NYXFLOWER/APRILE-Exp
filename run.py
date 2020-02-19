@@ -206,42 +206,44 @@ for nspc, id2gos in ns2assoc.items():
     print("{NS} {N:,} annotated human genes".format(NS=nspc, N=len(id2gos)))
 
 goeaobj = GOEnrichmentStudyNS(
-        GeneID2nt_hum.keys(), # List of human protein-acoding genes
-        ns2assoc, # geneid/GO associations
+        GeneID2nt_hum.keys(),       # List of human protein-acoding genes
+        ns2assoc,                   # geneid/GO associations
         obodag, # Ontologies
-        propagate_counts = False,
-        alpha = 0.05, # default significance cut-off
-        methods = ['fdr_bh']) # defult multipletest correction method
+        propagate_counts=False,
+        alpha=0.05,                 # default significance cut-off
+        methods=['fdr_bh'])         # defult multipletest correction method
 
 # 'p_' means "pvalue". 'fdr_bh' is the multipletest method we are currently using.
 geneids_study = pp_idx.flatten()    # geneid2symbol.keys()
 geneids_study = [int(data.prot_idx_to_id[idx].replace('GeneID', ''))
                  for idx in geneids_study]
-# print(geneids_study)
 
+# ##############################################################################
 goea_results_all = goeaobj.run_study(geneids_study)
-# with open(out_dir + "/all_go.pkl", 'wb') as f:
-#     pickle.dump(goea_results_all, f)
-# print('SAVE -> the significant GO terms in all_go.pkl')
-
 goea_results_sig = [r for r in goea_results_all if r.p_fdr_bh < 0.05]
+# ##############################################################################
+
 n_sig = len(goea_results_sig)
 print('\n==== FIND: {} significant GO terms ===='.format(n_sig))
 if n_sig == 0:
     exit()
 
-# with open(out_dir + "/sig_go.pkl", 'wb') as f:
-#     pickle.dump(goea_results_sig, f)
-# print('SAVE -> the significant GO terms in sig_go.pkl')
-#
+
 print()
 # -------------- analysis --------------
-keys = ['name', 'namespace']
+geneid2symbol = {v.GeneID: v.Symbol for k, v in GeneID2nt_hum.items()}
+
+keys = ['name', 'namespace','id']
 df_go1 = pandas.DataFrame([{k: g.goterm.__dict__.get(k) for k in keys}
                            for g in goea_results_sig])
 df_p = pandas.DataFrame([{'p_fdr_bh': g.__dict__['p_fdr_bh']}
                          for g in goea_results_sig])
 df_go = df_go1.merge(df_p, left_index=True, right_index=True)
+
+go_genes = pandas.DataFrame([{'id': g.goterm.id, 'gene': s, 'symbol': geneid2symbol[s]}
+                         for g in goea_results_sig
+                         for s in g.study_items])
+df_go = df_go.merge(go_genes, on='id')
 print('SAVE -> name spaces of the significant GO terms in namespace.csv')
 print(df_go.groupby('namespace').count())
 df_go.to_csv(out_dir + "/name_space.csv")
@@ -249,7 +251,6 @@ df_go.to_csv(out_dir + "/name_space.csv")
 print()
 # -------------- Plot subset starting from these significant GO terms --------------
 goid_subset = [g.GO for g in goea_results_sig]
-geneid2symbol = {v.GeneID: v.Symbol for k, v in GeneID2nt_hum.items()}
 plot_gos(out_dir + "/go_enrich.png",
          goid_subset,                       # Source GO ids
          obodag,
@@ -271,7 +272,7 @@ drug_ids = pandas.DataFrame([[data.drug_id_to_idx['CID{}'.format(d.cid)],
                               'NA' if len(d.synonyms) == 0 else d.synonyms[0],
                               d.iupac_name] for d in drugs],
                             columns=["drug_idx", 'CID', 'synonym', 'iupac_name'])
-drug_ids.to_csv('drug_details.csv', index=False)
+drug_ids.to_csv(out_dir + '/drug_details.csv', index=False)
 print('SAVE -> drug compound info to drug_details.csv')
 if drug_ids.shape[0] < 5:
     print(drug_ids)
