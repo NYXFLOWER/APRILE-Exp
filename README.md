@@ -5,7 +5,7 @@
 ![Size](https://img.shields.io/github/repo-size/nyxflower/pose-path?color=green&style=plastic)
 
 
-An optimisation model for explaining the predictions made by PoSe-Models
+PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019). It is designed for explaining the predictions made by PoSe-Models. Here we use it to explore the relation between drug side effects and genes.
 
 ### How To Use
 
@@ -20,6 +20,61 @@ An optimisation model for explaining the predictions made by PoSe-Models
 
 An example of allocating a gpu node with interaction: 
 - `salloc -p gpu --gres gpu:1 -c 10 --mem 40g -t 8:0:0`
+
+### Help for `run.py`
+
+#### 1.  PoSePath Usage
+
+`run.py drug_index_1 drug_index_2 side_effect_index regul_sore filter [-h] [-a] [-v]`
+
+| Positional Arguments | Data Type        | Description                        |
+| -------------------- | ---------------- | ---------------------------------- |
+| drug_index_1         | int/int_list/str | [0, 283]                           |
+| drug_index_2         | int/int_list/str | [0, 283]                           |
+| side_effect_index    | int/int_list/str | [0, 860]                           |
+| regul_sore           | float            | higher sore -> smaller pp-subgraph |
+| filter               | float            | threshold probability              |
+
+| Optional Arguments | Description                                    |
+| ------------------ | ---------------------------------------------- |
+| -h, --help         | show this help message and exit                |
+| -a, --ifaddition   | add this flag for draw additional interactions |
+| -v, --version      | show program's version number and exit         |
+
+#### 2. Examples:
+
+For the drug pair (D-88, D-95) and the side effect (SE-846) if prediction prob more than 0.7
+```bash
+$ python run.py 88 95 846 1 0.7
+```
+For all drug pairs causing the side effect (SE-846 and SE-848) (case: Prob > 0.99)
+```bash
+$ python run.py all all 846,848 2 0.99
+```
+For all side effects caused by the drug pairs (D-2, D-95), (D-2, D-107), (D-88, D-95), (D-88, D-107)
+```bash
+$ python run.py 2,88 95,107 2, all 2 0.89
+```
+For the side effects (SE-846 and SE-848) caused by all drug pairs which include the durg (D-88)
+```bash
+$ python run.py 88 all all 3 0.9
+```
+
+#### 3. Index Map:
+​    See detailed drug, protein, side effect information in `../index-map` directory
+
+#### 4. Output:
+`exp_info.pkl` [dict]: 
+
+- drug1, drug2, side_effect: list of int
+-  pp_idx, pd_idx: int ndarray (2, n_edge), undirected
+- pp_weight, pd_weight: float nparray (n_edges,), (0, 1]
+- probability: list of float (0, 1)
+
+`visual_explainer.png` [figure]: visualise pp_idx, pd_idx, pp_weight, pd_weight, drug1, drug2
+`go_enrich.png, go_enrich_symbols.pdf` [figure]: visualise significant GO terms with/without gene symbols
+`namespace.csv` [table]: associated significant GO terms' name, namespace, p-value
+
 
 ## License
 
