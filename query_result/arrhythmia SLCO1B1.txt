@@ -1,0 +1,123 @@
+Randed 1/20
+'title': 'Effects of Delivering SLCO1B1 Pharmacogenetic Information in Randomized Trial and Observational Settings'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/CIRCGEN.118.002228'
+'author': 'B Peyser and EP Perry and K Singh and RD Gill…'
+'abstract': '… Mendeley; Reddit; Digg; Email. Jump to. Supplementary Materials. Free Accessarticle Download\nPDF. Effects of Delivering SLCO1B1 Pharmacogenetic Information in Randomized Trial and\nObservational Settings … Delivery of SLCO1B1*5 Genetic Test Results and Statin Adherence … \n'
+'eprint': 'https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.118.002228'
+
+Randed 2/20
+'title': 'Elevated plasma moxifloxacin concentrations and SLCO1B1 g.− 11187G> A polymorphism in adults with pulmonary tuberculosis'
+'url': 'https://aac.asm.org/content/62/5/e01802-17.short'
+'author': 'M Weiner and J Gelfond and TL Johnson-Pais…'
+'eprint': 'https://aac.asm.org/content/aac/62/5/e01802-17.full.pdf'
+
+Randed 3/20
+'title': 'SLCO1B1 Genotype-Guided Statin Therapy Lowers LDL Cholesterol in Patients With Statin-Intolerance- A Randomized Controlled Trial'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.134.suppl_1.12183'
+'author': 'D Voora and E Perry and K Singh and G Trujillo and N Milazzo…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic … 134, No. suppl_1Abstract 12183: SLCO1B1\nGenotype-Guided Statin Therapy Lowers LDL Cholesterol in Patients With Statin-Intolerance … \n'
+
+Randed 4/20
+'title': 'Association of Statin-Induced Musculoskeletal Side Effects with Sex and a Hepatic Uptake Transporter Reduced Function Allele, SLCO1B1* 5'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.118.suppl_18.S_326-a'
+'author': 'D Voora and S Ali and SH Shah and CR Reed and B Salisbury…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic, Translational, and … of Statin-Induced Musculoskeletal\nSide Effects with Sex and a Hepatic Uptake Transporter Reduced Function Allele, SLCO1B1 … \n'
+
+Randed 5/20
+'title': 'SLCO1B1 521T> C polymorphism associated with rosuvastatin-induced myotoxicity in Chinese coronary artery disease patients: a nested case–control study'
+'url': 'https://link.springer.com/article/10.1007/s00228-017-2318-z'
+'author': 'JE Liu and XY Liu and S Chen and Y Zhang and LY Cai…'
+'abstract': '… Arrhythmia. 26 (10.2) … All SNPs conformed to Hardy–Weinberg equilibrium (P > 0.05). The\nSLCO1B1 521T > C polymorphism was associated with risk of myotoxicity regardless of prescribed\nstatins, even after adjustment for confounding factors, including age, BMI, and HDLC … \n'
+
+Randed 6/20
+'title': 'Impact of SLCO1B1 Genotype on Pediatric Simvastatin Pharmacokinetics'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.134.suppl_1.15784'
+'author': 'J Wagner and S Abdel-Rahman and L van Haandel…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic, Translational … suppl_1Abstract 15784: Impact of SLCO1B1\nGenotype on Pediatric Simvastatin Pharmacokinetics. Free Accessarticle. About. Sections … \n'
+
+Randed 7/20
+'title': 'Frequency of Potentially Clinically Relevant Variants of CYP2C19 And SLCO1B1 in a Large Direct-to-Consumer Genetic Database'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.140.suppl_1.16081'
+'author': 'PE Empey and C Kosinski and A Chubb and J Zhan and H Nhan…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic, Translational … Suppl_1Abstract 16081: Frequency of\nPotentially Clinically Relevant Variants of CYP2C19 And SLCO1B1 in a Large Direct-to-Consumer … \n'
+
+Randed 8/20
+'title': 'SLCO1B1 and Statin Therapy: Getting the GIST of Pharmacogenetic Testing'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/CIRCGEN.118.002320'
+'author': 'S Tuteja and DJ Rader'
+'abstract': '… Download PDF. SLCO1B1 and Statin Therapy … 9 Polymorphisms in SLCO1B1 are also implicated\nin milder forms of statin intolerance. 10 However, it is unknown whether prospective\npharmacogenetic testing would improve outcomes for patients receiving statin treatment … \n'
+'eprint': 'https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.118.002320'
+
+Randed 9/20
+'title': 'Genetic Variation at the SLCO1B1 Gene Locus and Low Density Lipoprotein Cholesterol Lowering Response to Pravastatin in the Elderly'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.124.suppl_21.A9782'
+'author': 'H Akao and E Polisecki and K Kajinami and S Trompet…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic, Translational … suppl_21Abstract 9782: Genetic Variation\nat the SLCO1B1 Gene Locus and Low Density Lipoprotein Cholesterol Lowering Response … \n'
+
+Randed 10/20
+'title': 'Effect of SLCO1B1* 5 on Low-Density Lipoprotein Cholesterol Levels and Long-Term Clinical Events in Patients During Statin Therapy Following Cardiac …'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.128.suppl_22.A11344'
+'author': 'JH Li and S Suchindran and SH Shah and WE Kraus and GS Ginsburg…'
+'abstract': '… 1962; 1961; 1960. 1959; 1958; 1957; 1956; 1955; 1954; 1953; 1952; 1951; 1950. Subjects:\nArrhythmia and Electrophysiology; Basic, Translational, and … suppl_22Abstract 11344: Effect of\nSLCO1B1*5 on Low-Density Lipoprotein Cholesterol Levels and Long-Term Clinical Events … \n'
+
+Randed 11/20
+'title': 'Novel rare variants in congenital cardiac arrhythmia genes are frequent in drug-induced torsades de pointes'
+'url': 'https://www.nature.com/articles/tpj201214'
+'author': 'AH Ramirez and CM Shaffer and JT Delaney…'
+'abstract': '… in ion channel and associated genes have also been implicated in other congenital arrhythmia\nsyndromes, such as catecholaminergic polymorphic ventricular tachycardia, which is also\ncharacterized by incomplete penetrance and by susceptibility to serious arrhythmias … \n'
+'eprint': 'https://www.nature.com/articles/tpj201214'
+
+Randed 12/20
+'title': 'Ablatogenomics: can genotype guide catheter ablation for cardiac arrhythmias?'
+'url': 'https://www.futuremedicine.com/doi/abs/10.2217/pgs-2016-0114'
+'author': 'JD Roberts and GM Marcus'
+'abstract': '… likelihood of successfully maintaining sinus rhythm among patients receiving anti-arrhythmic\ndrugs pointing … may be secondary to the existence of genetic subphenotypes of the arrhythmia …\ngenetic testing in the clinical evaluation of inherited cardiac arrhythmias associated with … \n'
+
+Randed 13/20
+'title': 'Полиморфизм гена SLCO1B1 и статин-ассоциированная миопатия у российских пациентов'
+'url': 'https://cyberleninka.ru/article/n/17570521'
+'author': 'ВИ Петров and ОН Смусева and ЮВ Соловкина…'
+'abstract': '… 3. Behr ER, Roden D. Drug-induced arrhythmia: pharmacogenomic prescribing … Комплексное\nобследование, включающее анализ предикторов, в том числе гено-типирование по\nаллельному варианту SLCO1B1*5, позволит избежать дополнительного назначения … \n'
+'eprint': 'https://cyberleninka.ru/article/n/17570521'
+
+Randed 14/20
+'title': 'Automated Decision Support for Drug-Induced Long QT.'
+'url': 'http://search.ebscohost.com/login.aspx?direct=true&profile=ehost&scope=site&authtype=crawler&jrnl=00383317&AN=142156095&h=AWSNU%2FY%2FH0g8zr8nHdR0QUQ0pL2Q3iMxS3QiXiOZPYgbMSZASaCtfxufebJ3ssK3KkRPj%2BKlxb%2FI8Tt6w29HRQ%3D%3D&crl=c'
+'author': 'RA Lupu and H Twedt and S Chavour…'
+'abstract': '… based dosing guideline for simvastatin, based on genetic variability in SLCO1B1.4,5 … the\nobservation that the association between QT prolongation and ventricular arrhythmias has been …\nvery few patients that develop QT prolongation go on to experience a ventricular arrhythmia … \n'
+
+Randed 15/20
+'title': 'Pharmacokinetics of Pravastatin in Pediatric Dyslipidemia Patients: Clinical Impact of Genetic Variation on Statin Disposition'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.132.suppl_3.13716'
+'author': 'J Wagner and S Abdel-Rahman and L van Haandel…'
+'abstract': '… Journals Home; Arteriosclerosis, Thrombosis, and Vascular Biology (ATVB): Journal\nHome; Current Issue; See All Issues. Circulation: Journal Home; Current Issue; See\nAll Issues. Circ: Arrhythmia and Electrophysiology: Journal Home; … \n'
+
+Randed 16/20
+'title': 'The Prevalence of Actionable Pharmacogenomic Variants for Cardiovascular Therapeutics in an Large Ambulatory Adult Cohort'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.138.suppl_1.14338'
+'author': 'AS Tseng and J Maddux and D Upjohn and C Grilli and A Kekic…'
+'abstract': '… pharmacogenomics testing. Basic for CYP2D6, CYP2C19, CYP3A4, SLCO1B1 and\nVKORC1 for each patient were recorded and classified as poor, poor-intermediate,\nintermediate, intermediate-normal, normal, rapid and ultra-rapid. Poor … \n'
+
+Randed 17/20
+'title': 'The breast cancer resistance protein (BCRP) 421C> A single nucleotide polymorphism predicts improved low-density-lipoprotein cholesterol reduction by rosuvastatin'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.118.suppl_18.S_426-a'
+'author': 'SP Romaine and AJ Balmforth and KM Bailey and AS Hall'
+'abstract': '… Journals Home; Arteriosclerosis, Thrombosis, and Vascular Biology (ATVB): Journal\nHome; Current Issue; See All Issues. Circulation: Journal Home; Current Issue; See\nAll Issues. Circ: Arrhythmia and Electrophysiology: Journal Home; … \n'
+
+Randed 18/20
+'title': 'Drug Transporter Polymorphisms and Age Predict Circulating Atorvastatin and Rosuvastatin Concentration in Patients'
+'url': 'https://www.ahajournals.org/doi/abs/10.1161/circ.126.suppl_21.A14993'
+'author': 'MK DeGorter and RG Tirona and UI Schwarz and YH Choi…'
+'abstract': '… Journals Home; Arteriosclerosis, Thrombosis, and Vascular Biology (ATVB): Journal\nHome; Current Issue; See All Issues. Circulation: Journal Home; Current Issue; See\nAll Issues. Circ: Arrhythmia and Electrophysiology: Journal Home; … \n'
+
+Randed 19/20
+'title': 'Atrial Fibrillation Genomics: Time to Take the Next Step'
+'url': 'http://www.onlinejacc.org/content/63/12/1211.abstract'
+'author': 'DM Roden'
+'abstract': 'Skip to main content. Advertisement. Home; JACC Journals: JACC: Basic to\nTranslational Science; JACC: CardioOncology; JACC: Cardiovascular Imaging; JACC:\nCardiovascular Interventions; JACC: Case Reports; JACC: Clinical … \n'
+'eprint': 'https://core.ac.uk/download/pdf/82124671.pdf'
+
+Randed 20/20
+'title': 'Common drug interactions in cardiology prescription'
+'author': 'S Banerjee'
+'eprint': 'http://apiindia.org/wp-content/uploads/pdf/medicine_update_2012/cardiology_10.pdf'
