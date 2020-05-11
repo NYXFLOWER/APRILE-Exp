@@ -5,7 +5,7 @@
 ![Size](https://img.shields.io/github/repo-size/nyxflower/pose-path?color=green&style=plastic)
 
 
-PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019). It is designed for explaining the predictions made by PoSe-Models. Here we use it to explore the relation between drug side effects and genes.
+PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019). It is designed for explaining the predictions made by [PoSe-Models](https://github.com/NYXFLOWER/PoSe-Model). Here we use it to explore the relation between drug side effects and genes.
 
 ### How To Use
 
