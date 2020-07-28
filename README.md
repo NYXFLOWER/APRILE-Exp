@@ -6,7 +6,7 @@
 
 In this repository, we provide the `posepath` python package for discovering new insights on side effect (disease) mechanisms among 284 drugs, 861 side effects, 19,081 genes (or proteins) and 6,075,428 their relations.
 
-PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019) and [Gene Ontology analyses](https://www.nature.com/articles/s41598-018-28948-z) (Klopfenstein, 2018). It is designed for explaining the predictions made by **T**ri-graph **I**nformation **P**ropagation[(TIP)](https://github.com/NYXFLOWER/TIP)-like models. Here we apply it to a trained [PoSe-Models](https://github.com/NYXFLOWER/PoSe-Model) to explore molecular mechanisms of human side effects.
+PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., NeurIPS 2019) and [Gene Ontology analyses](https://www.nature.com/articles/s41598-018-28948-z) (Klopfenstein, Sci Rep 2018). It is designed for explaining the predictions made by **T**ri-graph **I**nformation **P**ropagation[(TIP)](https://github.com/NYXFLOWER/TIP)-like models. Here we apply it to a trained [PoSe-Models](https://github.com/NYXFLOWER/PoSe-Model) to explore molecular mechanisms of human side effects.
 
 <div align=center>
 <img height="300" src="fig/task.png" alt=""hhh/>
