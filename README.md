@@ -4,10 +4,16 @@
 [![Releases](https://img.shields.io/github/v/release/nyxflower/pose-path?include_prereleases&style=plastic)](https://github.com/NYXFLOWER/PoSe-Path/releases)
 ![Size](https://img.shields.io/github/repo-size/nyxflower/pose-path?color=green&style=plastic)
 
+In this repository, we provide the `posepath` python package for discovering new insights on side effect (disease) mechanisms among 284 drugs, 861 side effects, 19,081 genes (or proteins) and 6,075,428 their relations.
 
-PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019). It is designed for explaining the predictions made by [PoSe-Models](https://github.com/NYXFLOWER/PoSe-Model). Here we use it to explore the relation between drug side effects and genes.
+PoSe-Path is based on the [GNNExplainer](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks) (Ying et al., 2019) and [Gene Ontology analyses](https://www.nature.com/articles/s41598-018-28948-z) (Klopfenstein, 2018). It is designed for explaining the predictions made by **T**ri-graph **I**nformation **P**ropagation[(TIP)](https://github.com/NYXFLOWER/TIP)-like models. Here we apply it to a trained [PoSe-Models](https://github.com/NYXFLOWER/PoSe-Model) to explore molecular mechanisms of human side effects.
 
-### How To Use
+<div align=center>
+<img height="300" src="fig/task.png" alt=""hhh/>
+</div>
+
+
+### How To Install and Use
 
 - Download this repository, and change the working directory to its root directory
 - Download example data and a trained model from web, and unzip it:
@@ -64,16 +70,14 @@ $ python run.py 88 all all 3 0.9
 ​    See detailed drug, protein, side effect information in `../index-map` directory
 
 #### 4. Output:
-`exp_info.pkl` [dict]: 
-
-- drug1, drug2, side_effect: list of int
--  pp_idx, pd_idx: int ndarray (2, n_edge), undirected
-- pp_weight, pd_weight: float nparray (n_edges,), (0, 1]
-- probability: list of float (0, 1)
-
-`visual_explainer.png` [figure]: visualise pp_idx, pd_idx, pp_weight, pd_weight, drug1, drug2
-`go_enrich.png, go_enrich_symbols.pdf` [figure]: visualise significant GO terms with/without gene symbols
-`namespace.csv` [table]: associated significant GO terms' name, namespace, p-value
+- `exp_info.pkl` [dict]: 
+    - drug1, drug2, side_effect: list of int
+    -  pp_idx, pd_idx: int ndarray (2, n_edge), undirected
+    - pp_weight, pd_weight: float nparray (n_edges,), (0, 1]
+    - probability: list of float (0, 1)
+- `visual_explainer.png` [figure]: visualise pp_idx, pd_idx, pp_weight, pd_weight, drug1, drug2
+- `go_enrich.png, go_enrich_symbols.pdf` [figure]: visualise significant GO terms with/without gene symbols
+- `namespace.csv` [table]: associated significant GO terms' name, namespace, p-value
 
 
 ## License
