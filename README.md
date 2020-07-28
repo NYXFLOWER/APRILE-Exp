@@ -47,7 +47,8 @@ An example of allocating a gpu node with interaction:
 | -a, --ifaddition   | add this flag for draw additional interactions |
 | -v, --version      | show program's version number and exit         |
 
-#### 2. Examples:
+#### 2. Examples: 
+====> *Click* [here](https://www.youtube.com/watch?v=faaShlrh2yc&t=84s) *to see a demo on YouTube*
 
 For the drug pair (D-88, D-95) and the side effect (SE-846) if prediction prob more than 0.7
 ```bash
