@@ -232,6 +232,7 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, d1, d2,
     nx.draw_networkx_labels(G, pos, font_size=14)
 
     plt.savefig(out_path)
+    return G
 
 
 def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
