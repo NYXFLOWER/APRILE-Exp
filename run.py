@@ -1,8 +1,4 @@
 from __future__ import print_function
-import goatools
-import numpy as np
-import scipy.stats as stats
-import pubchempy
 from pubchempy import Compound
 
 from goatools.base import download_go_basic_obo         # Get http://geneontology.org/ontology/go-basic.obo
@@ -20,6 +16,7 @@ import argparse
 import textwrap
 import pickle
 import os
+
 
 # -------------- parse input parameters --------------
 parser = argparse.ArgumentParser(
@@ -65,12 +62,18 @@ parser.add_argument("regul_sore", type=float, default=1.0,
                     help="[float] higher sore -> smaller pp-subgraph")
 parser.add_argument('filter', type=float, default=0.98,
                     help='[float] threshold probability')
+parser.add_argument('-s', '--seed', default=0,
+                    help="[int] random seed for optimizer")
 parser.add_argument('-a', '--ifaddition', action='store_true', default=False,
                     help='add this flag for draw additional interactions')
 parser.add_argument("-v", "--version", action='version', version='%(prog)s 3.0')
+
 args = parser.parse_args()
 
 
+if args.seed:
+    torch.manual_seed(args.seed)
+    print("==== SEED: {} ====".format(args.seed))
 # -------------- set working directory --------------
 root = os.path.abspath(os.getcwd())
 data_dir = root + '/data/'
@@ -142,6 +145,9 @@ print('pp_edge: {}, pd_edge:{}, dd_edge:{}\n'.format(pp_idx.shape[1],
 fig_name = '-'.join([args.drug_index_1, args.drug_index_2,
                      args.side_effect_index, str(args.regul_sore),
                      str(args.filter)])
+if args.seed:
+    fig_name += "-{}".format(args.seed)
+
 if len(fig_name) > 30:
     print("The output files' name are 'tmp', as it is too lang.")
     fig_name = 'tmp'
@@ -151,13 +157,16 @@ if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 print('==== OUTPUT DIR: {} ==='.format(out_dir))
 
-visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
+G = visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
                 out_dir+"/visual_explainer.png".format(fig_name),
                 hiden=args.ifaddition,
                 size=(60, 60),
                 protein_name_dict=data.prot_idx_to_id,
                 drug_name_dict=data.drug_idx_to_id)
 print('SAVE -> visual explainer in visual_explainer.png')
+with open(out_dir + "/graph.pkl", "wb") as f:
+    pickle.dump(G, f)
+    print('SAVE -> visual explainer in graph.pkl')
 
 # -------------- save results as dictionary in a pickle file --------------
 # print(pp_idx.device)
@@ -166,7 +175,7 @@ out = {"pp_idx": pp_idx,
        "pd_idx": pd_idx,
        "pd_weight": pd_weight,
        "drug1": drug1,
-       "durg2": drug2,
+       "drug2": drug2,
        "side_effect": side_effect,
        "probability": torch.Tensor(P[tmp]).tolist()}
 with open(out_dir + "/exp_info.pkl", "wb") as f:
@@ -277,4 +286,51 @@ print('SAVE -> drug compound info to drug_details.csv')
 if drug_ids.shape[0] < 5:
     print(drug_ids)
 print()
+
+# -------------- Protein Dropout --------------
+model.eval()
+n = int(len(out['drug1'])/2)
+unique_p = set(out['pp_idx'].flatten()) | set(out['pd_idx'][0])
+dropout_table = pandas.DataFrame({'drug_1': [int(d) for d in out['drug1'][:n]],
+                                  'drug_2': [int(d) for d in out['drug2'][:n]],
+                                  'side effect': [int(d) for d in out['side_effect'][:n]]})
+dropout_mask = dropout_table.copy()
+dropout_mask['all'] = 0
+
+pp_weights = torch.tensor([0.0001] * out['pp_idx'].shape[1]).to(device)
+pd_weights = torch.tensor([0.0001] * out['pd_idx'].shape[1]).to(device)
+pp_index = torch.tensor(out['pp_idx']).to(device)
+pd_index = torch.tensor(out['pd_idx']).to(device)
+
+z = model.pp(data.p_feat, pp_index, pp_weights)
+z = model.pd(z, pd_index, pd_weights)
+P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+dropout_table['all'] = P.tolist()[:n]
+
+for p in unique_p:
+    pp_weights = np.copy(out['pp_weight'])
+    pp_weights[out['pp_idx'][0] == p] = 0.0001
+    pp_weights[out['pp_idx'][1] == p] = 0.0001
+    pp_weights = torch.tensor(pp_weights).to(device)
+    z = model.pp(data.p_feat, pp_index, pp_weights)
+
+    pd_weights = np.copy(out['pd_weight'])
+    pd_weights[out['pd_idx'][0] == p] = 0.0001
+    pd_weights = torch.tensor(pd_weights).to(device)
+    z = model.pd(z, pd_index, pd_weights)
+
+    P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+    dropout_table['gene {}'.format(p)] = P.tolist()[:n]
+    dropout_mask['gene {}'.format(p)] = 0
+dropout_table.to_csv(out_dir + '/gene_dropout.csv', index=False)
+print('SAVE -> gene dropout results to gene_dropout.csv')
+
+pd = out['pd_idx']
+for i in range(dropout_mask.shape[0]):
+    d1, d2 = dropout_table.loc[i, 'drug_1'], dropout_table.loc[i, 'drug_2']
+    ppp = pd[:, (pd[1] == d1) | (pd[1] == d2)]
+    for p in ppp[0]:
+        dropout_mask.loc[i, 'gene {}'.format(p)] = 1
+dropout_mask.to_csv(out_dir + '/gene_dropout_mask.csv', index=False)
+print('SAVE -> gene dropout results to gene_dropout_mask.csv')
 
