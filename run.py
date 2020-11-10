@@ -82,6 +82,8 @@ data_dir = root + '/data/'
 # -------------- load data --------------
 with open(data_dir + 'tipexp_data.pkl', 'rb') as f:
     data = pickle.load(f)
+with open(data_dir + 'network.pkl', 'rb') as f:
+    network = pickle.load(f)
 
 
 # -------------- parse drug pairs and side effects --------------
@@ -289,7 +291,7 @@ print()
 
 # -------------- Protein Dropout --------------
 model.eval()
-n = int(len(out['drug1'])/2)
+n = int(len(out['drug1'])/2) if len(out['drug1']) > 2 else len(out['drug1'])
 unique_p = set(out['pp_idx'].flatten()) | set(out['pd_idx'][0])
 dropout_table = pandas.DataFrame({'drug_1': [int(d) for d in out['drug1'][:n]],
                                   'drug_2': [int(d) for d in out['drug2'][:n]],
@@ -333,4 +335,3 @@ for i in range(dropout_mask.shape[0]):
         dropout_mask.loc[i, 'gene {}'.format(p)] = 1
 dropout_mask.to_csv(out_dir + '/gene_dropout_mask.csv', index=False)
 print('SAVE -> gene dropout results to gene_dropout_mask.csv')
-
