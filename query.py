@@ -3,6 +3,7 @@ import sys
 import pickle
 import textwrap
 import scholarly
+import requests
 
 # parse parameters
 if sys.argv[1] in {'-h', '--help'}:
