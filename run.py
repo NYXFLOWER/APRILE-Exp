@@ -1,22 +1,23 @@
 from __future__ import print_function
 from pubchempy import Compound
 
-from goatools.base import download_go_basic_obo         # Get http://geneontology.org/ontology/go-basic.obo
-from goatools.base import download_ncbi_associations    # Get ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2go.gz
+from goatools.base import \
+    download_go_basic_obo  # Get http://geneontology.org/ontology/go-basic.obo
+from goatools.base import \
+    download_ncbi_associations  # Get ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2go.gz
 from goatools.obo_parser import GODag
 from goatools.anno.genetogo_reader import Gene2GoReader
 from goatools.test_data.genes_NCBI_9606_ProteinCoding import GENEID2NT as GeneID2nt_hum
 from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
 from goatools.godag_plot import plot_gos, plot_results, plot_goid2goobj
 
-from src.utils import visualize_graph, args_parse
+from src.utils import visualize_graph, args_parse_train, args_parse_pred
 from src.layers import *
 import pandas
 import argparse
 import textwrap
 import pickle
 import os
-
 
 # -------------- parse input parameters --------------
 parser = argparse.ArgumentParser(
@@ -49,8 +50,7 @@ parser = argparse.ArgumentParser(
                 visualise significant GO terms with/without gene symbols
           - namespace.csv                                       [table]
                 associated significant GO terms' name, namespace, p-value
-        """),
-)
+        """))
 # //TODO: add combination mods
 parser.add_argument("drug_index_1", type=str,
                     help="[int/int_list/all] from 0 to 283")
@@ -70,7 +70,6 @@ parser.add_argument("-v", "--version", action='version', version='%(prog)s 3.0')
 
 args = parser.parse_args()
 
-
 if args.seed:
     torch.manual_seed(args.seed)
     print("==== SEED: {} ====".format(args.seed))
@@ -78,26 +77,25 @@ if args.seed:
 root = os.path.abspath(os.getcwd())
 data_dir = root + '/data/'
 
-
 # -------------- load data --------------
 with open(data_dir + 'tipexp_data.pkl', 'rb') as f:
     data = pickle.load(f)
-with open(data_dir + 'network.pkl', 'rb') as f:
-    network = pickle.load(f)
-
+# with open(data_dir + 'network.pkl', 'rb') as f:
+#     network = pickle.load(f)
 
 # -------------- parse drug pairs and side effects --------------
 # //TODO: change args from int to string (list of int)
-drug1, drug2, side_effect = args_parse(args.drug_index_1, args.drug_index_2,
-                                       args.side_effect_index, data.train_range,
-                                       data.train_et, data.train_idx)
-
+# drug1, drug2, side_effect = args_parse_train(args.drug_index_1, args.drug_index_2,
+#                                              args.side_effect_index, data.train_range,
+#                                              data.train_et, data.train_idx)
+drug1, drug2, side_effect = args_parse_pred(args.drug_index_1, args.drug_index_2,
+                                            args.side_effect_index,
+                                            data.n_drug, data.n_et)
 
 # -------------- identify device --------------
 device_name = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("==== DEVICE: {} ====".format(device_name))
 device = torch.device(device_name)
-
 
 # -------------- load trained model --------------
 nhids_gcn = [64, 32, 32]
@@ -110,7 +108,6 @@ model = Model(pp, pd, mip).to('cpu')
 name = 'poly-' + str(nhids_gcn) + '-' + str(drug_dim)
 model.load_state_dict(torch.load(data_dir + name + '-model.pt'))
 
-
 # -------------- edge filter --------------
 data = data.to(device)
 model = model.to(device)
@@ -119,14 +116,18 @@ pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
 pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
 z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
 z = model.pd(z, data.pd_index, pd_static_edge_weights)
-P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+P = torch.sigmoid(
+    (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+
+# print(P[P>0.5].tolist())
 
 tmp = P > args.filter
 drug1 = torch.Tensor(drug1)[tmp].tolist()
 if not drug1:
     raise ValueError("No Satisfied Edges." +
                      "\n - Suggestion: reduce the threshold probability with [-f] flag."
-                     + "Current probability threshold is {}. ".format(args.filter) +
+                     + "Current probability threshold is {}. ".format(
+        args.filter) +
                      "\n - Suggestion: check if retrieved edge is in the training set."
                      "\n - Please use -h for help")
 
@@ -154,17 +155,18 @@ if len(fig_name) > 30:
     print("The output files' name are 'tmp', as it is too lang.")
     fig_name = 'tmp'
 
-out_dir = root + '/out/' + fig_name
+out_dir = root + '/out_Covid/' + fig_name    # TODO
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 print('==== OUTPUT DIR: {} ==='.format(out_dir))
 
-G = visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1, drug2,
-                out_dir+"/visual_explainer.png".format(fig_name),
-                hiden=args.ifaddition,
-                size=(60, 60),
-                protein_name_dict=data.prot_idx_to_id,
-                drug_name_dict=data.drug_idx_to_id)
+G = visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1,
+                    drug2,
+                    out_dir + "/visual_explainer.png".format(fig_name),
+                    hiden=args.ifaddition,
+                    size=(60, 60),
+                    protein_name_dict=data.prot_idx_to_id,
+                    drug_name_dict=data.drug_idx_to_id)
 print('SAVE -> visual explainer in visual_explainer.png')
 with open(out_dir + "/graph.pkl", "wb") as f:
     pickle.dump(G, f)
@@ -194,6 +196,13 @@ else:
     print('  Too many edges to print')
 print()
 
+info_table = pandas.DataFrame({'drug1': drug1,
+                               'drug2': drug2,
+                               'side effect': side_effect,
+                               'probability': torch.Tensor(P[tmp]).tolist()})
+info_table.to_csv(out_dir+'/pred_results.csv', index=False)
+print('SAVE -> predicted results in pred_results.csv\n')
+
 # -------------- Go Enrichment --------------
 print('==== GO ENRICHMENT ====')
 obo_fname = download_go_basic_obo()
@@ -208,7 +217,7 @@ objanno = Gene2GoReader(fin_gene2go, taxids=[9606])
 #        BP: biological_process
 #        MF: molecular_function
 #        CC: cellular_component
-#    assocation is a dict:
+#    association is a dict:
 #        key: NCBI GeneID
 #        value: A set of GO IDs associated with that gene
 ns2assoc = objanno.get_ns2assc()
@@ -217,15 +226,15 @@ for nspc, id2gos in ns2assoc.items():
     print("{NS} {N:,} annotated human genes".format(NS=nspc, N=len(id2gos)))
 
 goeaobj = GOEnrichmentStudyNS(
-        GeneID2nt_hum.keys(),       # List of human protein-acoding genes
-        ns2assoc,                   # geneid/GO associations
-        obodag, # Ontologies
-        propagate_counts=False,
-        alpha=0.05,                 # default significance cut-off
-        methods=['fdr_bh'])         # defult multipletest correction method
+    GeneID2nt_hum.keys(),  # List of human protein-acoding genes
+    ns2assoc,  # geneID/GO associations
+    obodag,  # Ontologies
+    propagate_counts=False,
+    alpha=0.05,  # default significance cut-off
+    methods=['fdr_bh'])  # default multipletest correction method
 
-# 'p_' means "pvalue". 'fdr_bh' is the multipletest method we are currently using.
-geneids_study = pp_idx.flatten()    # geneid2symbol.keys()
+# 'p_' means "p-value". 'fdr_bh' is the multipletest method we are currently using.
+geneids_study = pp_idx.flatten()  # geneid2symbol.keys()
 geneids_study = [int(data.prot_idx_to_id[idx].replace('GeneID', ''))
                  for idx in geneids_study]
 
@@ -239,21 +248,21 @@ print('\n==== FIND: {} significant GO terms ===='.format(n_sig))
 if n_sig == 0:
     exit()
 
-
 print()
 # -------------- analysis --------------
 geneid2symbol = {v.GeneID: v.Symbol for k, v in GeneID2nt_hum.items()}
 
-keys = ['name', 'namespace','id']
+keys = ['name', 'namespace', 'id']
 df_go1 = pandas.DataFrame([{k: g.goterm.__dict__.get(k) for k in keys}
                            for g in goea_results_sig])
 df_p = pandas.DataFrame([{'p_fdr_bh': g.__dict__['p_fdr_bh']}
                          for g in goea_results_sig])
 df_go = df_go1.merge(df_p, left_index=True, right_index=True)
 
-go_genes = pandas.DataFrame([{'id': g.goterm.id, 'gene': s, 'symbol': geneid2symbol[s]}
-                         for g in goea_results_sig
-                         for s in g.study_items])
+go_genes = pandas.DataFrame(
+    [{'id': g.goterm.id, 'gene': s, 'symbol': geneid2symbol[s]}
+     for g in goea_results_sig
+     for s in g.study_items])
 df_go = df_go.merge(go_genes, on='id')
 print('SAVE -> name spaces of the significant GO terms in namespace.csv')
 print(df_go.groupby('namespace').count())
@@ -263,17 +272,18 @@ print()
 # -------------- Plot subset starting from these significant GO terms --------------
 goid_subset = [g.GO for g in goea_results_sig]
 plot_gos(out_dir + "/go_enrich.png",
-         goid_subset,                       # Source GO ids
+         goid_subset,  # Source GO ids
          obodag,
-         goea_results=goea_results_all)     # Use pvals for coloring
+         goea_results=goea_results_all)  # Use pvals for coloring
 
 plot_gos(out_dir + "/go_enrich_symbols.pdf",
-         goid_subset,                       # Source GO ids
+         goid_subset,  # Source GO ids
          obodag,
-         goea_results=goea_results_all,     # use pvals for coloring
-         id2symbol=geneid2symbol,           # Print study gene Symbols, not Entrez GeneIDs
-         study_items=6,                     # Only only 6 gene Symbols max on GO terms
-         items_p_line=3)                    # Print 3 genes per line
+         goea_results=goea_results_all,  # use pvals for coloring
+         id2symbol=geneid2symbol,
+         # Print study gene Symbols, not Entrez GeneIDs
+         study_items=6,  # Only only 6 gene Symbols max on GO terms
+         items_p_line=3)  # Print 3 genes per line
 
 print()
 cids = [int(data.drug_idx_to_id[c].replace('CID', '')) for c in pd_idx[1]]
@@ -282,7 +292,8 @@ drug_ids = pandas.DataFrame([[data.drug_id_to_idx['CID{}'.format(d.cid)],
                               d.cid,
                               'NA' if len(d.synonyms) == 0 else d.synonyms[0],
                               d.iupac_name] for d in drugs],
-                            columns=["drug_idx", 'CID', 'synonym', 'iupac_name'])
+                            columns=["drug_idx", 'CID', 'synonym',
+                                     'iupac_name'])
 drug_ids.to_csv(out_dir + '/drug_details.csv', index=False)
 print('SAVE -> drug compound info to drug_details.csv')
 if drug_ids.shape[0] < 5:
@@ -291,11 +302,12 @@ print()
 
 # -------------- Protein Dropout --------------
 model.eval()
-n = int(len(out['drug1'])/2) if len(out['drug1']) > 2 else len(out['drug1'])
+n = int(len(out['drug1']) / 2) if len(out['drug1']) > 2 else len(out['drug1'])
 unique_p = set(out['pp_idx'].flatten()) | set(out['pd_idx'][0])
 dropout_table = pandas.DataFrame({'drug_1': [int(d) for d in out['drug1'][:n]],
                                   'drug_2': [int(d) for d in out['drug2'][:n]],
-                                  'side effect': [int(d) for d in out['side_effect'][:n]]})
+                                  'side effect': [int(d) for d in
+                                                  out['side_effect'][:n]]})
 dropout_mask = dropout_table.copy()
 dropout_mask['all'] = 0
 
@@ -306,7 +318,8 @@ pd_index = torch.tensor(out['pd_idx']).to(device)
 
 z = model.pp(data.p_feat, pp_index, pp_weights)
 z = model.pd(z, pd_index, pd_weights)
-P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+P = torch.sigmoid(
+    (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
 dropout_table['all'] = P.tolist()[:n]
 
 for p in unique_p:
@@ -321,7 +334,9 @@ for p in unique_p:
     pd_weights = torch.tensor(pd_weights).to(device)
     z = model.pd(z, pd_index, pd_weights)
 
-    P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+    P = torch.sigmoid(
+        (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to(
+        "cpu")
     dropout_table['gene {}'.format(p)] = P.tolist()[:n]
     dropout_mask['gene {}'.format(p)] = 0
 dropout_table.to_csv(out_dir + '/gene_dropout.csv', index=False)
