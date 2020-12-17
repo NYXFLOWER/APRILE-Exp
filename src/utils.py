@@ -235,7 +235,7 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, d1, d2,
     return G
 
 
-def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
+def args_parse_train(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
     """
     :param drug_index_1: char '*' or string of the format list of int, like 2,3,4
     :param drug_index_2: char '*' or string of the format list of int
@@ -313,5 +313,34 @@ def args_parse(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
             drug2.extend(tmp)
             side_effect.extend((et[idx[0] == d1]).tolist())
             drug1.extend([d1] * len(tmp))
+
+    return drug1, drug2, side_effect
+
+
+def args_parse_pred(drug_index_1, drug_index_2, side_effect_index, n_drug, n_side_effect):
+    """
+    :param drug_index_1: char '*' or string of the format list of int, like 2,3,4
+    :param drug_index_2: char '*' or string of the format list of int
+    :param side_effect_index: char '*' or string of the format list of int
+    :return: three lists of int
+    """
+    # case - * * *
+    if drug_index_1 == 'all' and drug_index_2 == 'all' and side_effect_index == 'all':
+        print('The drug1, drug2, side effect inputs can not be [all] at the same time!')
+        exit()
+        return
+
+    drug_index_1 = list(range(n_drug)) if drug_index_1 == 'all' \
+        else [int(i) for i in drug_index_1.split(',')]
+    drug_index_2 = list(range(n_drug)) if drug_index_2 == 'all' \
+        else [int(i) for i in drug_index_2.split(',')]
+    side_effect_index = list(range(n_side_effect)) if side_effect_index == 'all' \
+        else [int(i) for i in side_effect_index.split(',')]
+
+    drug1, drug2, side_effect = [], [], []
+    for s, d1, d2 in product(side_effect_index, drug_index_1, drug_index_2):
+        side_effect.append(s)
+        drug1.append(d1)
+        drug2.append(d2)
 
     return drug1, drug2, side_effect
