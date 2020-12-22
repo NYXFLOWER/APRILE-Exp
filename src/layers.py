@@ -5,6 +5,8 @@ import numpy as np
 from torch.nn import Parameter
 from torch_geometric.nn.conv import MessagePassing
 import torch.nn.functional as F
+import os
+import pickle
 
 
 torch.manual_seed(1111)
@@ -268,9 +270,9 @@ class Pre_mask(torch.nn.Module):
         self.pd_weight.data[mask] = 0.0
 
 
-class Tip_explainer(object):
+class PoseExplainer(object):
     def __init__(self, model, data, device):
-        super(Tip_explainer, self).__init__()
+        super(PoseExplainer, self).__init__()
         self.model = model
         self.data = data
         self.device = device
@@ -365,4 +367,57 @@ class Tip_explainer(object):
         pd_left_weight = pd_mask[pd_left_mask].detach().cpu().numpy()
 
         return pp_left_index, pp_left_weight, pd_left_index, pd_left_weight
+
+
+class PosePredictor(object):
+    def __init__(self, data_dir: str, data):
+        # load data
+        with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'rb') as f:
+            self.data = pickle.load(f)
+
+        # load pretrained model
+        self.model, self.name = self.__pretrained_model_construction__()
+        self.model.load_state_dict(
+            torch.load(data_dir + self.name + '-model.pt'))
+
+    def __pretrained_model_construction__(self):
+        nhids_gcn = [64, 32, 32]
+        prot_out_dim = sum(nhids_gcn)
+        drug_dim = 128
+        pp = PP(self.data.n_prot, nhids_gcn)
+        pd = PD(prot_out_dim, drug_dim, self.data.n_drug)
+        mip = MultiInnerProductDecoder(drug_dim + pd.d_dim_feat, self.data.n_et)
+        name = 'poly-' + str(nhids_gcn) + '-' + str(drug_dim)
+
+        return Model(pp, pd, mip).to('cpu'), name
+
+    def predict(self, drug1, drug2, side_effect, device, threshold=0.5):
+        data = self.data.to(device)
+        model = self.model.to(device)
+        model.eval()
+
+        pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
+        pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
+        z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
+        z = model.pd(z, data.pd_index, pd_static_edge_weights)
+        P = torch.sigmoid(
+            (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)
+        ).to('cpu')
+
+        index_filter = P > threshold
+        drug1 = torch.Tensor(drug1)[index_filter].tolist()
+        if not drug1:
+            raise ValueError("No Satisfied Edges."
+                             + "\n - Suggestion: reduce the threshold probability."
+                             + "Current probability threshold is {}. ".format(threshold)
+                             + "\n - Please use -h for help")
+
+        drug2 = torch.Tensor(drug2)[index_filter].tolist()
+        side_effect = torch.Tensor(side_effect)[index_filter].tolist()
+
+        return drug1, drug2, side_effect, P[index_filter].tolist()
+
+
+
+
 
