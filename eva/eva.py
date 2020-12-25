@@ -54,3 +54,32 @@ for k, v in ns2assoc['MF'].items():
         if go_gene_asso_mf.get(gg) is None:
             go_gene_asso_mf[gg] = set()
         go_gene_asso_mf[gg].add(k)
+
+
+
+
+import plotly.graph_objects as go
+xx = list(set(range(data.n_et)) - set(top46))
+se_name = np.array([data.side_effect_idx_to_name[i] for i in range(data.n_et)])
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=x_embed[:, 0][xx],
+    y=x_embed[:, 1][xx],
+    mode='markers',
+    marker=dict(size=6),
+    text=se_name[xx],
+    textposition='top center'
+))
+fig.add_trace(go.Scatter(
+    x=x_embed[:, 0][top46],
+    y=x_embed[:, 1][top46],
+    mode='markers',
+    marker=dict(size=8),
+    text=se_name[top46],
+    textposition='top center'
+))
+fig.update_layout()
+fig.write_html('tmp46.html')
+
+
