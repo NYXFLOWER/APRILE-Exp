@@ -135,7 +135,7 @@ drug2 = torch.Tensor(drug2)[tmp].tolist()
 side_effect = torch.Tensor(side_effect)[tmp].tolist()
 
 # -------------- load and train explainer --------------
-exp = Tip_explainer(model, data, device)
+exp = PoseExplainer(model, data, device)
 result = exp.explain(drug1, drug2, side_effect, regulization=args.regul_sore)
 # print(result)
 
@@ -199,7 +199,8 @@ print()
 info_table = pandas.DataFrame({'drug1': drug1,
                                'drug2': drug2,
                                'side effect': side_effect,
-                               'probability': torch.Tensor(P[tmp]).tolist()})
+                               'probability': torch.Tensor(P[tmp]).tolist(),
+                               'side effect name': [data.side_effect_idx_to_name[i] for i in np.array(side_effect).astype(np.int)]})
 info_table.to_csv(out_dir+'/pred_results.csv', index=False)
 print('SAVE -> predicted results in pred_results.csv\n')
 
