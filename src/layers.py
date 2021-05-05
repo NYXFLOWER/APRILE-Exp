@@ -13,6 +13,10 @@ torch.manual_seed(1111)
 np.random.seed(1111)
 EPS = 1e-13
 
+# load data
+with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'rb') as f:
+    self.data = pickle.load(f)
+
 
 def normalize(input):
     norm_square = (input ** 2).sum(dim=1)
@@ -370,7 +374,7 @@ class PoseExplainer(object):
 
 
 class PosePredictor(object):
-    def __init__(self, data_dir: str, data):
+    def __init__(self, data_dir: str):
         # load data
         with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'rb') as f:
             self.data = pickle.load(f)
@@ -391,7 +395,7 @@ class PosePredictor(object):
 
         return Model(pp, pd, mip).to('cpu'), name
 
-    def predict(self, drug1, drug2, side_effect, device, threshold=0.5):
+    def predict(self, drug1, drug2, side_effect, device='cpu', threshold=0.5):
         data = self.data.to(device)
         model = self.model.to(device)
         model.eval()
@@ -418,6 +422,238 @@ class PosePredictor(object):
         return drug1, drug2, side_effect, P[index_filter].tolist()
 
 
+class Pose(object):
+    def __init__(self, data_dir: str, device='cpu'):
+        # load pretrained model
+        self.model, self.name = self.__pretrained_model_construction__()
+        self.model.load_state_dict(
+            torch.load(data_dir + self.name + '-model.pt'))
+
+        self.device = device
+
+    def __pretrained_model_construction__(self):
+        nhids_gcn = [64, 32, 32]
+        prot_out_dim = sum(nhids_gcn)
+        drug_dim = 128
+        pp = PP(self.data.n_prot, nhids_gcn)
+        pd = PD(prot_out_dim, drug_dim, self.data.n_drug)
+        mip = MultiInnerProductDecoder(drug_dim + pd.d_dim_feat, self.data.n_et)
+        name = 'poly-' + str(nhids_gcn) + '-' + str(drug_dim)
+
+        return Model(pp, pd, mip).to('cpu'), name
+
+    def get_prediction_train(self, threshold=0.5):
+        return self.predict(self.data.train_idx[0].tolist(), self.data.train_idx[1].tolist(), self.data.train_et.tolist(), threshold=threshold)
+
+    def get_prediction_test(self):
+        pass
+
+    def predict(self, drug1, drug2, side_effect, threshold=0.5):
+        device = self.device
+        data = self.data.to(device)
+        model = self.model.to(device)
+        model.eval()
+
+        pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
+        pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
+        z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
+        z0 = z.clone()
+        z1 = z.clone()
+
+        # prediction based on all infor
+        z = model.pd(z, data.pd_index, pd_static_edge_weights)
+        P = torch.sigmoid(
+            (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)
+        ).to('cpu')
+
+        index_filter = P > threshold
+        drug1 = torch.Tensor(drug1)[index_filter].tolist()
+        if not drug1:
+            raise ValueError("No Satisfied Edges."
+                             + "\n - Suggestion: reduce the threshold probability."
+                             + "Current probability threshold is {}. ".format(threshold)
+                             + "\n - Please use -h for help")
+
+        drug2 = torch.Tensor(drug2)[index_filter].tolist()
+        side_effect = torch.Tensor(side_effect)[index_filter].tolist()
+
+        # prediction based on protein info and their interactions
+        z0.data[:, 64:] *= 0
+        z0 = model.pd(z0, data.pd_index, pd_static_edge_weights)
+        P0 = torch.sigmoid((z0[drug1] * z0[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+        ppui_score = (P[index_filter] - P0)/P[index_filter]
+
+        # prediction based on drug info only
+        z1.data *= 0
+        z1 = model.pd(z1, data.pd_index, pd_static_edge_weights)
+        P1 = torch.sigmoid((z1[drug1] * z1[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+        pui_score = (P[index_filter] - P1)/P[index_filter]
+
+        return drug1, drug2, side_effect, P[index_filter].tolist(), pui_score.tolist(), ppui_score.tolist()
+
+    def explain(self, drug_list_1, drug_list_2, side_effect_list, regulization=2):
+        query = PoseQuery(drug_list_1, drug_list_2, side_effect_list, regulization)
+
+        data = self.data
+        model = self.model
+        device = self.device
+
+        pre_mask = Pre_mask(data.pp_index.shape[1] // 2, data.pd_index.shape[1]).to(device)
+        data = data.to(device)
+        model = model.to(device)
+
+        for gcn in self.model.pp.conv_list:
+            gcn.cached = False
+        self.model.pd.conv.cached = False
+        self.model.eval()
+
+        pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
+        pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
+
+        optimizer = torch.optim.Adam(pre_mask.parameters(), lr=0.01)
+        fake_optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+        # z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
+        # z = model.pd(z, data.pd_index, pd_static_edge_weights)
+
+        # # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+        # P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
+
+        # if len(drug_list_1) < 5:
+        #     print(P.tolist())
+
+        tmp = 0.0
+        pre_mask.reset_parameters()
+        for i in range(9999):
+            model.train()
+            pre_mask.desaturate()
+            optimizer.zero_grad()
+            fake_optimizer.zero_grad()
+
+            # half_mask = torch.sigmoid(pre_mask.pp_weight)
+            half_mask = torch.nn.Hardtanh(0, 1)(pre_mask.pp_weight)
+            pp_mask = torch.cat([half_mask, half_mask])
+
+            pd_mask = torch.nn.Hardtanh(0, 1)(pre_mask.pd_weight)
+
+            z = model.pp(data.p_feat, data.pp_index, pp_mask)
+
+            # TODO:
+            # z = model.pd(z, data.pd_index, pd_static_edge_weights)
+            z = model.pd(z, data.pd_index, pd_mask)
+            # TODO:
+
+            # P = torch.sigmoid((z[drug1, :] * z[drug2, :] * model.mip.weight[side_effect, :]).sum())
+            P = torch.sigmoid((z[drug_list_1] * z[drug_list_2] * model.mip.weight[side_effect_list]).sum(dim=1))
+            EPS = 1e-7
+
+            # TODO:
+            loss = torch.log(1 - P + EPS).sum() / regulization \
+                   + 0.5 * (pp_mask * (2 - pp_mask)).sum() \
+                   + (pd_mask * (2 - pd_mask)).sum()
+            # loss = -  torch.log(P) + 0.5 * (pp_mask * (2 - pp_mask)).sum() + (pd_mask * (2 - pd_mask)).sum()
+            # TODO:
+
+            loss.backward()
+            optimizer.step()
+            # print("Epoch:{}, loss:{}, prob:{}, pp_link_sum:{}, pd_link_sum:{}".format(i, loss.tolist(), P.tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
+            if i % 100 == 0:
+                print("Epoch:{:3d}, loss:{:0.2f}, prob:{:0.2f}, pp_link_sum:{:0.2f}, pd_link_sum:{:0.2f}".format(i, loss.tolist(), P.mean().tolist(), pp_mask.sum().tolist(), pd_mask.sum().tolist()))
+
+            # until no weight need to be updated --> no sum of weights changes
+            if tmp == (pp_mask.sum().tolist(), pd_mask.sum().tolist()):
+                break
+            else:
+                tmp = (pp_mask.sum().tolist(), pd_mask.sum().tolist())
+
+
+        pre_mask.saturate()
+
+        pp_left_mask = (pp_mask > 0.2).detach().cpu().numpy()
+        tmp = (data.pp_index[0, :] > data.pp_index[1, :]).detach().cpu().numpy()
+        pp_left_mask = np.logical_and(pp_left_mask, tmp)
+
+        pd_left_mask = (pd_mask > 0.2).detach().cpu().numpy()
+
+        pp_left_index = data.pp_index[:, pp_left_mask].cpu().numpy()
+        pd_left_index = data.pd_index[:, pd_left_mask].cpu().numpy()
+
+        pp_left_weight = pp_mask[pp_left_mask].detach().cpu().numpy()
+        pd_left_weight = pd_mask[pd_left_mask].detach().cpu().numpy()
+
+        query.set_exp_result(pp_left_index, pp_left_weight, pd_left_index, pd_left_weight)
+
+        return query
+
+     
+class PoseQuery(object):
+    @staticmethod
+    def load_from_pkl(file):
+        with open(file, 'rb') as f:
+            return pickle.load(f)
+
+    def __init__(self, drug1, drug2, side_effect, regulization):
+        self.drug1 = drug1
+        self.drug2 = drug2
+        self.side_effect = side_effect
+        self.regulization = regulization
+        self.if_exp = False
+
+    def set_exp_result(self, pp_index, pp_weight, pd_index, pd_weight):
+        self.pp_index = pp_index
+        self.pp_weight = pp_weight
+        self.pd_index = pd_index
+        self.pd_weight = pd_weight
+
+        print('pp_edge: {}, pd_edge:{}\n'.format(pp_index.shape[1], pd_index.shape[1]))
+
+    def enrich_GO(self):
+        go_file = "go-basic.obo"
+        if not os.path.exists(go_file):
+            obo_fname = download_go_basic_obo()
+            fin_gene2go = download_ncbi_associations()
+        
+        # Load gene ontologies
+        obodag = GODag("go-basic.obo")      
+        # Read NCBI's gene2go. Store annotations in a list of namedtuples
+        objanno = Gene2GoReader(fin_gene2go, taxids=[9606])
+        # Get namespace2association where:
+        #    namespace is:
+        #        BP: biological_process
+        #        MF: molecular_function
+        #        CC: cellular_component
+        #    association is a dict:
+        #        key: NCBI GeneID
+        #        value: A set of GO IDs associated with that gene
+        ns2assoc = objanno.get_ns2assc()
+
+        goeaobj = GOEnrichmentStudyNS(
+            GeneID2nt_hum.keys(),  # List of human protein-acoding genes
+            ns2assoc,  # geneID/GO associations
+            obodag,  # Ontologies
+            propagate_counts=False,
+            alpha=0.05,  # default significance cut-off
+            methods=['fdr_bh'])  # default multipletest correction method
+
+        geneids_study = self.pp_index.flatten()  # geneid2symbol.keys()
+        geneids_study = [int(data.prot_idx_to_id[idx].replace('GeneID', '')) for idx in geneids_study]
+
+    def set_pred_result(self, probability, pui_score, ppui_score):
+        self.probability = probability
+        self.pui_score = pui_score
+        self.ppui_score = ppui_score
+
+    def get_query(self):
+        return self.drug1, self.drug2, self.side_effect, self.regulization
+
+    def to_pickle(self, file):
+        with open(file, 'wb') as f:
+            pickle.dump(self, f)
+    
+    def generate_report(self, file):
+
+
+    
 
 
 

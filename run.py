@@ -85,12 +85,14 @@ with open(data_dir + 'tipexp_data.pkl', 'rb') as f:
 
 # -------------- parse drug pairs and side effects --------------
 # //TODO: change args from int to string (list of int)
-# drug1, drug2, side_effect = args_parse_train(args.drug_index_1, args.drug_index_2,
-#                                              args.side_effect_index, data.train_range,
-#                                              data.train_et, data.train_idx)
-drug1, drug2, side_effect = args_parse_pred(args.drug_index_1, args.drug_index_2,
-                                            args.side_effect_index,
-                                            data.n_drug, data.n_et)
+drug1, drug2, side_effect = args_parse_train(args.drug_index_1, args.drug_index_2,
+                                             args.side_effect_index, data.train_range,
+                                             data.train_et, data.train_idx)
+# drug1, drug2, side_effect = args_parse_pred(args.drug_index_1, args.drug_index_2,
+#                                             args.side_effect_index,
+#                                             data.n_drug, data.n_et)
+# drug1, drug2, side_effect = [19,129,37], [129,37,19], [452, 452, 452]
+print(len(drug1))
 
 # -------------- identify device --------------
 device_name = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -111,13 +113,17 @@ model.load_state_dict(torch.load(data_dir + name + '-model.pt'))
 # -------------- edge filter --------------
 data = data.to(device)
 model = model.to(device)
+print(model)
 model.eval()
 pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
 pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
 z = model.pp(data.p_feat, data.pp_index, pp_static_edge_weights)
+z0 = z.clone()
+z1 = z.clone()
+
+# final prediction
 z = model.pd(z, data.pd_index, pd_static_edge_weights)
-P = torch.sigmoid(
-    (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+P = torch.sigmoid((z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
 
 # print(P[P>0.5].tolist())
 
@@ -133,6 +139,16 @@ if not drug1:
 
 drug2 = torch.Tensor(drug2)[tmp].tolist()
 side_effect = torch.Tensor(side_effect)[tmp].tolist()
+
+# layer 0 prediction
+z0.data[:, 64:] *= 0
+z0 = model.pd(z0, data.pd_index, pd_static_edge_weights)
+P0 = torch.sigmoid((z0[drug1] * z0[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+
+# drug embeddings only with drug info
+z1.data *= 0
+z1 = model.pd(z1, data.pd_index, pd_static_edge_weights)
+P1 = torch.sigmoid((z1[drug1] * z1[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
 
 # -------------- load and train explainer --------------
 exp = PoseExplainer(model, data, device)
@@ -155,22 +171,12 @@ if len(fig_name) > 30:
     print("The output files' name are 'tmp', as it is too lang.")
     fig_name = 'tmp'
 
-out_dir = root + '/out_Covid/' + fig_name    # TODO
+out_dir = root + '/out_top_pred_train/' + fig_name    # TODO
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 print('==== OUTPUT DIR: {} ==='.format(out_dir))
 
-G = visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1,
-                    drug2,
-                    out_dir + "/visual_explainer.png".format(fig_name),
-                    hiden=args.ifaddition,
-                    size=(60, 60),
-                    protein_name_dict=data.prot_idx_to_id,
-                    drug_name_dict=data.drug_idx_to_id)
-print('SAVE -> visual explainer in visual_explainer.png')
-with open(out_dir + "/graph.pkl", "wb") as f:
-    pickle.dump(G, f)
-    print('SAVE -> visual explainer in graph.pkl')
+
 
 # -------------- save results as dictionary in a pickle file --------------
 # print(pp_idx.device)
@@ -196,10 +202,15 @@ else:
     print('  Too many edges to print')
 print()
 
+pui_score = (P[tmp] - P1)/P[tmp]
+ppui_score = (P[tmp] - P0)/P[tmp]
+
 info_table = pandas.DataFrame({'drug1': drug1,
                                'drug2': drug2,
                                'side effect': side_effect,
                                'probability': torch.Tensor(P[tmp]).tolist(),
+                               'PUI score': pui_score.tolist(),
+                               'PPIU score': ppui_score.tolist(),
                                'side effect name': [data.side_effect_idx_to_name[i] for i in np.array(side_effect).astype(np.int)]})
 info_table.to_csv(out_dir+'/pred_results.csv', index=False)
 print('SAVE -> predicted results in pred_results.csv\n')
@@ -301,53 +312,77 @@ if drug_ids.shape[0] < 5:
     print(drug_ids)
 print()
 
-# -------------- Protein Dropout --------------
-model.eval()
-n = int(len(out['drug1']) / 2) if len(out['drug1']) > 2 else len(out['drug1'])
-unique_p = set(out['pp_idx'].flatten()) | set(out['pd_idx'][0])
-dropout_table = pandas.DataFrame({'drug_1': [int(d) for d in out['drug1'][:n]],
-                                  'drug_2': [int(d) for d in out['drug2'][:n]],
-                                  'side effect': [int(d) for d in
-                                                  out['side_effect'][:n]]})
-dropout_mask = dropout_table.copy()
-dropout_mask['all'] = 0
 
-pp_weights = torch.tensor([0.0001] * out['pp_idx'].shape[1]).to(device)
-pd_weights = torch.tensor([0.0001] * out['pd_idx'].shape[1]).to(device)
-pp_index = torch.tensor(out['pp_idx']).to(device)
-pd_index = torch.tensor(out['pd_idx']).to(device)
+# # -------------- Output Graph of Explainer --------------
+# //TODO: move to utils and store and load to save time
+prot_graph_dict = {}
+for k, v in data.prot_idx_to_id.items():
+    gid = int(v[6:])
+    if geneid2symbol.get(gid):
+        prot_graph_dict[k] = '-'.join([str(k), v, geneid2symbol[gid]])
+    else:
+        prot_graph_dict[k] = '-'.join([str(k), v, 'N/A']) 
 
-z = model.pp(data.p_feat, pp_index, pp_weights)
-z = model.pd(z, pd_index, pd_weights)
-P = torch.sigmoid(
-    (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
-dropout_table['all'] = P.tolist()[:n]
 
-for p in unique_p:
-    pp_weights = np.copy(out['pp_weight'])
-    pp_weights[out['pp_idx'][0] == p] = 0.0001
-    pp_weights[out['pp_idx'][1] == p] = 0.0001
-    pp_weights = torch.tensor(pp_weights).to(device)
-    z = model.pp(data.p_feat, pp_index, pp_weights)
+G = visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, data.pp_index, drug1,
+                    drug2,
+                    out_dir + "/visual_explainer.png".format(fig_name),
+                    hiden=args.ifaddition,
+                    size=(60, 60),
+                    protein_name_dict=prot_graph_dict,
+                    drug_name_dict=data.drug_idx_to_id)
+print('SAVE -> visual explainer in visual_explainer.png')
+with open(out_dir + "/graph.pkl", "wb") as f:
+    pickle.dump(G, f)
+    print('SAVE -> visual explainer in graph.pkl')
 
-    pd_weights = np.copy(out['pd_weight'])
-    pd_weights[out['pd_idx'][0] == p] = 0.0001
-    pd_weights = torch.tensor(pd_weights).to(device)
-    z = model.pd(z, pd_index, pd_weights)
+# # -------------- Protein Dropout --------------
+# model.eval()
+# n = int(len(out['drug1']) / 2) if len(out['drug1']) > 2 else len(out['drug1'])
+# unique_p = set(out['pp_idx'].flatten()) | set(out['pd_idx'][0])
+# dropout_table = pandas.DataFrame({'drug_1': [int(d) for d in out['drug1'][:n]],
+#                                   'drug_2': [int(d) for d in out['drug2'][:n]],
+#                                   'side effect': [int(d) for d in
+#                                                   out['side_effect'][:n]]})
+# dropout_mask = dropout_table.copy()
+# dropout_mask['all'] = 0
 
-    P = torch.sigmoid(
-        (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to(
-        "cpu")
-    dropout_table['gene {}'.format(p)] = P.tolist()[:n]
-    dropout_mask['gene {}'.format(p)] = 0
-dropout_table.to_csv(out_dir + '/gene_dropout.csv', index=False)
-print('SAVE -> gene dropout results to gene_dropout.csv')
+# pp_weights = torch.tensor([0.0001] * out['pp_idx'].shape[1]).to(device)
+# pd_weights = torch.tensor([0.0001] * out['pd_idx'].shape[1]).to(device)
+# pp_index = torch.tensor(out['pp_idx']).to(device)
+# pd_index = torch.tensor(out['pd_idx']).to(device)
 
-pd = out['pd_idx']
-for i in range(dropout_mask.shape[0]):
-    d1, d2 = dropout_table.loc[i, 'drug_1'], dropout_table.loc[i, 'drug_2']
-    ppp = pd[:, (pd[1] == d1) | (pd[1] == d2)]
-    for p in ppp[0]:
-        dropout_mask.loc[i, 'gene {}'.format(p)] = 1
-dropout_mask.to_csv(out_dir + '/gene_dropout_mask.csv', index=False)
-print('SAVE -> gene dropout results to gene_dropout_mask.csv')
+# z = model.pp(data.p_feat, pp_index, pp_weights)
+# z = model.pd(z, pd_index, pd_weights)
+# P = torch.sigmoid(
+#     (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
+# dropout_table['all'] = P.tolist()[:n]
+
+# for p in unique_p:
+#     pp_weights = np.copy(out['pp_weight'])
+#     pp_weights[out['pp_idx'][0] == p] = 0.0001
+#     pp_weights[out['pp_idx'][1] == p] = 0.0001
+#     pp_weights = torch.tensor(pp_weights).to(device)
+#     z = model.pp(data.p_feat, pp_index, pp_weights)
+
+#     pd_weights = np.copy(out['pd_weight'])
+#     pd_weights[out['pd_idx'][0] == p] = 0.0001
+#     pd_weights = torch.tensor(pd_weights).to(device)
+#     z = model.pd(z, pd_index, pd_weights)
+
+#     P = torch.sigmoid(
+#         (z[drug1] * z[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to(
+#         "cpu")
+#     dropout_table['gene {}'.format(p)] = P.tolist()[:n]
+#     dropout_mask['gene {}'.format(p)] = 0
+# dropout_table.to_csv(out_dir + '/gene_dropout.csv', index=False)
+# print('SAVE -> gene dropout results to gene_dropout.csv')
+
+# pd = out['pd_idx']
+# for i in range(dropout_mask.shape[0]):
+#     d1, d2 = dropout_table.loc[i, 'drug_1'], dropout_table.loc[i, 'drug_2']
+#     ppp = pd[:, (pd[1] == d1) | (pd[1] == d2)]
+#     for p in ppp[0]:
+#         dropout_mask.loc[i, 'gene {}'.format(p)] = 1
+# dropout_mask.to_csv(out_dir + '/gene_dropout_mask.csv', index=False)
+# print('SAVE -> gene dropout results to gene_dropout_mask.csv')
