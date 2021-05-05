@@ -339,8 +339,9 @@ def args_parse_pred(drug_index_1, drug_index_2, side_effect_index, n_drug, n_sid
 
     drug1, drug2, side_effect = [], [], []
     for s, d1, d2 in product(side_effect_index, drug_index_1, drug_index_2):
-        side_effect.append(s)
-        drug1.append(d1)
-        drug2.append(d2)
+        if d1 != d2:
+            side_effect.extend([s, s])
+            drug1.extend((d1, d2))
+            drug2.extend((d2, d1))
 
     return drug1, drug2, side_effect
