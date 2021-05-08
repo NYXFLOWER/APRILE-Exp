@@ -2,20 +2,41 @@ import torch
 from torch_scatter import scatter_add
 from torch_geometric.utils import add_remaining_self_loops
 import numpy as np
+import pandas
 from torch.nn import Parameter
 from torch_geometric.nn.conv import MessagePassing
 import torch.nn.functional as F
 import os
 import pickle
 
+from pubchempy import Compound
+
+from goatools.base import \
+    download_go_basic_obo  # Get http://geneontology.org/ontology/go-basic.obo
+from goatools.base import \
+    download_ncbi_associations  # Get ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2go.gz
+from goatools.test_data.genes_NCBI_9606_ProteinCoding import GENEID2NT as GeneID2nt_hum
+from goatools.obo_parser import GODag
+from goatools.anno.genetogo_reader import Gene2GoReader
+from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
+from goatools.godag_plot import plot_gos, plot_results, plot_goid2goobj
+
+from src.utils import remove_bidirection, visualize_graph
+
+from scholarly import scholarly
+import PyPDF2
 
 torch.manual_seed(1111)
 np.random.seed(1111)
 EPS = 1e-13
 
 # load data
+data_dir = os.path.join(os.path.abspath(os.getcwd()), 'data/')
 with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'rb') as f:
-    self.data = pickle.load(f)
+    gdata = pickle.load(f)
+
+# with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'wb') as f:
+#     pickle.dump(gdata, f)
 
 
 def normalize(input):
@@ -430,27 +451,62 @@ class Pose(object):
             torch.load(data_dir + self.name + '-model.pt'))
 
         self.device = device
+        self.__GO_enrich__()
+
+
+    def __GO_enrich__(self):
+        go_file = "go-basic.obo"
+        if not os.path.exists(go_file):
+            download_go_basic_obo()
+        
+        # Load gene ontologies
+        obodag = GODag("go-basic.obo")
+   
+        # Read NCBI's gene2go. Store annotations in a list of namedtuples
+        fin_gene2go = download_ncbi_associations()
+        objanno = Gene2GoReader(fin_gene2go, taxids=[9606])
+        # Get namespace2association where:
+        #    namespace is:
+        #        BP: biological_process
+        #        MF: molecular_function
+        #        CC: cellular_component
+        #    association is a dict:
+        #        key: NCBI GeneID
+        #        value: A set of GO IDs associated with that gene
+        ns2assoc = objanno.get_ns2assc()
+
+        self.goeaobj = GOEnrichmentStudyNS(
+            GeneID2nt_hum.keys(),  # List of human protein-acoding genes
+            ns2assoc,  # geneID/GO associations
+            obodag,  # Ontologies
+            propagate_counts=False,
+            alpha=0.05,  # default significance cut-off
+            methods=['fdr_bh'])  # default multipletest correction method
 
     def __pretrained_model_construction__(self):
         nhids_gcn = [64, 32, 32]
         prot_out_dim = sum(nhids_gcn)
         drug_dim = 128
-        pp = PP(self.data.n_prot, nhids_gcn)
-        pd = PD(prot_out_dim, drug_dim, self.data.n_drug)
-        mip = MultiInnerProductDecoder(drug_dim + pd.d_dim_feat, self.data.n_et)
+        pp = PP(gdata.n_prot, nhids_gcn)
+        pd = PD(prot_out_dim, drug_dim, gdata.n_drug)
+        mip = MultiInnerProductDecoder(drug_dim + pd.d_dim_feat, gdata.n_et)
         name = 'poly-' + str(nhids_gcn) + '-' + str(drug_dim)
 
         return Model(pp, pd, mip).to('cpu'), name
 
     def get_prediction_train(self, threshold=0.5):
-        return self.predict(self.data.train_idx[0].tolist(), self.data.train_idx[1].tolist(), self.data.train_et.tolist(), threshold=threshold)
+        train_idx, train_et = remove_bidirection(gdata.train_idx, gdata.train_et)
 
-    def get_prediction_test(self):
-        pass
+        return self.predict(train_idx[0].tolist(), train_idx[1].tolist(), train_et.tolist(), threshold=threshold)
+
+    def get_prediction_test(self, threshold=0.5):
+        test_idx, test_et = remove_bidirection(gdata.test_idx, gdata.test_et)
+
+        return self.predict(test_idx[0].tolist(), test_idx[1].tolist(), test_et.tolist(), threshold=threshold)
 
     def predict(self, drug1, drug2, side_effect, threshold=0.5):
         device = self.device
-        data = self.data.to(device)
+        data = gdata.to(device)
         model = self.model.to(device)
         model.eval()
 
@@ -467,15 +523,15 @@ class Pose(object):
         ).to('cpu')
 
         index_filter = P > threshold
-        drug1 = torch.Tensor(drug1)[index_filter].tolist()
+        drug1 = torch.Tensor(drug1)[index_filter].numpy().astype(int).tolist()
         if not drug1:
             raise ValueError("No Satisfied Edges."
                              + "\n - Suggestion: reduce the threshold probability."
                              + "Current probability threshold is {}. ".format(threshold)
                              + "\n - Please use -h for help")
 
-        drug2 = torch.Tensor(drug2)[index_filter].tolist()
-        side_effect = torch.Tensor(side_effect)[index_filter].tolist()
+        drug2 = torch.Tensor(drug2)[index_filter].numpy().astype(int).tolist()
+        side_effect = torch.Tensor(side_effect)[index_filter].numpy().astype(int).tolist()
 
         # prediction based on protein info and their interactions
         z0.data[:, 64:] *= 0
@@ -489,14 +545,53 @@ class Pose(object):
         P1 = torch.sigmoid((z1[drug1] * z1[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
         pui_score = (P[index_filter] - P1)/P[index_filter]
 
-        return drug1, drug2, side_effect, P[index_filter].tolist(), pui_score.tolist(), ppui_score.tolist()
+        # reture a query object
+        query = PoseQuery(drug1, drug2, side_effect)
+        query.set_pred_result(P[index_filter].tolist(), pui_score.tolist(), ppui_score.tolist())
 
-    def explain(self, drug_list_1, drug_list_2, side_effect_list, regulization=2):
-        query = PoseQuery(drug_list_1, drug_list_2, side_effect_list, regulization)
+        return query 
 
-        data = self.data
+    def explain_list(self, drug_list_1, drug_list_2, side_effect_list, regulization=2, if_auto_tuning=True, if_pred=True):
+        if if_pred:
+            query = self.predict(drug_list_1, drug_list_2, side_effect_list)
+        else:    
+            query = PoseQuery(drug_list_1, drug_list_2, side_effect_list, regulization)
+        return self.explain_query(query, if_auto_tuning=if_auto_tuning, regulization=query.regulization)
+
+    def explain_query(self, query, if_auto_tuning=True, regulization=2):
+        query.regulization = regulization
+
+        pp_left_index, pp_left_weight, pd_left_index, pd_left_weight = self.__explain(query)
+
+        if if_auto_tuning:
+            while pp_left_index.shape[0]==0:
+                query.regulization /= 2
+                pp_left_index, pp_left_weight, pd_left_index, pd_left_weight = self.explain_query(query)
+
+        query.set_exp_result(pp_left_index, pp_left_weight, pd_left_index, pd_left_weight)
+
+        goea_results_sig = self.enrich_go(pp_left_index)
+        query.set_enrich_result(goea_results_sig)
+
+        return query
+
+    def enrich_go(self, pp_left_index):
+        # -------------- Go Enrichment --------------
+        geneids_study = pp_left_index.flatten()  # geneid2symbol.keys()
+        geneids_study = [int(gdata.prot_idx_to_id[idx].replace('GeneID', '')) for idx in geneids_study]
+
+        goea_results_all = self.goeaobj.run_study(geneids_study)
+        goea_results_sig = [r for r in goea_results_all if r.p_fdr_bh < 0.05]
+        
+        return goea_results_sig
+        
+    def __explain(self, query):
+
+        data = gdata
         model = self.model
         device = self.device
+        
+        drug_list_1, drug_list_2, side_effect_list, regulization = query.get_query()
 
         pre_mask = Pre_mask(data.pp_index.shape[1] // 2, data.pd_index.shape[1]).to(device)
         data = data.to(device)
@@ -507,8 +602,8 @@ class Pose(object):
         self.model.pd.conv.cached = False
         self.model.eval()
 
-        pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
-        pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
+        # pp_static_edge_weights = torch.ones((data.pp_index.shape[1])).to(device)
+        # pd_static_edge_weights = torch.ones((data.pd_index.shape[1])).to(device)
 
         optimizer = torch.optim.Adam(pre_mask.parameters(), lr=0.01)
         fake_optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
@@ -581,9 +676,7 @@ class Pose(object):
         pp_left_weight = pp_mask[pp_left_mask].detach().cpu().numpy()
         pd_left_weight = pd_mask[pd_left_mask].detach().cpu().numpy()
 
-        query.set_exp_result(pp_left_index, pp_left_weight, pd_left_index, pd_left_weight)
-
-        return query
+        return pp_left_index, pp_left_weight, pd_left_index, pd_left_weight
 
      
 class PoseQuery(object):
@@ -592,68 +685,108 @@ class PoseQuery(object):
         with open(file, 'rb') as f:
             return pickle.load(f)
 
-    def __init__(self, drug1, drug2, side_effect, regulization):
+    def __init__(self, drug1, drug2, side_effect, regulization=2):
         self.drug1 = drug1
         self.drug2 = drug2
         self.side_effect = side_effect
         self.regulization = regulization
-        self.if_exp = False
+        self.if_explain = False
+        self.if_enrich = False
+        self.if_pred = False
+
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
+        
+    def __str__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
 
     def set_exp_result(self, pp_index, pp_weight, pd_index, pd_weight):
-        self.pp_index = pp_index
-        self.pp_weight = pp_weight
-        self.pd_index = pd_index
-        self.pd_weight = pd_weight
+        if pd_index.shape[1]:
+            self.pp_index = pp_index
+            self.pp_weight = pp_weight
+            self.pd_index = pd_index
+            self.pd_weight = pd_weight
+            self.if_explain = True
 
-        print('pp_edge: {}, pd_edge:{}\n'.format(pp_index.shape[1], pd_index.shape[1]))
+            print('pp_edge: {}, pd_edge:{}\n'.format(pp_index.shape[1], pd_index.shape[1]))
 
-    def enrich_GO(self):
-        go_file = "go-basic.obo"
-        if not os.path.exists(go_file):
-            obo_fname = download_go_basic_obo()
-            fin_gene2go = download_ncbi_associations()
-        
-        # Load gene ontologies
-        obodag = GODag("go-basic.obo")      
-        # Read NCBI's gene2go. Store annotations in a list of namedtuples
-        objanno = Gene2GoReader(fin_gene2go, taxids=[9606])
-        # Get namespace2association where:
-        #    namespace is:
-        #        BP: biological_process
-        #        MF: molecular_function
-        #        CC: cellular_component
-        #    association is a dict:
-        #        key: NCBI GeneID
-        #        value: A set of GO IDs associated with that gene
-        ns2assoc = objanno.get_ns2assc()
-
-        goeaobj = GOEnrichmentStudyNS(
-            GeneID2nt_hum.keys(),  # List of human protein-acoding genes
-            ns2assoc,  # geneID/GO associations
-            obodag,  # Ontologies
-            propagate_counts=False,
-            alpha=0.05,  # default significance cut-off
-            methods=['fdr_bh'])  # default multipletest correction method
-
-        geneids_study = self.pp_index.flatten()  # geneid2symbol.keys()
-        geneids_study = [int(data.prot_idx_to_id[idx].replace('GeneID', '')) for idx in geneids_study]
+    def set_enrich_result(self, goea_results_sig):
+        if len(goea_results_sig):
+            self.sig_gos = goea_results_sig
+            self.if_enrich = True
 
     def set_pred_result(self, probability, pui_score, ppui_score):
         self.probability = probability
         self.pui_score = pui_score
         self.ppui_score = ppui_score
+        self.if_pred = True
 
     def get_query(self):
         return self.drug1, self.drug2, self.side_effect, self.regulization
+        
+    def get_pred_table(self):
+        keys = ['drug_1', 'CID_1', 'name_1', 'drug_2', 'CID_2', 'name_2', 'side_effect', 'side_effect_name', 'prob', 'pui', 'ppui']
+        cid1 = [int(gdata.drug_idx_to_id[c][3:]) for c in self.drug1]
+        cid2 = [int(gdata.drug_idx_to_id[c][3:]) for c in self.drug2]
+        name1 = [gdata.drug_idx_to_name[c] for c in self.drug1]
+        name2 = [gdata.drug_idx_to_name[c] for c in self.drug2]
+        sename = [gdata.side_effect_idx_to_name[c] for c in self.side_effect]
+
+        if not self.if_pred:
+            print('WARING: The query is not predicted')
+            keys = keys[:8]
+            df = [self.drug1, cid1, name1, self.drug2, cid2, name2, self.side_effect, sename]
+        else:
+            df = [self.drug1, cid1, name1, self.drug2, cid2, name2, self.side_effect, sename, self.probability, self.pui_score, self.ppui_score]
+
+        df = pandas.DataFrame(df).T
+        df.columns = keys
+
+        return df
+
+    def get_GOEnrich_table(self):
+        if not self.if_enrich:
+            print('ERROR: There is no enriched GO item')
+            return
+
+        keys = ['name', 'namespace', 'id']
+        df_go1 = pandas.DataFrame([{k: g.goterm.__dict__.get(k) for k in keys} for g in self.sig_gos])
+        df_p = pandas.DataFrame([{'p_fdr_bh': g.__dict__['p_fdr_bh']} for g in self.sig_gos])
+        df_go = df_go1.merge(df_p, left_index=True, right_index=True)
+
+        go_genes = pandas.DataFrame(
+            [{'id': g.goterm.id, 'gene': s, 'symbol': gdata.geneid2symbol[s]} for g in self.sig_gos for s in g.study_items])
+        
+        return df_go.merge(go_genes, on='id')
 
     def to_pickle(self, file):
         with open(file, 'wb') as f:
             pickle.dump(self, f)
     
-    def generate_report(self, file):
+    # def search_pub(self, file):
+        
+    def get_subgraph(self, if_show=True, save_path=None):
+        if not self.if_explain:
+            print('ERROR: The query is not explained')
+            return
+
+        _, self.fig = visualize_graph(self.pp_index, self.pp_weight, self.pd_index, self.pd_weight, gdata.pp_index, self.drug1, self.drug2, save_path, size=(30, 30), protein_name_dict=gdata.prot_graph_dict, drug_name_dict=gdata.drug_graph_dict)
+
+        if if_show:
+            self.fig.show()
+        
+        return self.fig
 
 
-    
+def get_pub_summary(pub):
+    bib = pub['bib']
+    abstract = bib['abstract'] if bib.get('abstract') else 'NA'
+    return f"Google Scholarly Rank: {pub['gsrank']}\n  'Title': {bib['title']}\n  'Author': {', '.join(bib['author'])}\n  'URL': {pub['pub_url']}\n  'Abstract': {abstract}..."
 
+def print_pub_summary(pub):
+    print(get_pub_summary(pub))
+    print()
 
-
+def search_GoogleScholar(query_string, n=20):
+    ranks = scholarly.search_pubs(query_string)
+    return [next(ranks) for i in range(n)]

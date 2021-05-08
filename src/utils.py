@@ -230,9 +230,11 @@ def visualize_graph(pp_idx, pp_weight, pd_idx, pd_weight, pp_adj, d1, d2,
     for p in pos:  # raise text positions
         pos[p][1] += 0.02
     nx.draw_networkx_labels(G, pos, font_size=14)
-
-    plt.savefig(out_path)
-    return G
+    if out_path is not None:
+        plt.savefig(out_path)
+        print(f"DONE --> save figure to path: \"{out_path}\" ")
+    
+    return G, plt.gcf()
 
 
 def args_parse_train(drug_index_1, drug_index_2, side_effect_index, rg, et, idx):
