@@ -39,6 +39,30 @@ with open(os.path.join(data_dir, 'tipexp_data.pkl'), 'rb') as f:
 #     pickle.dump(gdata, f)
 
 
+def negative_sampling(pos_edge_index, num_nodes):
+    idx = (pos_edge_index[0] * num_nodes + pos_edge_index[1])
+    idx = idx.to(torch.device('cpu'))
+
+    perm = torch.tensor(np.random.choice(num_nodes**2, idx.size(0)))
+    mask = torch.from_numpy(np.isin(perm, idx).astype(np.uint8))
+    rest = mask.nonzero().view(-1)
+    while rest.numel() > 0:  # pragma: no cover
+        tmp = torch.tensor(np.random.choice(num_nodes**2, rest.size(0)))
+        mask = torch.from_numpy(np.isin(tmp, idx).astype(np.uint8))
+        perm[rest] = tmp
+        rest = mask.nonzero().view(-1)
+
+    row, col = perm / num_nodes, perm % num_nodes
+    return torch.stack([row, col], dim=0).long().to(pos_edge_index.device)
+
+
+def typed_negative_sampling(pos_edge_index, num_nodes, range_list):
+    tmp = []
+    for start, end in range_list:
+        tmp.append(negative_sampling(pos_edge_index[:, start: end], num_nodes))
+    return torch.cat(tmp, dim=1)
+
+    
 def normalize(input):
     norm_square = (input ** 2).sum(dim=1)
     return input / torch.sqrt(norm_square.view(-1, 1))
@@ -537,17 +561,17 @@ class Pose(object):
         z0.data[:, 64:] *= 0
         z0 = model.pd(z0, data.pd_index, pd_static_edge_weights)
         P0 = torch.sigmoid((z0[drug1] * z0[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
-        ppui_score = (P[index_filter] - P0)/P[index_filter]
+        ppiu_score = (P[index_filter] - P0)/P[index_filter]
 
         # prediction based on drug info only
         z1.data *= 0
         z1 = model.pd(z1, data.pd_index, pd_static_edge_weights)
         P1 = torch.sigmoid((z1[drug1] * z1[drug2] * model.mip.weight[side_effect]).sum(dim=1)).to("cpu")
-        pui_score = (P[index_filter] - P1)/P[index_filter]
+        piu_score = (P[index_filter] - P1)/P[index_filter]
 
         # reture a query object
         query = PoseQuery(drug1, drug2, side_effect)
-        query.set_pred_result(P[index_filter].tolist(), pui_score.tolist(), ppui_score.tolist())
+        query.set_pred_result(P[index_filter].tolist(), piu_score.tolist(), ppiu_score.tolist())
 
         return query 
 
@@ -564,9 +588,12 @@ class Pose(object):
         pp_left_index, pp_left_weight, pd_left_index, pd_left_weight = self.__explain(query)
 
         if if_auto_tuning:
-            while pp_left_index.shape[0]==0:
+            while pp_left_index.shape[1]==0:
+                if query.regulization < 0.0001:
+                    print("Warning: auto tuning forced to stop.")
+                    break
                 query.regulization /= 2
-                pp_left_index, pp_left_weight, pd_left_index, pd_left_weight = self.explain_query(query)
+                pp_left_index, pp_left_weight, pd_left_index, pd_left_weight = self.__explain(query)
 
         query.set_exp_result(pp_left_index, pp_left_weight, pd_left_index, pd_left_weight)
 
@@ -695,7 +722,7 @@ class PoseQuery(object):
         self.if_pred = False
 
     def __repr__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
+        return str(self.__class__) + ": \n" + str(self.__dict__)
         
     def __str__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
@@ -712,20 +739,28 @@ class PoseQuery(object):
 
     def set_enrich_result(self, goea_results_sig):
         if len(goea_results_sig):
-            self.sig_gos = goea_results_sig
             self.if_enrich = True
 
-    def set_pred_result(self, probability, pui_score, ppui_score):
+            keys = ['name', 'namespace', 'id']
+            df_go1 = pandas.DataFrame([{k: g.goterm.__dict__.get(k) for k in keys} for g in goea_results_sig])
+            df_p = pandas.DataFrame([{'p_fdr_bh': g.__dict__['p_fdr_bh']} for g in goea_results_sig])
+            df_go = df_go1.merge(df_p, left_index=True, right_index=True)
+
+            go_genes = pandas.DataFrame([{'id': g.goterm.id, 'gene': s, 'symbol': gdata.geneid2symbol[s]} for g in goea_results_sig for s in g.study_items])
+        
+            self.GOEnrich_table = df_go.merge(go_genes, on='id')
+
+    def set_pred_result(self, probability, piu_score, ppiu_score):
         self.probability = probability
-        self.pui_score = pui_score
-        self.ppui_score = ppui_score
+        self.piu_score = piu_score
+        self.ppiu_score = ppiu_score
         self.if_pred = True
 
     def get_query(self):
         return self.drug1, self.drug2, self.side_effect, self.regulization
         
     def get_pred_table(self):
-        keys = ['drug_1', 'CID_1', 'name_1', 'drug_2', 'CID_2', 'name_2', 'side_effect', 'side_effect_name', 'prob', 'pui', 'ppui']
+        keys = ['drug_1', 'CID_1', 'name_1', 'drug_2', 'CID_2', 'name_2', 'side_effect', 'side_effect_name', 'prob', 'piu', 'ppiu']
         cid1 = [int(gdata.drug_idx_to_id[c][3:]) for c in self.drug1]
         cid2 = [int(gdata.drug_idx_to_id[c][3:]) for c in self.drug2]
         name1 = [gdata.drug_idx_to_name[c] for c in self.drug1]
@@ -737,7 +772,7 @@ class PoseQuery(object):
             keys = keys[:8]
             df = [self.drug1, cid1, name1, self.drug2, cid2, name2, self.side_effect, sename]
         else:
-            df = [self.drug1, cid1, name1, self.drug2, cid2, name2, self.side_effect, sename, self.probability, self.pui_score, self.ppui_score]
+            df = [self.drug1, cid1, name1, self.drug2, cid2, name2, self.side_effect, sename, self.probability, self.piu_score, self.ppiu_score]
 
         df = pandas.DataFrame(df).T
         df.columns = keys
@@ -749,15 +784,7 @@ class PoseQuery(object):
             print('ERROR: There is no enriched GO item')
             return
 
-        keys = ['name', 'namespace', 'id']
-        df_go1 = pandas.DataFrame([{k: g.goterm.__dict__.get(k) for k in keys} for g in self.sig_gos])
-        df_p = pandas.DataFrame([{'p_fdr_bh': g.__dict__['p_fdr_bh']} for g in self.sig_gos])
-        df_go = df_go1.merge(df_p, left_index=True, right_index=True)
-
-        go_genes = pandas.DataFrame(
-            [{'id': g.goterm.id, 'gene': s, 'symbol': gdata.geneid2symbol[s]} for g in self.sig_gos for s in g.study_items])
-        
-        return df_go.merge(go_genes, on='id')
+        return self.GOEnrich_table
 
     def to_pickle(self, file):
         with open(file, 'wb') as f:
@@ -781,12 +808,28 @@ class PoseQuery(object):
 def get_pub_summary(pub):
     bib = pub['bib']
     abstract = bib['abstract'] if bib.get('abstract') else 'NA'
-    return f"Google Scholarly Rank: {pub['gsrank']}\n  'Title': {bib['title']}\n  'Author': {', '.join(bib['author'])}\n  'URL': {pub['pub_url']}\n  'Abstract': {abstract}..."
+    return f"Google Scholarly Rank: {pub['gsrank']}\n  'Title': {bib['title']}\n  'Author': {', '.join(bib['author'])}\n  'URL': {pub.get('pub_url')}\n  'Abstract': {abstract}..."
 
 def print_pub_summary(pub):
     print(get_pub_summary(pub))
     print()
 
+def print_pubs_summary(pubs):
+    if len(pubs):
+        for pub in pubs:
+            print_pub_summary(pub)
+    else:
+        print("Warning: the input publication list is empty.\n")
+
 def search_GoogleScholar(query_string, n=20):
+    print(f"Search on Google Scholar: [{query_string}]\n")
     ranks = scholarly.search_pubs(query_string)
-    return [next(ranks) for i in range(n)]
+
+    pubs = []
+    for pub in ranks:
+        if len(pubs) == n:
+            return pubs
+        pubs.append(pub)
+    
+    print(f"Warning: {len(pubs)} matched publications in total.\n") 
+    return pubs

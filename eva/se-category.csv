@@ -1,0 +1,1169 @@
+,side effect,catagory,catagory name,se_id
+0,atelectasis,C08,respiratory tract diseases,0
+1,back ache,S,symptoms,1
+2,lung edema,C08,respiratory tract diseases,2
+3,acidosis,C18,nutritional and metabolic diseases,5
+4,peliosis,C06,digestive system diseases,6
+5,peliosis,C14,cardiovascular diseases,6
+6,apnea,C08,respiratory tract diseases,7
+7,apnea,S,symptoms,7
+8,drug hypersensitivity,C20,immune system diseases,8
+9,drug hypersensitivity,C25,chemically-induced disorders,8
+10,flatulence,S,symptoms,9
+11,allergies,C20,immune system diseases,11
+12,thrombocytopenia,C15,hemic and lymphatic diseases,12
+13,bradycardia,C14,cardiovascular diseases,13
+14,bradycardia,S,symptoms,13
+15,bleeding,S,symptoms,15
+16,hyperglycaemia,C18,nutritional and metabolic diseases,17
+17,peritonitis,C01,infections,18
+18,peritonitis,C06,digestive system diseases,18
+19,hypoglycaemia,C18,nutritional and metabolic diseases,19
+20,asystole,C14,cardiovascular diseases,21
+21,cerebral infarct,C10,nervous system diseases,22
+22,cerebral infarct,C14,cardiovascular diseases,22
+23,cerebral infarct,S,symptoms,22
+24,hypoxia,S,symptoms,23
+25,adynamic ileus,C06,digestive system diseases,26
+26,sepsis,C01,infections,27
+27,sepsis,S,symptoms,27
+28,hypomagnesaemia,C18,nutritional and metabolic diseases,28
+29,acute respiratory distress syndrome,C08,respiratory tract diseases,29
+30,lipoma,C04,neoplasms,30
+31,flank pain,S,symptoms,32
+32,pneumothorax,C08,respiratory tract diseases,33
+33,appendicitis,C01,infections,34
+34,appendicitis,C06,digestive system diseases,34
+35,strabismus,C10,nervous system diseases,35
+36,strabismus,C11,eye diseases,35
+37,blood calcium decreased,C18,nutritional and metabolic diseases,36
+38,respiratory failure,C08,respiratory tract diseases,37
+39,pulmonary hypertension,C08,respiratory tract diseases,38
+40,pulmonary hypertension,C14,cardiovascular diseases,38
+41,hypercapnia,S,symptoms,39
+42,intestinal perforation,C06,digestive system diseases,40
+43,leucocytosis,C15,hemic and lymphatic diseases,41
+44,leucocytosis,S,symptoms,41
+45,arterial pressure nos decreased,C14,cardiovascular diseases,44
+46,metabolic acidosis,C18,nutritional and metabolic diseases,45
+47,bladder inflammation,C12,male urogenital diseases,46
+48,bladder inflammation,C13,female urogenital diseases and pregnancy complications,46
+49,sinus tachycardia,C14,cardiovascular diseases,48
+50,sinus tachycardia,S,symptoms,48
+51,arterial pressure nos increased,C14,cardiovascular diseases,50
+52,edema,S,symptoms,52
+53,disease of liver,C06,digestive system diseases,53
+54,anaphylactic reaction,C20,immune system diseases,57
+55,acute pancreatitis,C06,digestive system diseases,59
+56,neumonia,C01,infections,60
+57,neumonia,C08,respiratory tract diseases,60
+58,adenocarcinoma,C04,neoplasms,61
+59,confusion,C10,nervous system diseases,62
+60,confusion,S,symptoms,62
+61,malnourished,C18,nutritional and metabolic diseases,63
+62,haemorrhoids,C06,digestive system diseases,64
+63,haemorrhoids,C14,cardiovascular diseases,64
+64,still birth,C13,female urogenital diseases and pregnancy complications,65
+65,still birth,S,symptoms,65
+66,anaemia,C15,hemic and lymphatic diseases,66
+67,encephalopathy,C10,nervous system diseases,69
+68,anorexia,S,symptoms,70
+69,tremor,C10,nervous system diseases,71
+70,tremor,S,symptoms,71
+71,hallucination,C10,nervous system diseases,72
+72,hallucination,S,symptoms,72
+73,chronic obstructive airway disease,C08,respiratory tract diseases,73
+74,head ache,S,symptoms,75
+75,back injury,C26,wounds and injuries,76
+76,erythema,C17,skin and connective tissue diseases,77
+77,erythema,S,symptoms,77
+78,diplopia,C10,nervous system diseases,78
+79,diplopia,C11,eye diseases,78
+80,diplopia,S,symptoms,78
+81,enlarged spleen,S,symptoms,79
+82,narcolepsy,C10,nervous system diseases,80
+83,esophageal spasm,C06,digestive system diseases,81
+84,erosive gastritis,C06,digestive system diseases,82
+85,breast cancer,C04,neoplasms,85
+86,breast cancer,C17,skin and connective tissue diseases,85
+87,haemolytic anaemia,C15,hemic and lymphatic diseases,87
+88,icterus,S,symptoms,89
+89,gastroenteritis,C06,digestive system diseases,90
+90,optic disc edema,C10,nervous system diseases,91
+91,optic disc edema,C11,eye diseases,91
+92,sleep disorder,C10,nervous system diseases,92
+93,sleep disorder,S,symptoms,92
+94,septic shock,C01,infections,93
+95,septic shock,S,symptoms,93
+96,bladder retention,C12,male urogenital diseases,94
+97,bladder retention,C13,female urogenital diseases and pregnancy complications,94
+98,aphonia,C08,respiratory tract diseases,95
+99,aphonia,C09,otorhinolaryngologic diseases,95
+100,aphonia,C10,nervous system diseases,95
+101,aphonia,S,symptoms,95
+102,pain,S,symptoms,96
+103,idiopathic thrombocytopenic purpura,C15,hemic and lymphatic diseases,97
+104,idiopathic thrombocytopenic purpura,C20,immune system diseases,97
+105,idiopathic thrombocytopenic purpura,S,symptoms,97
+106,pneumonia staphylococcal,C01,infections,98
+107,pneumonia staphylococcal,C08,respiratory tract diseases,98
+108,alopecia,C17,skin and connective tissue diseases,99
+109,alopecia,S,symptoms,99
+110,conjunctivitis,C11,eye diseases,100
+111,lobar pneumonia,C01,infections,101
+112,lobar pneumonia,C08,respiratory tract diseases,101
+113,glomerulonephritis,C12,male urogenital diseases,102
+114,glomerulonephritis,C13,female urogenital diseases and pregnancy complications,102
+115,duodenal ulcer,C06,digestive system diseases,103
+116,deep vein thromboses,C14,cardiovascular diseases,104
+117,leucopenia,C15,hemic and lymphatic diseases,105
+118,rhinorrhea,S,symptoms,106
+119,bursitis,C05,musculoskeletal diseases,107
+120,nephrocalcinosis,C12,male urogenital diseases,111
+121,nephrocalcinosis,C13,female urogenital diseases and pregnancy complications,111
+122,nephrocalcinosis,C18,nutritional and metabolic diseases,111
+123,thrombotic microangiopathy,C15,hemic and lymphatic diseases,113
+124,dizziness,S,symptoms,114
+125,pleurisy,C01,infections,115
+126,pleurisy,C08,respiratory tract diseases,115
+127,sunburn,C17,skin and connective tissue diseases,116
+128,sunburn,C26,wounds and injuries,116
+129,hoarseness,C08,respiratory tract diseases,117
+130,hoarseness,C09,otorhinolaryngologic diseases,117
+131,hoarseness,C10,nervous system diseases,117
+132,hoarseness,S,symptoms,117
+133,bleeding hemorrhoids,C06,digestive system diseases,118
+134,bleeding hemorrhoids,C14,cardiovascular diseases,118
+135,fatigue,S,symptoms,119
+136,aspiration pneumonia,C01,infections,120
+137,aspiration pneumonia,C08,respiratory tract diseases,120
+138,diarrhea,S,symptoms,122
+139,asthma,C08,respiratory tract diseases,123
+140,asthma,C20,immune system diseases,123
+141,tinnitus,C09,otorhinolaryngologic diseases,125
+142,tinnitus,C10,nervous system diseases,125
+143,tinnitus,S,symptoms,125
+144,muscle spasm,C10,nervous system diseases,126
+145,muscle spasm,S,symptoms,126
+146,candida infection,C01,infections,128
+147,glossodynia,C07,stomatognathic diseases,130
+148,glossodynia,S,symptoms,130
+149,anal fissure,C06,digestive system diseases,131
+150,cellulitis,C01,infections,133
+151,cellulitis,C17,skin and connective tissue diseases,133
+152,cellulitis,S,symptoms,133
+153,constipated,S,symptoms,135
+154,muscle paresis,C10,nervous system diseases,137
+155,muscle paresis,S,symptoms,137
+156,deafness,C09,otorhinolaryngologic diseases,138
+157,deafness,C10,nervous system diseases,138
+158,deafness,S,symptoms,138
+159,vocal cord paralysis,C08,respiratory tract diseases,139
+160,vocal cord paralysis,C09,otorhinolaryngologic diseases,139
+161,vocal cord paralysis,C10,nervous system diseases,139
+162,vocal cord paralysis,S,symptoms,139
+163,eye pain,C11,eye diseases,141
+164,eye pain,S,symptoms,141
+165,leukaemia,C04,neoplasms,142
+166,chronic kidney disease,C12,male urogenital diseases,143
+167,chronic kidney disease,C13,female urogenital diseases and pregnancy complications,143
+168,acute kidney failure,C12,male urogenital diseases,144
+169,acute kidney failure,C13,female urogenital diseases and pregnancy complications,144
+170,retrocollis,S,symptoms,145
+171,cholangitis,C06,digestive system diseases,147
+172,hypothyroid,C19,endocrine system diseases,148
+173,dermatitides,C17,skin and connective tissue diseases,149
+174,dermatitis medicamentosa,C17,skin and connective tissue diseases,151
+175,dermatitis medicamentosa,C20,immune system diseases,151
+176,dermatitis medicamentosa,C25,chemically-induced disorders,151
+177,deafness neurosensory,C09,otorhinolaryngologic diseases,153
+178,deafness neurosensory,C10,nervous system diseases,153
+179,deafness neurosensory,S,symptoms,153
+180,fungal disease,C01,infections,154
+181,erythema multiforme,C17,skin and connective tissue diseases,157
+182,haematoma,S,symptoms,158
+183,bleb,C17,skin and connective tissue diseases,159
+184,bleb,S,symptoms,159
+185,amenorrhea,S,symptoms,161
+186,epistaxis,C08,respiratory tract diseases,162
+187,epistaxis,C09,otorhinolaryngologic diseases,162
+188,epistaxis,S,symptoms,162
+189,hepatitis,C06,digestive system diseases,163
+190,neutropenia,C15,hemic and lymphatic diseases,165
+191,abdominal pain,S,symptoms,168
+192,chest pain,S,symptoms,169
+193,mycobacterium tuberculosis infection,C01,infections,170
+194,cholelithiasis,C06,digestive system diseases,171
+195,pyoderma,C17,skin and connective tissue diseases,172
+196,aching muscles,C05,musculoskeletal diseases,175
+197,aching muscles,C10,nervous system diseases,175
+198,aching muscles,S,symptoms,175
+199,abscess,C01,infections,176
+200,abscess,S,symptoms,176
+201,loss of consciousness,C10,nervous system diseases,177
+202,loss of consciousness,S,symptoms,177
+203,arthritis infective,C05,musculoskeletal diseases,180
+204,loss of weight,S,symptoms,181
+205,nasopharyngitis,C01,infections,182
+206,nasopharyngitis,C07,stomatognathic diseases,182
+207,nasopharyngitis,C08,respiratory tract diseases,182
+208,nasopharyngitis,C09,otorhinolaryngologic diseases,182
+209,belching,S,symptoms,183
+210,rhinitis,C01,infections,184
+211,rhinitis,C08,respiratory tract diseases,184
+212,rhinitis,C09,otorhinolaryngologic diseases,184
+213,heart attack,C14,cardiovascular diseases,186
+214,heart attack,S,symptoms,186
+215,hepatic neoplasia,C04,neoplasms,187
+216,hepatic neoplasia,C06,digestive system diseases,187
+217,azotaemia,C12,male urogenital diseases,188
+218,azotaemia,C13,female urogenital diseases and pregnancy complications,188
+219,azotaemia,S,symptoms,188
+220,muscle weakness,C05,musculoskeletal diseases,190
+221,muscle weakness,C10,nervous system diseases,190
+222,muscle weakness,S,symptoms,190
+223,cataract,C11,eye diseases,192
+224,insomnia,C10,nervous system diseases,194
+225,dyspepsia,S,symptoms,195
+226,asthenia,S,symptoms,196
+227,emesis,S,symptoms,197
+228,embolism pulmonary,C08,respiratory tract diseases,198
+229,embolism pulmonary,C14,cardiovascular diseases,198
+230,colitis ischemic,C06,digestive system diseases,200
+231,colitis ischemic,C14,cardiovascular diseases,200
+232,arteriosclerotic heart disease,C14,cardiovascular diseases,202
+233,small intestinal obstruction,C06,digestive system diseases,203
+234,paraesthesia,C10,nervous system diseases,204
+235,paraesthesia,S,symptoms,204
+236,neoplasia,C04,neoplasms,205
+237,fainting,C10,nervous system diseases,206
+238,fainting,S,symptoms,206
+239,sneezing,S,symptoms,208
+240,hypokalaemia,C18,nutritional and metabolic diseases,210
+241,migraine,C10,nervous system diseases,212
+242,osteoporosis,C05,musculoskeletal diseases,214
+243,osteoporosis,C18,nutritional and metabolic diseases,214
+244,high blood pressure,C14,cardiovascular diseases,215
+245,diverticulosis,C06,digestive system diseases,217
+246,diverticulosis,S,symptoms,217
+247,arthritis rheumatoid,C05,musculoskeletal diseases,218
+248,arthritis rheumatoid,C17,skin and connective tissue diseases,218
+249,arthritis rheumatoid,C20,immune system diseases,218
+250,arteriosclerosis,C14,cardiovascular diseases,220
+251,osteoarthritis,C05,musculoskeletal diseases,222
+252,pleural pain,C01,infections,223
+253,pleural pain,C08,respiratory tract diseases,223
+254,fibromyalgia,C05,musculoskeletal diseases,225
+255,fibromyalgia,C10,nervous system diseases,225
+256,breast pain,S,symptoms,226
+257,herpes zoster,C01,infections,228
+258,breast cyst,C04,neoplasms,229
+259,breast cyst,C17,skin and connective tissue diseases,229
+260,myoglobinuria,C05,musculoskeletal diseases,230
+261,osteomalacia,C05,musculoskeletal diseases,231
+262,osteomalacia,C18,nutritional and metabolic diseases,231
+263,ischias,C10,nervous system diseases,232
+264,ischias,S,symptoms,232
+265,aching joints,C05,musculoskeletal diseases,233
+266,aching joints,S,symptoms,233
+267,arthritis,C05,musculoskeletal diseases,234
+268,colonic polyp,S,symptoms,236
+269,cholecystitis,C06,digestive system diseases,237
+270,extrasystoles ventricular,C14,cardiovascular diseases,239
+271,extrasystoles ventricular,S,symptoms,239
+272,acne rosacea,C17,skin and connective tissue diseases,240
+273,incontinence,C12,male urogenital diseases,241
+274,incontinence,C13,female urogenital diseases and pregnancy complications,241
+275,incontinence,S,symptoms,241
+276,diabetic acidosis,C18,nutritional and metabolic diseases,243
+277,diabetic acidosis,C19,endocrine system diseases,243
+278,diabetic retinopathy,C14,cardiovascular diseases,244
+279,diabetic retinopathy,C19,endocrine system diseases,244
+280,blepharitis,C11,eye diseases,245
+281,pyelonephritis,C12,male urogenital diseases,246
+282,pyelonephritis,C13,female urogenital diseases and pregnancy complications,246
+283,blepharospasm,C11,eye diseases,248
+284,aneurysm,C14,cardiovascular diseases,249
+285,benign prostatic hyperplasia,C12,male urogenital diseases,250
+286,superficial thrombophlebitis,C14,cardiovascular diseases,253
+287,decubitus ulcer,C17,skin and connective tissue diseases,255
+288,kidney failure,C12,male urogenital diseases,256
+289,kidney failure,C13,female urogenital diseases and pregnancy complications,256
+290,meningitides,C10,nervous system diseases,257
+291,cough,C08,respiratory tract diseases,260
+292,cough,S,symptoms,260
+293,nocturia,S,symptoms,265
+294,spinning sensation,C09,otorhinolaryngologic diseases,266
+295,spinning sensation,C10,nervous system diseases,266
+296,spinning sensation,S,symptoms,266
+297,diabetes,C18,nutritional and metabolic diseases,267
+298,diabetes,C19,endocrine system diseases,267
+299,bronchitis,C01,infections,268
+300,bronchitis,C08,respiratory tract diseases,268
+301,polyp,S,symptoms,269
+302,osteomyelitis,C01,infections,270
+303,osteomyelitis,C05,musculoskeletal diseases,270
+304,enlarged liver,C06,digestive system diseases,272
+305,enlarged liver,S,symptoms,272
+306,laceration,C26,wounds and injuries,273
+307,coma,C10,nervous system diseases,274
+308,coma,S,symptoms,274
+309,bacterial infection,C01,infections,279
+310,angiitis,C14,cardiovascular diseases,280
+311,convulsion,C10,nervous system diseases,281
+312,convulsion,S,symptoms,281
+313,iron deficiency anaemia,C15,hemic and lymphatic diseases,282
+314,iron deficiency anaemia,C18,nutritional and metabolic diseases,282
+315,cardiomyopathy,C14,cardiovascular diseases,283
+316,bronchial spasm,C08,respiratory tract diseases,284
+317,cardiac decompensation,C14,cardiovascular diseases,287
+318,mucositis oral,C06,digestive system diseases,288
+319,mucositis oral,C07,stomatognathic diseases,288
+320,hernia,S,symptoms,290
+321,glaucoma,C11,eye diseases,291
+322,breast dysplasia,C17,skin and connective tissue diseases,295
+323,phlebitis,C14,cardiovascular diseases,296
+324,lung neoplasms,C04,neoplasms,297
+325,lung neoplasms,C08,respiratory tract diseases,297
+326,bone marrow failure,C15,hemic and lymphatic diseases,299
+327,deglutition disorder,C06,digestive system diseases,300
+328,deglutition disorder,C09,otorhinolaryngologic diseases,300
+329,adrenal insufficiency,C19,endocrine system diseases,301
+330,polyneuropathy,C10,nervous system diseases,303
+331,nephrolithiasis,C12,male urogenital diseases,304
+332,nephrolithiasis,C13,female urogenital diseases and pregnancy complications,304
+333,dysarthria,C10,nervous system diseases,305
+334,dysarthria,S,symptoms,305
+335,scoliosis,C05,musculoskeletal diseases,307
+336,rhabdomyolysis,C05,musculoskeletal diseases,309
+337,apoplexy,C10,nervous system diseases,311
+338,apoplexy,C14,cardiovascular diseases,311
+339,aphasia,C10,nervous system diseases,313
+340,aphasia,S,symptoms,313
+341,amnesia,C10,nervous system diseases,314
+342,amnesia,S,symptoms,314
+343,keratitis sicca,C11,eye diseases,320
+344,dehydration,C18,nutritional and metabolic diseases,321
+345,dehydration,S,symptoms,321
+346,ataxia,C10,nervous system diseases,322
+347,ataxia,S,symptoms,322
+348,transient ischaemic attack,C10,nervous system diseases,323
+349,transient ischaemic attack,C14,cardiovascular diseases,323
+350,cerebral haemorrhage,C10,nervous system diseases,324
+351,cerebral haemorrhage,C14,cardiovascular diseases,324
+352,cerebral haemorrhage,S,symptoms,324
+353,elevated cholesterol,C18,nutritional and metabolic diseases,326
+354,anxiety,F,mental discorders,330
+355,facial palsy,C07,stomatognathic diseases,331
+356,facial palsy,C10,nervous system diseases,331
+357,facial palsy,S,symptoms,331
+358,ureteral obstruction,C12,male urogenital diseases,332
+359,ureteral obstruction,C13,female urogenital diseases and pregnancy complications,332
+360,nephrosclerosis,C12,male urogenital diseases,334
+361,nephrosclerosis,C13,female urogenital diseases and pregnancy complications,334
+362,psoriatic arthritis,C05,musculoskeletal diseases,335
+363,psoriatic arthritis,C17,skin and connective tissue diseases,335
+364,laryngitis,C01,infections,337
+365,laryngitis,C08,respiratory tract diseases,337
+366,laryngitis,C09,otorhinolaryngologic diseases,337
+367,nausea,S,symptoms,343
+368,pleural effusion,C08,respiratory tract diseases,346
+369,sinusitis,C01,infections,347
+370,sinusitis,C08,respiratory tract diseases,347
+371,sinusitis,C09,otorhinolaryngologic diseases,347
+372,bilirubinaemia,S,symptoms,348
+373,amentia,C10,nervous system diseases,349
+374,cervicalgia,S,symptoms,351
+375,hyperlipaemia,C18,nutritional and metabolic diseases,352
+376,metabolic encephalopathy,C10,nervous system diseases,353
+377,metabolic encephalopathy,C18,nutritional and metabolic diseases,353
+378,diabetic nephropathy,C12,male urogenital diseases,354
+379,diabetic nephropathy,C13,female urogenital diseases and pregnancy complications,354
+380,diabetic nephropathy,C19,endocrine system diseases,354
+381,encephalitis,C10,nervous system diseases,355
+382,atherosclerosis,C14,cardiovascular diseases,357
+383,aortic regurgitation,C14,cardiovascular diseases,358
+384,neuralgia,C10,nervous system diseases,359
+385,neuralgia,S,symptoms,359
+386,hemiplegia,C10,nervous system diseases,360
+387,hemiplegia,S,symptoms,360
+388,emphysema,S,symptoms,362
+389,postherpetic neuralgia,C10,nervous system diseases,364
+390,postherpetic neuralgia,S,symptoms,364
+391,neuritis,C10,nervous system diseases,366
+392,gingivitis,C01,infections,369
+393,gingivitis,C07,stomatognathic diseases,369
+394,soft tissue infection,C01,infections,370
+395,bruxism,C07,stomatognathic diseases,376
+396,bone inflammation,C05,musculoskeletal diseases,379
+397,tooth disease,C07,stomatognathic diseases,381
+398,arthropathy,C05,musculoskeletal diseases,383
+399,pericardial effusion,C14,cardiovascular diseases,384
+400,infection,C01,infections,386
+401,blindness,C10,nervous system diseases,387
+402,blindness,C11,eye diseases,387
+403,blindness,S,symptoms,387
+404,herpes simplex,C01,infections,388
+405,herpes simplex,C17,skin and connective tissue diseases,388
+406,acute myeloblastic leukemia,C04,neoplasms,390
+407,gastric inflammation,C06,digestive system diseases,392
+408,transfusion reaction,C15,hemic and lymphatic diseases,393
+409,transfusion reaction,C20,immune system diseases,393
+410,cardiac murmur,S,symptoms,398
+411,proteinuria,C12,male urogenital diseases,400
+412,proteinuria,C13,female urogenital diseases and pregnancy complications,400
+413,proteinuria,S,symptoms,400
+414,multiple sclerosis,C10,nervous system diseases,403
+415,multiple sclerosis,C20,immune system diseases,403
+416,weight gain,S,symptoms,404
+417,enuresis,C12,male urogenital diseases,406
+418,enuresis,C13,female urogenital diseases and pregnancy complications,406
+419,salivary gland inflammation,C07,stomatognathic diseases,409
+420,cervicitis,C13,female urogenital diseases and pregnancy complications,410
+421,adenitis,C15,hemic and lymphatic diseases,412
+422,ecchymoses,C15,hemic and lymphatic diseases,413
+423,ecchymoses,S,symptoms,413
+424,tardive dyskinesia,C10,nervous system diseases,414
+425,tardive dyskinesia,S,symptoms,414
+426,esophagitis,C06,digestive system diseases,423
+427,nephrotic syndrome,C12,male urogenital diseases,424
+428,nephrotic syndrome,C13,female urogenital diseases and pregnancy complications,424
+429,contracture,C05,musculoskeletal diseases,427
+430,proctitis,C06,digestive system diseases,428
+431,spondylitis,C01,infections,429
+432,spondylitis,C05,musculoskeletal diseases,429
+433,spondylosis,C05,musculoskeletal diseases,430
+434,hyperparathyroidism,C19,endocrine system diseases,431
+435,sleep apnea,C08,respiratory tract diseases,432
+436,sleep apnea,C10,nervous system diseases,432
+437,head injury,C10,nervous system diseases,435
+438,head injury,C26,wounds and injuries,435
+439,synovitis,C05,musculoskeletal diseases,436
+440,hyperhidrosis,C17,skin and connective tissue diseases,437
+441,apraxia,C10,nervous system diseases,440
+442,apraxia,S,symptoms,440
+443,drug addiction,C25,chemically-induced disorders,441
+444,prostatitis,C12,male urogenital diseases,442
+445,femoral neck fracture,C26,wounds and injuries,443
+446,sleep walking,C10,nervous system diseases,444
+447,monoclonal gammopathy,C15,hemic and lymphatic diseases,445
+448,monoclonal gammopathy,C20,immune system diseases,445
+449,bruise,C26,wounds and injuries,446
+450,scar,S,symptoms,447
+451,cardiac disease,C14,cardiovascular diseases,448
+452,pain pelvic,S,symptoms,449
+453,panic disorder,F,mental discorders,452
+454,tendinitis,C05,musculoskeletal diseases,454
+455,tendinitis,C26,wounds and injuries,454
+456,colpitis,C13,female urogenital diseases and pregnancy complications,456
+457,bone spur,C05,musculoskeletal diseases,458
+458,pancreatitis,C06,digestive system diseases,459
+459,allergic rhinitis,C08,respiratory tract diseases,460
+460,allergic rhinitis,C09,otorhinolaryngologic diseases,460
+461,allergic rhinitis,C20,immune system diseases,460
+462,otitis media,C09,otorhinolaryngologic diseases,461
+463,haematochezia,C06,digestive system diseases,465
+464,haematochezia,S,symptoms,465
+465,radiculopathy,C10,nervous system diseases,469
+466,dysphonia,C08,respiratory tract diseases,470
+467,dysphonia,C09,otorhinolaryngologic diseases,470
+468,dysphonia,C10,nervous system diseases,470
+469,dysphonia,S,symptoms,470
+470,myelopathy,C10,nervous system diseases,471
+471,dysuria,S,symptoms,473
+472,mitral valve prolapse,C14,cardiovascular diseases,477
+473,fatty liver,C06,digestive system diseases,478
+474,bipolar disorder,F,mental discorders,480
+475,embolism,C14,cardiovascular diseases,481
+476,duodenitis,C06,digestive system diseases,482
+477,malignant melanoma,C04,neoplasms,483
+478,ear infection,C09,otorhinolaryngologic diseases,484
+479,sinus bradycardia,C14,cardiovascular diseases,485
+480,sinus bradycardia,S,symptoms,485
+481,atrial ectopic beats,C14,cardiovascular diseases,486
+482,atrial ectopic beats,S,symptoms,486
+483,hydronephrosis,C12,male urogenital diseases,490
+484,hydronephrosis,C13,female urogenital diseases and pregnancy complications,490
+485,dental caries,C07,stomatognathic diseases,491
+486,mouth ulcer,C07,stomatognathic diseases,493
+487,gastroduodenal ulcer,C06,digestive system diseases,494
+488,fistula,S,symptoms,495
+489,acute bronchitis,C01,infections,496
+490,acute bronchitis,C08,respiratory tract diseases,496
+491,gynaecomastia,C17,skin and connective tissue diseases,497
+492,hypophosphataemia,C18,nutritional and metabolic diseases,498
+493,renal tubular acidosis,C12,male urogenital diseases,501
+494,renal tubular acidosis,C13,female urogenital diseases and pregnancy complications,501
+495,renal tubular acidosis,C16,"congenital, hereditary, and neonatal diseases and abnormalities",501
+496,renal tubular acidosis,C18,nutritional and metabolic diseases,501
+497,phlebothrombosis,C14,cardiovascular diseases,502
+498,dysaesthesia,C10,nervous system diseases,503
+499,dysaesthesia,S,symptoms,503
+500,goiter,C19,endocrine system diseases,504
+501,adenopathy,C15,hemic and lymphatic diseases,506
+502,tympanic membrane perforation,C09,otorhinolaryngologic diseases,507
+503,tympanic membrane perforation,C26,wounds and injuries,507
+504,arrhythmia,C14,cardiovascular diseases,508
+505,arrhythmia,S,symptoms,508
+506,hepatic failure,C06,digestive system diseases,509
+507,spinal fracture,C26,wounds and injuries,511
+508,movement disorder,C10,nervous system diseases,513
+509,musculoskeletal pain,C05,musculoskeletal diseases,515
+510,musculoskeletal pain,S,symptoms,515
+511,ulcer,S,symptoms,519
+512,rib fracture,C26,wounds and injuries,520
+513,angioedema,C14,cardiovascular diseases,524
+514,angioedema,C17,skin and connective tissue diseases,524
+515,angioedema,C20,immune system diseases,524
+516,sick sinus syndrome,C14,cardiovascular diseases,525
+517,sick sinus syndrome,S,symptoms,525
+518,hyperthyroidism,C19,endocrine system diseases,526
+519,cardiac failure,C14,cardiovascular diseases,527
+520,adenoma,C04,neoplasms,530
+521,epilepsy,C10,nervous system diseases,531
+522,muscle disorder,C05,musculoskeletal diseases,533
+523,muscle disorder,C10,nervous system diseases,533
+524,bundle branch block,C14,cardiovascular diseases,534
+525,bundle branch block,S,symptoms,534
+526,melanocytic naevus,C04,neoplasms,536
+527,cramp,C05,musculoskeletal diseases,537
+528,cramp,C10,nervous system diseases,537
+529,cramp,S,symptoms,537
+530,atrial flutter,C14,cardiovascular diseases,538
+531,atrial flutter,S,symptoms,538
+532,hypernatraemia,C18,nutritional and metabolic diseases,540
+533,streptococcal infection,C01,infections,543
+534,aspergillosis,C01,infections,544
+535,light sensitivity,C10,nervous system diseases,545
+536,light sensitivity,C11,eye diseases,545
+537,light sensitivity,S,symptoms,545
+538,enteritis,C06,digestive system diseases,546
+539,colitis,C06,digestive system diseases,548
+540,glucose intolerance,C18,nutritional and metabolic diseases,550
+541,multiple myeloma,C04,neoplasms,551
+542,multiple myeloma,C14,cardiovascular diseases,551
+543,multiple myeloma,C15,hemic and lymphatic diseases,551
+544,multiple myeloma,C20,immune system diseases,551
+545,hemiparesis,C10,nervous system diseases,554
+546,hemiparesis,S,symptoms,554
+547,polymyositis,C05,musculoskeletal diseases,555
+548,polymyositis,C10,nervous system diseases,555
+549,bacteraemia,C01,infections,556
+550,bacteraemia,S,symptoms,556
+551,onychomycosis,C01,infections,557
+552,onychomycosis,C17,skin and connective tissue diseases,557
+553,myocarditis,C14,cardiovascular diseases,559
+554,endocarditis,C14,cardiovascular diseases,561
+555,ventricular fibrillation,C14,cardiovascular diseases,563
+556,ventricular fibrillation,S,symptoms,563
+557,gangrene,S,symptoms,564
+558,adverse drug effect,C25,chemically-induced disorders,566
+559,cirrhosis,S,symptoms,568
+560,trigeminal neuralgia,C07,stomatognathic diseases,569
+561,trigeminal neuralgia,C10,nervous system diseases,569
+562,polyuria,C12,male urogenital diseases,570
+563,polyuria,C13,female urogenital diseases and pregnancy complications,570
+564,polyuria,S,symptoms,570
+565,periodontal disease,C07,stomatognathic diseases,571
+566,obesity,C18,nutritional and metabolic diseases,572
+567,obesity,S,symptoms,572
+568,glucosuria,C12,male urogenital diseases,573
+569,glucosuria,C13,female urogenital diseases and pregnancy complications,573
+570,glucosuria,C18,nutritional and metabolic diseases,573
+571,basal cell carcinoma,C04,neoplasms,574
+572,haematemesis,C06,digestive system diseases,576
+573,haematemesis,S,symptoms,576
+574,granuloma,C15,hemic and lymphatic diseases,577
+575,granuloma,S,symptoms,577
+576,failure to thrive,S,symptoms,579
+577,cardiac tamponade,C14,cardiovascular diseases,580
+578,ankle fracture,C26,wounds and injuries,581
+579,diverticulitis,C06,digestive system diseases,585
+580,dermatitis exfoliative,C17,skin and connective tissue diseases,586
+581,thrombophlebitis,C14,cardiovascular diseases,588
+582,shoulder pain,C05,musculoskeletal diseases,589
+583,shoulder pain,S,symptoms,589
+584,gouty arthritis,C05,musculoskeletal diseases,593
+585,gouty arthritis,C16,"congenital, hereditary, and neonatal diseases and abnormalities",593
+586,gouty arthritis,C18,nutritional and metabolic diseases,593
+587,supraventricular tachycardia,C14,cardiovascular diseases,594
+588,supraventricular tachycardia,S,symptoms,594
+589,respiratory alkalosis,C08,respiratory tract diseases,595
+590,respiratory alkalosis,C18,nutritional and metabolic diseases,595
+591,major depression,F,mental discorders,597
+592,lymphoma,C04,neoplasms,599
+593,lymphoma,C15,hemic and lymphatic diseases,599
+594,lymphoma,C20,immune system diseases,599
+595,substance abuse,C25,chemically-induced disorders,600
+596,dry eye,C11,eye diseases,603
+597,ovarian cyst,C04,neoplasms,604
+598,ovarian cyst,C13,female urogenital diseases and pregnancy complications,604
+599,ovarian cyst,C19,endocrine system diseases,604
+600,bone fracture,C26,wounds and injuries,608
+601,cyst,C04,neoplasms,610
+602,cyst,S,symptoms,610
+603,abdominal hernia,S,symptoms,611
+604,cor pulmonale,C14,cardiovascular diseases,613
+605,right heart failure,C14,cardiovascular diseases,615
+606,subarachnoid haemorrhage,C10,nervous system diseases,616
+607,subarachnoid haemorrhage,C14,cardiovascular diseases,616
+608,subarachnoid haemorrhage,S,symptoms,616
+609,cancer,C04,neoplasms,617
+610,premature menopause,C13,female urogenital diseases and pregnancy complications,620
+611,umbilical hernia,C16,"congenital, hereditary, and neonatal diseases and abnormalities",621
+612,umbilical hernia,S,symptoms,621
+613,psoriasis,C17,skin and connective tissue diseases,622
+614,contact dermatitis,C17,skin and connective tissue diseases,623
+615,blepharoptosis,C11,eye diseases,624
+616,palsies,C10,nervous system diseases,631
+617,palsies,S,symptoms,631
+618,gout,C05,musculoskeletal diseases,633
+619,gout,C16,"congenital, hereditary, and neonatal diseases and abnormalities",633
+620,gout,C18,nutritional and metabolic diseases,633
+621,cerebral ischaemia,C10,nervous system diseases,634
+622,cerebral ischaemia,C14,cardiovascular diseases,634
+623,eyelid diseases,C11,eye diseases,635
+624,gastric ulcer,C06,digestive system diseases,636
+625,periodontitis,C07,stomatognathic diseases,637
+626,actinic keratosis,C04,neoplasms,640
+627,actinic keratosis,C17,skin and connective tissue diseases,640
+628,choking,C08,respiratory tract diseases,641
+629,aortic stenosis,C14,cardiovascular diseases,642
+630,glossitis,C07,stomatognathic diseases,644
+631,bacterial pneumonia,C01,infections,645
+632,bacterial pneumonia,C08,respiratory tract diseases,645
+633,alcohol consumption,F,mental discorders,646
+634,pancreatic cancer,C04,neoplasms,648
+635,pancreatic cancer,C06,digestive system diseases,648
+636,pancreatic cancer,C19,endocrine system diseases,648
+637,tenosynovitis,C05,musculoskeletal diseases,649
+638,liver abscess,C01,infections,650
+639,liver abscess,C06,digestive system diseases,650
+640,brain concussion,C10,nervous system diseases,653
+641,brain concussion,C26,wounds and injuries,653
+642,face pain,S,symptoms,655
+643,atrioventricular block,C14,cardiovascular diseases,656
+644,atrioventricular block,S,symptoms,656
+645,pelvic inflammatory disease,C01,infections,660
+646,pelvic inflammatory disease,C13,female urogenital diseases and pregnancy complications,660
+647,galactorrhea,C17,skin and connective tissue diseases,663
+648,schizoaffective disorder,F,mental discorders,664
+649,borderline personality disorder,F,mental discorders,665
+650,nephrogenic diabetes insipidus,C12,male urogenital diseases,668
+651,nephrogenic diabetes insipidus,C13,female urogenital diseases and pregnancy complications,668
+652,portal hypertension,C06,digestive system diseases,670
+653,diabetic neuropathy,C10,nervous system diseases,671
+654,diabetic neuropathy,C19,endocrine system diseases,671
+655,brain neoplasm,C04,neoplasms,672
+656,brain neoplasm,C10,nervous system diseases,672
+657,reflux esophagitis,C06,digestive system diseases,673
+658,breakthrough bleeding,C13,female urogenital diseases and pregnancy complications,674
+659,breakthrough bleeding,S,symptoms,674
+660,seroma,S,symptoms,675
+661,interstitial nephritis,C12,male urogenital diseases,677
+662,interstitial nephritis,C13,female urogenital diseases and pregnancy complications,677
+663,lichen planus,C17,skin and connective tissue diseases,680
+664,carotid artery stenosis,C10,nervous system diseases,681
+665,carotid artery stenosis,C14,cardiovascular diseases,681
+666,essential hypertension,C14,cardiovascular diseases,684
+667,hepatitis b,C01,infections,685
+668,hepatitis b,C06,digestive system diseases,685
+669,congenital heart disease,C14,cardiovascular diseases,686
+670,congenital heart disease,C16,"congenital, hereditary, and neonatal diseases and abnormalities",686
+671,hyperprolactinaemia,C10,nervous system diseases,695
+672,hyperprolactinaemia,C19,endocrine system diseases,695
+673,ketoacidosis,C18,nutritional and metabolic diseases,697
+674,sarcoidosis,C15,hemic and lymphatic diseases,698
+675,hyperpigmentation,C17,skin and connective tissue diseases,701
+676,agoraphobia,F,mental discorders,703
+677,optic neuritis,C10,nervous system diseases,706
+678,optic neuritis,C11,eye diseases,706
+679,eye injury,C10,nervous system diseases,707
+680,eye injury,C11,eye diseases,707
+681,eye injury,C26,wounds and injuries,707
+682,scotoma,C10,nervous system diseases,708
+683,scotoma,C11,eye diseases,708
+684,scotoma,S,symptoms,708
+685,eczema,C17,skin and connective tissue diseases,709
+686,erysipelas,C01,infections,710
+687,erysipelas,C17,skin and connective tissue diseases,710
+688,hepatorenal syndrome,C06,digestive system diseases,711
+689,hepatorenal syndrome,C12,male urogenital diseases,711
+690,hepatorenal syndrome,C13,female urogenital diseases and pregnancy complications,711
+691,hepatitis c,C01,infections,712
+692,hepatitis c,C06,digestive system diseases,712
+693,eye infection,C01,infections,713
+694,eye infection,C11,eye diseases,713
+695,ebv infection,C01,infections,714
+696,agranulocytoses,C15,hemic and lymphatic diseases,716
+697,pyoderma gangrenosum,C17,skin and connective tissue diseases,719
+698,hydrocephalus,C10,nervous system diseases,721
+699,acne,C17,skin and connective tissue diseases,722
+700,malignant hypertension,C14,cardiovascular diseases,723
+701,labyrinthitis,C09,otorhinolaryngologic diseases,725
+702,tracheitis,C01,infections,728
+703,tracheitis,C08,respiratory tract diseases,728
+704,vitamin d deficiency,C18,nutritional and metabolic diseases,729
+705,hyperuricaemia,S,symptoms,731
+706,parotitis,C07,stomatognathic diseases,732
+707,pericarditis,C14,cardiovascular diseases,735
+708,paronychia,C01,infections,737
+709,paronychia,C17,skin and connective tissue diseases,737
+710,thyroid disease,C19,endocrine system diseases,739
+711,aortic aneurysm,C14,cardiovascular diseases,740
+712,dermatomyositis,C05,musculoskeletal diseases,741
+713,dermatomyositis,C10,nervous system diseases,741
+714,dermatomyositis,C17,skin and connective tissue diseases,741
+715,hyperaesthesia,C10,nervous system diseases,742
+716,hyperaesthesia,S,symptoms,742
+717,bronchiectasis,C08,respiratory tract diseases,744
+718,aplasia pure red cell,C15,hemic and lymphatic diseases,745
+719,birth defect,C16,"congenital, hereditary, and neonatal diseases and abnormalities",747
+720,polymyalgia rheumatica,C05,musculoskeletal diseases,749
+721,polymyalgia rheumatica,C17,skin and connective tissue diseases,749
+722,diaphragmatic hernia,S,symptoms,750
+723,lymphedema,C15,hemic and lymphatic diseases,751
+724,temporal arteritis,C10,nervous system diseases,754
+725,temporal arteritis,C14,cardiovascular diseases,754
+726,temporal arteritis,C17,skin and connective tissue diseases,754
+727,temporal arteritis,C20,immune system diseases,754
+728,polyarthritis,C05,musculoskeletal diseases,755
+729,inflammatory bowel disease,C06,digestive system diseases,758
+730,tendon injury,C26,wounds and injuries,759
+731,hiccough,S,symptoms,760
+732,serum sickness,C17,skin and connective tissue diseases,761
+733,serum sickness,C20,immune system diseases,761
+734,serum sickness,C25,chemically-induced disorders,761
+735,synovial cyst,C04,neoplasms,763
+736,ovarian cancer,C04,neoplasms,765
+737,ovarian cancer,C13,female urogenital diseases and pregnancy complications,765
+738,ovarian cancer,C19,endocrine system diseases,765
+739,gastric cancer,C04,neoplasms,766
+740,gastric cancer,C06,digestive system diseases,766
+741,varicose vein,C14,cardiovascular diseases,767
+742,aphthous stomatitis,C07,stomatognathic diseases,768
+743,volvulus,C06,digestive system diseases,771
+744,volvulus,S,symptoms,771
+745,vaginal discharge,C13,female urogenital diseases and pregnancy complications,772
+746,left ventricular hypertrophy,C14,cardiovascular diseases,773
+747,left ventricular hypertrophy,S,symptoms,773
+748,anosmia,C10,nervous system diseases,774
+749,anosmia,S,symptoms,774
+750,haemangioma,C04,neoplasms,775
+751,incisional hernia,S,symptoms,776
+752,splenic infarction,C14,cardiovascular diseases,779
+753,splenic infarction,C15,hemic and lymphatic diseases,779
+754,splenic infarction,S,symptoms,779
+755,meningioma,C04,neoplasms,781
+756,meningioma,C10,nervous system diseases,781
+757,hepatic encephalopathy,C06,digestive system diseases,782
+758,hepatic encephalopathy,C10,nervous system diseases,782
+759,hepatic encephalopathy,C18,nutritional and metabolic diseases,782
+760,vitamin b 12 deficiency,C18,nutritional and metabolic diseases,785
+761,paraplegia,C10,nervous system diseases,786
+762,paraplegia,S,symptoms,786
+763,aseptic meningitis,C10,nervous system diseases,787
+764,alcoholic intoxication,C25,chemically-induced disorders,788
+765,causalgia,C10,nervous system diseases,789
+766,bradyarrhythmia,C14,cardiovascular diseases,791
+767,bradyarrhythmia,S,symptoms,791
+768,conversion disorder,F,mental discorders,792
+769,epidural abscess,C01,infections,793
+770,epidural abscess,C10,nervous system diseases,793
+771,hay fever,C08,respiratory tract diseases,795
+772,hay fever,C09,otorhinolaryngologic diseases,795
+773,hay fever,C20,immune system diseases,795
+774,myasthenia gravis,C04,neoplasms,796
+775,myasthenia gravis,C10,nervous system diseases,796
+776,myasthenia gravis,C20,immune system diseases,796
+777,fibroids,C04,neoplasms,797
+778,bladder cancer,C04,neoplasms,799
+779,bladder cancer,C12,male urogenital diseases,799
+780,bladder cancer,C13,female urogenital diseases and pregnancy complications,799
+781,histoplasmosis,C01,infections,801
+782,ganglion,C04,neoplasms,802
+783,ganglion,C17,skin and connective tissue diseases,802
+784,sjogrens syndrome,C05,musculoskeletal diseases,803
+785,sjogrens syndrome,C07,stomatognathic diseases,803
+786,sjogrens syndrome,C11,eye diseases,803
+787,sjogrens syndrome,C17,skin and connective tissue diseases,803
+788,sjogrens syndrome,C20,immune system diseases,803
+789,venous insufficiency,C14,cardiovascular diseases,805
+790,tension headache,C10,nervous system diseases,807
+791,pigmentation disorder,C17,skin and connective tissue diseases,809
+792,pigmentation disorder,S,symptoms,809
+793,keratitis,C11,eye diseases,810
+794,diabetes insipidus,C12,male urogenital diseases,812
+795,diabetes insipidus,C13,female urogenital diseases and pregnancy complications,812
+796,diabetes insipidus,C19,endocrine system diseases,812
+797,folliculitis,C17,skin and connective tissue diseases,814
+798,empyema,C01,infections,815
+799,empyema,S,symptoms,815
+800,esophageal cancer,C04,neoplasms,821
+801,esophageal cancer,C06,digestive system diseases,821
+802,neurogenic bladder,C10,nervous system diseases,822
+803,neurogenic bladder,C12,male urogenital diseases,822
+804,neurogenic bladder,C13,female urogenital diseases and pregnancy complications,822
+805,neurogenic bladder,S,symptoms,822
+806,uterine bleeding,C13,female urogenital diseases and pregnancy complications,823
+807,uterine bleeding,S,symptoms,823
+808,hyperacusia,C09,otorhinolaryngologic diseases,825
+809,hyperacusia,C10,nervous system diseases,825
+810,hyperacusia,S,symptoms,825
+811,enterocolitis,C06,digestive system diseases,826
+812,cryptococcosis,C01,infections,828
+813,chronic hepatitis,C06,digestive system diseases,829
+814,food intolerance,S,symptoms,830
+815,cluster headache,C10,nervous system diseases,831
+816,connective tissue disease,C17,skin and connective tissue diseases,832
+817,anisocoria,C10,nervous system diseases,834
+818,anisocoria,C11,eye diseases,834
+819,anisocoria,S,symptoms,834
+820,pancreatic pseudocyst,C04,neoplasms,839
+821,pancreatic pseudocyst,C06,digestive system diseases,839
+822,hyperphosphatemia,C18,nutritional and metabolic diseases,841
+823,status epilepticus,C10,nervous system diseases,842
+824,status epilepticus,S,symptoms,842
+825,sacroiliitis,C05,musculoskeletal diseases,843
+826,pyuria,C01,infections,845
+827,pyuria,C12,male urogenital diseases,845
+828,pyuria,C13,female urogenital diseases and pregnancy complications,845
+829,breast inflammation,C13,female urogenital diseases and pregnancy complications,846
+830,breast inflammation,C17,skin and connective tissue diseases,846
+831,mumps,C01,infections,849
+832,mumps,C07,stomatognathic diseases,849
+833,tinea pedis,C01,infections,850
+834,tinea pedis,C17,skin and connective tissue diseases,850
+835,tinea pedis,S,symptoms,850
+836,hypogonadism,C19,endocrine system diseases,851
+837,esophageal stenosis,C06,digestive system diseases,853
+838,corneal abrasion,C10,nervous system diseases,855
+839,corneal abrasion,C11,eye diseases,855
+840,corneal abrasion,C26,wounds and injuries,855
+841,bunion,C05,musculoskeletal diseases,856
+842,asthenopia,C11,eye diseases,859
+843,agitated,S,symptoms,3
+844,abnormal movements,S,symptoms,4
+845,pain in throat,S,symptoms,10
+846,lung infiltration,S,symptoms,14
+847,hypoglycaemia neonatal,S,symptoms,16
+848,abdominal distension,S,symptoms,20
+849,difficulty breathing,S,symptoms,24
+850,decreased body temperature,S,symptoms,25
+851,appendectomy,S,symptoms,31
+852,disorder lung,S,symptoms,42
+853,hot flash,S,symptoms,43
+854,ascites,S,symptoms,47
+855,stridor,S,symptoms,49
+856,hypoventilation,S,symptoms,51
+857,aspartate aminotransferase increase,S,symptoms,54
+858,cold extremities,S,symptoms,55
+859,facial flushing,S,symptoms,56
+860,eruption,S,symptoms,58
+861,drug toxicity nos,S,symptoms,67
+862,increased white blood cell count,S,symptoms,68
+863,drowsiness,S,symptoms,74
+864,gastroenteritis viral,S,symptoms,83
+865,lymphocytes decreased,S,symptoms,84
+866,itch,S,symptoms,86
+867,upper gastrointestinal bleeding,S,symptoms,88
+868,bleeding vaginal,S,symptoms,108
+869,excoriation,S,symptoms,109
+870,ekbom syndrome,S,symptoms,110
+871,blurred vision,S,symptoms,112
+872,perirectal abscess,S,symptoms,121
+873,skin lesion,S,symptoms,124
+874,fib,S,symptoms,127
+875,abnormal gait,S,symptoms,129
+876,infection viral,S,symptoms,132
+877,allergic dermatitis,S,symptoms,134
+878,clotting,S,symptoms,136
+879,dry skin,S,symptoms,140
+880,cognitive disorder,S,symptoms,146
+881,abnormal lfts,S,symptoms,150
+882,acute brain syndrome,S,symptoms,152
+883,nasal sinus congestion,S,symptoms,155
+884,near syncope,S,symptoms,156
+885,nasal congestion,S,symptoms,160
+886,coated tongue,S,symptoms,164
+887,wheeze,S,symptoms,166
+888,haemorrhage rectum,S,symptoms,167
+889,blood disorder,S,symptoms,173
+890,psychoses,S,symptoms,174
+891,attempted suicide,S,symptoms,178
+892,bad breath,S,symptoms,179
+893,colon spastic,S,symptoms,185
+894,nervous tension,S,symptoms,189
+895,hypochloraemia,S,symptoms,191
+896,abdominal pain upper,S,symptoms,193
+897,biliary tract disorder,S,symptoms,199
+898,extremity pain,S,symptoms,201
+899,blood sodium decreased,S,symptoms,207
+900,feeling unwell,S,symptoms,209
+901,lower gi bleeding,S,symptoms,211
+902,intervertebral disc disorder,S,symptoms,213
+903,road traffic accident,S,symptoms,216
+904,abnormal vision,S,symptoms,219
+905,bulging,S,symptoms,221
+906,acid reflux,S,symptoms,224
+907,palpitation,S,symptoms,227
+908,abuse,S,symptoms,235
+909,dyspnea exertional,S,symptoms,238
+910,gall bladder,S,symptoms,242
+911,aptyalism,S,symptoms,247
+912,wrist fracture,S,symptoms,251
+913,dislocation,S,symptoms,252
+914,decreased libido,S,symptoms,254
+915,ild,S,symptoms,258
+916,atrioventricular block first degree,S,symptoms,259
+917,vestibular disorder,S,symptoms,261
+918,panic attack,S,symptoms,262
+919,nightmare,S,symptoms,263
+920,breast lump,S,symptoms,264
+921,lung fibrosis,S,symptoms,271
+922,amyotrophy,S,symptoms,275
+923,cachectic,S,symptoms,276
+924,renal cyst,S,symptoms,277
+925,neuropathy peripheral,S,symptoms,278
+926,femur fracture,S,symptoms,285
+927,fascitis plantar,S,symptoms,286
+928,joint swelling,S,symptoms,289
+929,mitral valve disease nos,S,symptoms,292
+930,edema extremities,S,symptoms,293
+931,pulmonary mass,S,symptoms,294
+932,balance disorder,S,symptoms,298
+933,sensory disturbance,S,symptoms,302
+934,hypotension orthostatic,S,symptoms,306
+935,autonomic instability,S,symptoms,308
+936,bundle branch block left,S,symptoms,310
+937,malabsorption,S,symptoms,312
+938,body temperature increased,S,symptoms,315
+939,burning sensation,S,symptoms,316
+940,chill,S,symptoms,317
+941,infection urinary tract,S,symptoms,318
+942,night sweat,S,symptoms,319
+943,mod,S,symptoms,325
+944,heart rate increased,S,symptoms,327
+945,eye swelling,S,symptoms,328
+946,psychosexual disorder,S,symptoms,329
+947,disorder renal,S,symptoms,333
+948,post traumatic stress disorder,S,symptoms,336
+949,angiopathy,S,symptoms,338
+950,flu,S,symptoms,339
+951,coeliac disease,S,symptoms,340
+952,adjustment disorder,S,symptoms,341
+953,carcinoid syndrome,S,symptoms,342
+954,dysphasia,S,symptoms,344
+955,drug withdrawal,S,symptoms,345
+956,cerebral atrophy,S,symptoms,350
+957,intervertebral disc herniation,S,symptoms,356
+958,pneumonia klebsiella,S,symptoms,361
+959,afib,S,symptoms,363
+960,eosinophil count increased,S,symptoms,365
+961,abnormal ecg,S,symptoms,367
+962,bone fracture spontaneous,S,symptoms,368
+963,floaters,S,symptoms,371
+964,thyroid neoplasia,S,symptoms,372
+965,dental abscess,S,symptoms,373
+966,dental pain,S,symptoms,374
+967,aseptic necrosis bone,S,symptoms,375
+968,retinal bleeding,S,symptoms,377
+969,gingival pain,S,symptoms,378
+970,candidiasis of mouth,S,symptoms,380
+971,mouth pain,S,symptoms,382
+972,lung neoplasm malignant,S,symptoms,385
+973,blood in urine,S,symptoms,389
+974,abnormal eeg,S,symptoms,391
+975,abortion spontaneous,S,symptoms,394
+976,urosepsis,S,symptoms,395
+977,eating disorder,S,symptoms,396
+978,schizophrenia,S,symptoms,397
+979,cardiac enlargement,S,symptoms,399
+980,increased platelet count,S,symptoms,401
+981,odynophagia,S,symptoms,402
+982,convulsions grand mal,S,symptoms,405
+983,bundle branch block right,S,symptoms,407
+984,personality disorder,S,symptoms,408
+985,hernia hiatal,S,symptoms,411
+986,blood pressure abnormal,S,symptoms,415
+987,muscle strain,S,symptoms,416
+988,ejaculation premature,S,symptoms,417
+989,excessive thirst,S,symptoms,418
+990,ear ache,S,symptoms,419
+991,elevated erythrocyte sedimentation rate,S,symptoms,420
+992,blood calcium increased,S,symptoms,421
+993,joint stiffness,S,symptoms,422
+994,proctalgia,S,symptoms,425
+995,bone pain,S,symptoms,426
+996,raynauds phenomenon,S,symptoms,433
+997,wound dehiscence,S,symptoms,434
+998,nystagmus,S,symptoms,438
+999,gastrointestinal bleed,S,symptoms,439
+1000,hip fracture,S,symptoms,450
+1001,difficulty in walking,S,symptoms,451
+1002,atrial septal defect,S,symptoms,453
+1003,obstructive uropathy,S,symptoms,455
+1004,rhagades,S,symptoms,457
+1005,intestinal functional disorder,S,symptoms,462
+1006,faecal incontinence,S,symptoms,463
+1007,carpal tunnel,S,symptoms,464
+1008,adh inappropriate,S,symptoms,466
+1009,neuropathy,S,symptoms,467
+1010,chest infection,S,symptoms,468
+1011,black stools,S,symptoms,472
+1012,flashing lights,S,symptoms,474
+1013,electrolyte disorder,S,symptoms,475
+1014,decreased hearing,S,symptoms,476
+1015,mouth bleeding,S,symptoms,479
+1016,external ear infection,S,symptoms,487
+1017,muscle inflammation,S,symptoms,488
+1018,cervical vertebral fracture,S,symptoms,489
+1019,elevated prostate specific antigen,S,symptoms,492
+1020,excess potassium,S,symptoms,499
+1021,esophageal ulcer,S,symptoms,500
+1022,metabolic alkalosis,S,symptoms,505
+1023,hyperalimentation,S,symptoms,510
+1024,parkinson,S,symptoms,512
+1025,macula lutea degeneration,S,symptoms,514
+1026,cardiac ischemia,S,symptoms,516
+1027,paranoia,S,symptoms,517
+1028,chronic sinusitis,S,symptoms,518
+1029,rotator cuff syndrome,S,symptoms,521
+1030,fractured pelvis nos,S,symptoms,522
+1031,infection upper respiratory,S,symptoms,523
+1032,atrioventricular block second degree,S,symptoms,528
+1033,pharyngeal inflammation,S,symptoms,529
+1034,angina,S,symptoms,532
+1035,tachycardia ventricular,S,symptoms,535
+1036,cardiovascular collapse,S,symptoms,539
+1037,hive,S,symptoms,541
+1038,syncope vasovagal,S,symptoms,542
+1039,bone marrow transplant,S,symptoms,547
+1040,elevated triglycerides,S,symptoms,549
+1041,duodenal ulcer haemorrhage,S,symptoms,552
+1042,cmv infection,S,symptoms,553
+1043,carcinoma of the colon,S,symptoms,558
+1044,cardiac valvulopathy,S,symptoms,560
+1045,atrioventricular block complete,S,symptoms,562
+1046,ischaemia,S,symptoms,565
+1047,defaecation urgency,S,symptoms,567
+1048,pulmonary arrest,S,symptoms,575
+1049,insulin dependent diabetes mellitus,S,symptoms,578
+1050,hepatitis toxic,S,symptoms,582
+1051,endocrine disorder,S,symptoms,583
+1052,sinus headache,S,symptoms,584
+1053,pancreatitis relapsing,S,symptoms,587
+1054,abnormal laboratory findings,S,symptoms,590
+1055,duodenal ulcer perforation,S,symptoms,591
+1056,joint effusion,S,symptoms,592
+1057,haemorrhage intracranial,S,symptoms,596
+1058,excessive sleepiness,S,symptoms,598
+1059,animal bite,S,symptoms,601
+1060,cerebral vascular disorder,S,symptoms,602
+1061,micturition urgency,S,symptoms,605
+1062,stress incontinence,S,symptoms,606
+1063,hesitancy,S,symptoms,607
+1064,nodule,S,symptoms,609
+1065,scleroderma,S,symptoms,612
+1066,excessive salivation,S,symptoms,614
+1067,colitis pseudomembranous,S,symptoms,618
+1068,heavy menstrual period,S,symptoms,619
+1069,bleeding gums,S,symptoms,625
+1070,epicondylitis,S,symptoms,626
+1071,ingrowing nail,S,symptoms,627
+1072,dermatitis seborrheic,S,symptoms,628
+1073,candidiasis of vagina,S,symptoms,629
+1074,spinal compression fracture,S,symptoms,630
+1075,petit mal,S,symptoms,632
+1076,lyell,S,symptoms,638
+1077,seborrhoeic keratosis,S,symptoms,639
+1078,coughing blood,S,symptoms,643
+1079,squamous cell carcinoma of skin,S,symptoms,647
+1080,myelodysplasia,S,symptoms,651
+1081,rectal polyp,S,symptoms,652
+1082,cutaneous ulcer,S,symptoms,654
+1083,breast enlargement,S,symptoms,657
+1084,eustachian tube disorder,S,symptoms,658
+1085,acute sinusitis,S,symptoms,659
+1086,altered bowel function,S,symptoms,661
+1087,antinuclear antibody positive,S,symptoms,662
+1088,injury of neck,S,symptoms,666
+1089,pharyngitis streptococcal,S,symptoms,667
+1090,hepatic necrosis,S,symptoms,669
+1091,trigger finger,S,symptoms,676
+1092,nail disorder,S,symptoms,678
+1093,allergic vasculitis,S,symptoms,679
+1094,gastric polyps,S,symptoms,682
+1095,hyperkeratosis,S,symptoms,683
+1096,cholecystectomies,S,symptoms,687
+1097,carcinoma of prostate,S,symptoms,688
+1098,orthopnea,S,symptoms,689
+1099,renal mass,S,symptoms,690
+1100,breast disorder,S,symptoms,691
+1101,disseminated lupus erythematosus,S,symptoms,692
+1102,breast tenderness,S,symptoms,693
+1103,disorder peripheral vascular,S,symptoms,694
+1104,acute psychosis,S,symptoms,696
+1105,detached retina,S,symptoms,699
+1106,chest wall pain,S,symptoms,700
+1107,costochondritis,S,symptoms,702
+1108,cheilosis,S,symptoms,704
+1109,easy bruisability,S,symptoms,705
+1110,caesarean section,S,symptoms,715
+1111,petechia,S,symptoms,717
+1112,hematoma subdural,S,symptoms,718
+1113,cerebral artery embolism,S,symptoms,720
+1114,post nasal drip,S,symptoms,724
+1115,nodule skin,S,symptoms,726
+1116,neck mass,S,symptoms,727
+1117,kidney pain,S,symptoms,730
+1118,choreoathetosis,S,symptoms,733
+1119,disorder retinal,S,symptoms,734
+1120,cerumen impaction,S,symptoms,736
+1121,tooth impacted,S,symptoms,738
+1122,als,S,symptoms,743
+1123,furuncle,S,symptoms,746
+1124,autonomic neuropathy,S,symptoms,748
+1125,coronary artery bypass graft,S,symptoms,752
+1126,pleural fibrosis,S,symptoms,753
+1127,fecal occult blood,S,symptoms,756
+1128,cholecystitis acute,S,symptoms,757
+1129,anemia aplastic,S,symptoms,762
+1130,pneumonia primary atypical,S,symptoms,764
+1131,cutaneous mycosis,S,symptoms,769
+1132,humerus fracture,S,symptoms,770
+1133,abnormal mammogram,S,symptoms,777
+1134,arthritis bacterial,S,symptoms,778
+1135,hernia inguinal,S,symptoms,780
+1136,dyspnoea paroxysmal nocturnal,S,symptoms,783
+1137,carotid bruit,S,symptoms,784
+1138,irritation skin,S,symptoms,790
+1139,cholecystitis chronic,S,symptoms,794
+1140,mediastinal disorder,S,symptoms,798
+1141,breast swelling,S,symptoms,800
+1142,vitreous haemorrhage,S,symptoms,804
+1143,burns second degree,S,symptoms,806
+1144,night cramps,S,symptoms,808
+1145,kidney transplant,S,symptoms,811
+1146,fracture nonunion,S,symptoms,813
+1147,gastric ulcer perforated,S,symptoms,816
+1148,platelet disorder,S,symptoms,817
+1149,allergic alveolitis,S,symptoms,818
+1150,chronic ulcerative colitis,S,symptoms,819
+1151,meningitis viral,S,symptoms,820
+1152,uterine polyp,S,symptoms,824
+1153,motor retardation,S,symptoms,827
+1154,macrocytosis,S,symptoms,833
+1155,calculus ureteric,S,symptoms,835
+1156,menstrual disorder,S,symptoms,836
+1157,dysphemia,S,symptoms,837
+1158,irregular menstrual cycle,S,symptoms,838
+1159,testicular swelling,S,symptoms,840
+1160,tracheobronchitis,S,symptoms,844
+1161,xerosis,S,symptoms,847
+1162,postmenopausal bleeding,S,symptoms,848
+1163,testes pain,S,symptoms,852
+1164,coccydynia,S,symptoms,854
+1165,viral pharyngitis,S,symptoms,857
+1166,cystitis interstitial,S,symptoms,858
+1167,endometriosis,S,symptoms,860

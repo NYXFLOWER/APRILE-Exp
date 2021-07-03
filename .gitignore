@@ -134,3 +134,5 @@ data/
 */*.xml
 .DS_Store
 analysis.ipynb
+gene2go
+go-basic.obo

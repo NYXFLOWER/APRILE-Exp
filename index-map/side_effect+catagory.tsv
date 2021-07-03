@@ -1,0 +1,837 @@
+side effect	catagory	catagory name
+atelectasis	C08	respiratory tract diseases
+back ache	C23	pathological conditions, signs and symptoms
+lung edema	C08	respiratory tract diseases
+acidosis	C18	nutritional and metabolic diseases
+peliosis	C06	digestive system diseases
+peliosis	C14	cardiovascular diseases
+apnea	C08	respiratory tract diseases
+apnea	C23	pathological conditions, signs and symptoms
+drug hypersensitivity	C20	immune system diseases
+flatulence	C23	pathological conditions, signs and symptoms
+allergies	C20	immune system diseases
+thrombocytopenia	C15	hemic and lymphatic diseases
+bradycardia	C14	cardiovascular diseases
+bradycardia	C23	pathological conditions, signs and symptoms
+bleeding	C23	pathological conditions, signs and symptoms
+hyperglycaemia	C18	nutritional and metabolic diseases
+peritonitis	C01	infections
+peritonitis	C06	digestive system diseases
+hypoglycaemia	C18	nutritional and metabolic diseases
+asystole	C14	cardiovascular diseases
+cerebral infarct	C10	nervous system diseases
+cerebral infarct	C14	cardiovascular diseases
+cerebral infarct	C23	pathological conditions, signs and symptoms
+hypoxia	C23	pathological conditions, signs and symptoms
+adynamic ileus	C06	digestive system diseases
+sepsis	C01	infections
+sepsis	C23	pathological conditions, signs and symptoms
+hypomagnesaemia	C18	nutritional and metabolic diseases
+acute respiratory distress syndrome	C08	respiratory tract diseases
+lipoma	C04	neoplasms
+flank pain	C23	pathological conditions, signs and symptoms
+pneumothorax	C08	respiratory tract diseases
+appendicitis	C01	infections
+appendicitis	C06	digestive system diseases
+strabismus	C10	nervous system diseases
+strabismus	C11	eye diseases
+blood calcium decreased	C18	nutritional and metabolic diseases
+respiratory failure	C08	respiratory tract diseases
+pulmonary hypertension	C08	respiratory tract diseases
+pulmonary hypertension	C14	cardiovascular diseases
+hypercapnia	C23	pathological conditions, signs and symptoms
+intestinal perforation	C06	digestive system diseases
+leucocytosis	C15	hemic and lymphatic diseases
+leucocytosis	C23	pathological conditions, signs and symptoms
+arterial pressure nos decreased	C14	cardiovascular diseases
+metabolic acidosis	C18	nutritional and metabolic diseases
+bladder inflammation	C12	male urogenital diseases
+bladder inflammation	C13	female urogenital diseases and pregnancy complications
+sinus tachycardia	C14	cardiovascular diseases
+sinus tachycardia	C23	pathological conditions, signs and symptoms
+arterial pressure nos increased	C14	cardiovascular diseases
+edema	C23	pathological conditions, signs and symptoms
+disease of liver	C06	digestive system diseases
+anaphylactic reaction	C20	immune system diseases
+acute pancreatitis	C06	digestive system diseases
+neumonia	C01	infections
+neumonia	C08	respiratory tract diseases
+adenocarcinoma	C04	neoplasms
+confusion	C10	nervous system diseases
+confusion	C23	pathological conditions, signs and symptoms
+malnourished	C18	nutritional and metabolic diseases
+haemorrhoids	C06	digestive system diseases
+haemorrhoids	C14	cardiovascular diseases
+still birth	C13	female urogenital diseases and pregnancy complications
+still birth	C23	pathological conditions, signs and symptoms
+anaemia	C15	hemic and lymphatic diseases
+encephalopathy	C10	nervous system diseases
+anorexia	C23	pathological conditions, signs and symptoms
+tremor	C10	nervous system diseases
+tremor	C23	pathological conditions, signs and symptoms
+hallucination	C10	nervous system diseases
+hallucination	C23	pathological conditions, signs and symptoms
+chronic obstructive airway disease	C08	respiratory tract diseases
+head ache	C23	pathological conditions, signs and symptoms
+back injury	C26	wounds and injuries
+erythema	C17	skin and connective tissue diseases
+erythema	C23	pathological conditions, signs and symptoms
+diplopia	C10	nervous system diseases
+diplopia	C11	eye diseases
+diplopia	C23	pathological conditions, signs and symptoms
+enlarged spleen	C23	pathological conditions, signs and symptoms
+narcolepsy	C10	nervous system diseases
+esophageal spasm	C06	digestive system diseases
+erosive gastritis	C06	digestive system diseases
+breast cancer	C04	neoplasms
+breast cancer	C17	skin and connective tissue diseases
+haemolytic anaemia	C15	hemic and lymphatic diseases
+icterus	C23	pathological conditions, signs and symptoms
+gastroenteritis	C06	digestive system diseases
+optic disc edema	C10	nervous system diseases
+optic disc edema	C11	eye diseases
+sleep disorder	C10	nervous system diseases
+sleep disorder	C23	pathological conditions, signs and symptoms
+septic shock	C01	infections
+septic shock	C23	pathological conditions, signs and symptoms
+bladder retention	C12	male urogenital diseases
+bladder retention	C13	female urogenital diseases and pregnancy complications
+aphonia	C08	respiratory tract diseases
+aphonia	C09	otorhinolaryngologic diseases
+aphonia	C10	nervous system diseases
+aphonia	C23	pathological conditions, signs and symptoms
+pain	C23	pathological conditions, signs and symptoms
+idiopathic thrombocytopenic purpura	C15	hemic and lymphatic diseases
+idiopathic thrombocytopenic purpura	C20	immune system diseases
+idiopathic thrombocytopenic purpura	C23	pathological conditions, signs and symptoms
+pneumonia staphylococcal	C01	infections
+pneumonia staphylococcal	C08	respiratory tract diseases
+alopecia	C17	skin and connective tissue diseases
+alopecia	C23	pathological conditions, signs and symptoms
+conjunctivitis	C11	eye diseases
+lobar pneumonia	C01	infections
+lobar pneumonia	C08	respiratory tract diseases
+glomerulonephritis	C12	male urogenital diseases
+glomerulonephritis	C13	female urogenital diseases and pregnancy complications
+duodenal ulcer	C06	digestive system diseases
+deep vein thromboses	C14	cardiovascular diseases
+leucopenia	C15	hemic and lymphatic diseases
+rhinorrhea	C23	pathological conditions, signs and symptoms
+bursitis	C05	musculoskeletal diseases
+nephrocalcinosis	C12	male urogenital diseases
+nephrocalcinosis	C13	female urogenital diseases and pregnancy complications
+nephrocalcinosis	C18	nutritional and metabolic diseases
+thrombotic microangiopathy	C15	hemic and lymphatic diseases
+dizziness	C23	pathological conditions, signs and symptoms
+pleurisy	C01	infections
+pleurisy	C08	respiratory tract diseases
+sunburn	C17	skin and connective tissue diseases
+sunburn	C26	wounds and injuries
+hoarseness	C08	respiratory tract diseases
+hoarseness	C09	otorhinolaryngologic diseases
+hoarseness	C10	nervous system diseases
+hoarseness	C23	pathological conditions, signs and symptoms
+bleeding hemorrhoids	C06	digestive system diseases
+bleeding hemorrhoids	C14	cardiovascular diseases
+fatigue	C23	pathological conditions, signs and symptoms
+aspiration pneumonia	C01	infections
+aspiration pneumonia	C08	respiratory tract diseases
+diarrhea	C23	pathological conditions, signs and symptoms
+asthma	C08	respiratory tract diseases
+asthma	C20	immune system diseases
+tinnitus	C09	otorhinolaryngologic diseases
+tinnitus	C10	nervous system diseases
+tinnitus	C23	pathological conditions, signs and symptoms
+muscle spasm	C10	nervous system diseases
+muscle spasm	C23	pathological conditions, signs and symptoms
+candida infection	C01	infections
+glossodynia	C07	stomatognathic diseases
+glossodynia	C23	pathological conditions, signs and symptoms
+anal fissure	C06	digestive system diseases
+cellulitis	C01	infections
+cellulitis	C17	skin and connective tissue diseases
+cellulitis	C23	pathological conditions, signs and symptoms
+constipated	C23	pathological conditions, signs and symptoms
+muscle paresis	C10	nervous system diseases
+muscle paresis	C23	pathological conditions, signs and symptoms
+deafness	C09	otorhinolaryngologic diseases
+deafness	C10	nervous system diseases
+deafness	C23	pathological conditions, signs and symptoms
+vocal cord paralysis	C08	respiratory tract diseases
+vocal cord paralysis	C09	otorhinolaryngologic diseases
+vocal cord paralysis	C10	nervous system diseases
+vocal cord paralysis	C23	pathological conditions, signs and symptoms
+eye pain	C11	eye diseases
+eye pain	C23	pathological conditions, signs and symptoms
+leukaemia	C04	neoplasms
+chronic kidney disease	C12	male urogenital diseases
+chronic kidney disease	C13	female urogenital diseases and pregnancy complications
+acute kidney failure	C12	male urogenital diseases
+acute kidney failure	C13	female urogenital diseases and pregnancy complications
+retrocollis	C23	pathological conditions, signs and symptoms
+cholangitis	C06	digestive system diseases
+hypothyroid	C19	endocrine system diseases
+dermatitides	C17	skin and connective tissue diseases
+dermatitis medicamentosa	C17	skin and connective tissue diseases
+dermatitis medicamentosa	C20	immune system diseases
+deafness neurosensory	C09	otorhinolaryngologic diseases
+deafness neurosensory	C10	nervous system diseases
+deafness neurosensory	C23	pathological conditions, signs and symptoms
+fungal disease	C01	infections
+erythema multiforme	C17	skin and connective tissue diseases
+haematoma	C23	pathological conditions, signs and symptoms
+bleb	C17	skin and connective tissue diseases
+bleb	C23	pathological conditions, signs and symptoms
+amenorrhea	C23	pathological conditions, signs and symptoms
+epistaxis	C08	respiratory tract diseases
+epistaxis	C09	otorhinolaryngologic diseases
+epistaxis	C23	pathological conditions, signs and symptoms
+hepatitis	C06	digestive system diseases
+neutropenia	C15	hemic and lymphatic diseases
+abdominal pain	C23	pathological conditions, signs and symptoms
+chest pain	C23	pathological conditions, signs and symptoms
+mycobacterium tuberculosis infection	C01	infections
+cholelithiasis	C06	digestive system diseases
+pyoderma	C17	skin and connective tissue diseases
+aching muscles	C05	musculoskeletal diseases
+aching muscles	C10	nervous system diseases
+aching muscles	C23	pathological conditions, signs and symptoms
+abscess	C01	infections
+abscess	C23	pathological conditions, signs and symptoms
+loss of consciousness	C10	nervous system diseases
+loss of consciousness	C23	pathological conditions, signs and symptoms
+arthritis infective	C05	musculoskeletal diseases
+loss of weight	C23	pathological conditions, signs and symptoms
+nasopharyngitis	C01	infections
+nasopharyngitis	C07	stomatognathic diseases
+nasopharyngitis	C08	respiratory tract diseases
+nasopharyngitis	C09	otorhinolaryngologic diseases
+belching	C23	pathological conditions, signs and symptoms
+rhinitis	C01	infections
+rhinitis	C08	respiratory tract diseases
+rhinitis	C09	otorhinolaryngologic diseases
+heart attack	C14	cardiovascular diseases
+heart attack	C23	pathological conditions, signs and symptoms
+hepatic neoplasia	C04	neoplasms
+hepatic neoplasia	C06	digestive system diseases
+azotaemia	C12	male urogenital diseases
+azotaemia	C13	female urogenital diseases and pregnancy complications
+azotaemia	C23	pathological conditions, signs and symptoms
+muscle weakness	C05	musculoskeletal diseases
+muscle weakness	C10	nervous system diseases
+muscle weakness	C23	pathological conditions, signs and symptoms
+cataract	C11	eye diseases
+insomnia	C10	nervous system diseases
+dyspepsia	C23	pathological conditions, signs and symptoms
+asthenia	C23	pathological conditions, signs and symptoms
+emesis	C23	pathological conditions, signs and symptoms
+embolism pulmonary	C08	respiratory tract diseases
+embolism pulmonary	C14	cardiovascular diseases
+colitis ischemic	C06	digestive system diseases
+colitis ischemic	C14	cardiovascular diseases
+arteriosclerotic heart disease	C14	cardiovascular diseases
+small intestinal obstruction	C06	digestive system diseases
+paraesthesia	C10	nervous system diseases
+paraesthesia	C23	pathological conditions, signs and symptoms
+neoplasia	C04	neoplasms
+fainting	C10	nervous system diseases
+fainting	C23	pathological conditions, signs and symptoms
+sneezing	C23	pathological conditions, signs and symptoms
+hypokalaemia	C18	nutritional and metabolic diseases
+migraine	C10	nervous system diseases
+osteoporosis	C05	musculoskeletal diseases
+osteoporosis	C18	nutritional and metabolic diseases
+high blood pressure	C14	cardiovascular diseases
+diverticulosis	C06	digestive system diseases
+diverticulosis	C23	pathological conditions, signs and symptoms
+arthritis rheumatoid	C05	musculoskeletal diseases
+arthritis rheumatoid	C17	skin and connective tissue diseases
+arthritis rheumatoid	C20	immune system diseases
+arteriosclerosis	C14	cardiovascular diseases
+osteoarthritis	C05	musculoskeletal diseases
+pleural pain	C01	infections
+pleural pain	C08	respiratory tract diseases
+fibromyalgia	C05	musculoskeletal diseases
+fibromyalgia	C10	nervous system diseases
+breast pain	C23	pathological conditions, signs and symptoms
+herpes zoster	C01	infections
+breast cyst	C04	neoplasms
+breast cyst	C17	skin and connective tissue diseases
+myoglobinuria	C05	musculoskeletal diseases
+osteomalacia	C05	musculoskeletal diseases
+osteomalacia	C18	nutritional and metabolic diseases
+ischias	C10	nervous system diseases
+ischias	C23	pathological conditions, signs and symptoms
+aching joints	C05	musculoskeletal diseases
+aching joints	C23	pathological conditions, signs and symptoms
+arthritis	C05	musculoskeletal diseases
+colonic polyp	C23	pathological conditions, signs and symptoms
+cholecystitis	C06	digestive system diseases
+extrasystoles ventricular	C14	cardiovascular diseases
+extrasystoles ventricular	C23	pathological conditions, signs and symptoms
+acne rosacea	C17	skin and connective tissue diseases
+incontinence	C12	male urogenital diseases
+incontinence	C13	female urogenital diseases and pregnancy complications
+incontinence	C23	pathological conditions, signs and symptoms
+diabetic acidosis	C18	nutritional and metabolic diseases
+diabetic acidosis	C19	endocrine system diseases
+diabetic retinopathy	C14	cardiovascular diseases
+diabetic retinopathy	C19	endocrine system diseases
+blepharitis	C11	eye diseases
+pyelonephritis	C12	male urogenital diseases
+pyelonephritis	C13	female urogenital diseases and pregnancy complications
+blepharospasm	C11	eye diseases
+aneurysm	C14	cardiovascular diseases
+benign prostatic hyperplasia	C12	male urogenital diseases
+superficial thrombophlebitis	C14	cardiovascular diseases
+decubitus ulcer	C17	skin and connective tissue diseases
+kidney failure	C12	male urogenital diseases
+kidney failure	C13	female urogenital diseases and pregnancy complications
+meningitides	C10	nervous system diseases
+cough	C08	respiratory tract diseases
+cough	C23	pathological conditions, signs and symptoms
+nocturia	C23	pathological conditions, signs and symptoms
+spinning sensation	C09	otorhinolaryngologic diseases
+spinning sensation	C10	nervous system diseases
+spinning sensation	C23	pathological conditions, signs and symptoms
+diabetes	C18	nutritional and metabolic diseases
+diabetes	C19	endocrine system diseases
+bronchitis	C01	infections
+bronchitis	C08	respiratory tract diseases
+polyp	C23	pathological conditions, signs and symptoms
+osteomyelitis	C01	infections
+osteomyelitis	C05	musculoskeletal diseases
+enlarged liver	C06	digestive system diseases
+enlarged liver	C23	pathological conditions, signs and symptoms
+laceration	C26	wounds and injuries
+coma	C10	nervous system diseases
+coma	C23	pathological conditions, signs and symptoms
+bacterial infection	C01	infections
+angiitis	C14	cardiovascular diseases
+convulsion	C10	nervous system diseases
+convulsion	C23	pathological conditions, signs and symptoms
+iron deficiency anaemia	C15	hemic and lymphatic diseases
+iron deficiency anaemia	C18	nutritional and metabolic diseases
+cardiomyopathy	C14	cardiovascular diseases
+bronchial spasm	C08	respiratory tract diseases
+cardiac decompensation	C14	cardiovascular diseases
+mucositis oral	C06	digestive system diseases
+mucositis oral	C07	stomatognathic diseases
+hernia	C23	pathological conditions, signs and symptoms
+glaucoma	C11	eye diseases
+breast dysplasia	C17	skin and connective tissue diseases
+phlebitis	C14	cardiovascular diseases
+lung neoplasms	C04	neoplasms
+lung neoplasms	C08	respiratory tract diseases
+bone marrow failure	C15	hemic and lymphatic diseases
+deglutition disorder	C06	digestive system diseases
+deglutition disorder	C09	otorhinolaryngologic diseases
+adrenal insufficiency	C19	endocrine system diseases
+polyneuropathy	C10	nervous system diseases
+nephrolithiasis	C12	male urogenital diseases
+nephrolithiasis	C13	female urogenital diseases and pregnancy complications
+dysarthria	C10	nervous system diseases
+dysarthria	C23	pathological conditions, signs and symptoms
+scoliosis	C05	musculoskeletal diseases
+rhabdomyolysis	C05	musculoskeletal diseases
+apoplexy	C10	nervous system diseases
+apoplexy	C14	cardiovascular diseases
+aphasia	C10	nervous system diseases
+aphasia	C23	pathological conditions, signs and symptoms
+amnesia	C10	nervous system diseases
+amnesia	C23	pathological conditions, signs and symptoms
+keratitis sicca	C11	eye diseases
+dehydration	C18	nutritional and metabolic diseases
+dehydration	C23	pathological conditions, signs and symptoms
+ataxia	C10	nervous system diseases
+ataxia	C23	pathological conditions, signs and symptoms
+transient ischaemic attack	C10	nervous system diseases
+transient ischaemic attack	C14	cardiovascular diseases
+cerebral haemorrhage	C10	nervous system diseases
+cerebral haemorrhage	C14	cardiovascular diseases
+cerebral haemorrhage	C23	pathological conditions, signs and symptoms
+elevated cholesterol	C18	nutritional and metabolic diseases
+anxiety	F	mental discorders
+facial palsy	C07	stomatognathic diseases
+facial palsy	C10	nervous system diseases
+facial palsy	C23	pathological conditions, signs and symptoms
+ureteral obstruction	C12	male urogenital diseases
+ureteral obstruction	C13	female urogenital diseases and pregnancy complications
+nephrosclerosis	C12	male urogenital diseases
+nephrosclerosis	C13	female urogenital diseases and pregnancy complications
+psoriatic arthritis	C05	musculoskeletal diseases
+psoriatic arthritis	C17	skin and connective tissue diseases
+laryngitis	C01	infections
+laryngitis	C08	respiratory tract diseases
+laryngitis	C09	otorhinolaryngologic diseases
+nausea	C23	pathological conditions, signs and symptoms
+pleural effusion	C08	respiratory tract diseases
+sinusitis	C01	infections
+sinusitis	C08	respiratory tract diseases
+sinusitis	C09	otorhinolaryngologic diseases
+bilirubinaemia	C23	pathological conditions, signs and symptoms
+amentia	C10	nervous system diseases
+cervicalgia	C23	pathological conditions, signs and symptoms
+hyperlipaemia	C18	nutritional and metabolic diseases
+metabolic encephalopathy	C10	nervous system diseases
+metabolic encephalopathy	C18	nutritional and metabolic diseases
+diabetic nephropathy	C12	male urogenital diseases
+diabetic nephropathy	C13	female urogenital diseases and pregnancy complications
+diabetic nephropathy	C19	endocrine system diseases
+encephalitis	C10	nervous system diseases
+atherosclerosis	C14	cardiovascular diseases
+aortic regurgitation	C14	cardiovascular diseases
+neuralgia	C10	nervous system diseases
+neuralgia	C23	pathological conditions, signs and symptoms
+hemiplegia	C10	nervous system diseases
+hemiplegia	C23	pathological conditions, signs and symptoms
+emphysema	C23	pathological conditions, signs and symptoms
+postherpetic neuralgia	C10	nervous system diseases
+postherpetic neuralgia	C23	pathological conditions, signs and symptoms
+neuritis	C10	nervous system diseases
+gingivitis	C01	infections
+gingivitis	C07	stomatognathic diseases
+soft tissue infection	C01	infections
+bruxism	C07	stomatognathic diseases
+bone inflammation	C05	musculoskeletal diseases
+tooth disease	C07	stomatognathic diseases
+arthropathy	C05	musculoskeletal diseases
+pericardial effusion	C14	cardiovascular diseases
+infection	C01	infections
+blindness	C10	nervous system diseases
+blindness	C11	eye diseases
+blindness	C23	pathological conditions, signs and symptoms
+herpes simplex	C01	infections
+herpes simplex	C17	skin and connective tissue diseases
+acute myeloblastic leukemia	C04	neoplasms
+gastric inflammation	C06	digestive system diseases
+transfusion reaction	C15	hemic and lymphatic diseases
+transfusion reaction	C20	immune system diseases
+cardiac murmur	C23	pathological conditions, signs and symptoms
+proteinuria	C12	male urogenital diseases
+proteinuria	C13	female urogenital diseases and pregnancy complications
+proteinuria	C23	pathological conditions, signs and symptoms
+multiple sclerosis	C10	nervous system diseases
+multiple sclerosis	C20	immune system diseases
+weight gain	C23	pathological conditions, signs and symptoms
+enuresis	C12	male urogenital diseases
+enuresis	C13	female urogenital diseases and pregnancy complications
+salivary gland inflammation	C07	stomatognathic diseases
+cervicitis	C13	female urogenital diseases and pregnancy complications
+adenitis	C15	hemic and lymphatic diseases
+ecchymoses	C15	hemic and lymphatic diseases
+ecchymoses	C23	pathological conditions, signs and symptoms
+tardive dyskinesia	C10	nervous system diseases
+tardive dyskinesia	C23	pathological conditions, signs and symptoms
+esophagitis	C06	digestive system diseases
+nephrotic syndrome	C12	male urogenital diseases
+nephrotic syndrome	C13	female urogenital diseases and pregnancy complications
+contracture	C05	musculoskeletal diseases
+proctitis	C06	digestive system diseases
+spondylitis	C01	infections
+spondylitis	C05	musculoskeletal diseases
+spondylosis	C05	musculoskeletal diseases
+hyperparathyroidism	C19	endocrine system diseases
+sleep apnea	C08	respiratory tract diseases
+sleep apnea	C10	nervous system diseases
+head injury	C10	nervous system diseases
+head injury	C26	wounds and injuries
+synovitis	C05	musculoskeletal diseases
+hyperhidrosis	C17	skin and connective tissue diseases
+apraxia	C10	nervous system diseases
+apraxia	C23	pathological conditions, signs and symptoms
+prostatitis	C12	male urogenital diseases
+femoral neck fracture	C26	wounds and injuries
+sleep walking	C10	nervous system diseases
+monoclonal gammopathy	C15	hemic and lymphatic diseases
+monoclonal gammopathy	C20	immune system diseases
+bruise	C26	wounds and injuries
+scar	C23	pathological conditions, signs and symptoms
+cardiac disease	C14	cardiovascular diseases
+pain pelvic	C23	pathological conditions, signs and symptoms
+panic disorder	F	mental discorders
+tendinitis	C05	musculoskeletal diseases
+tendinitis	C26	wounds and injuries
+colpitis	C13	female urogenital diseases and pregnancy complications
+bone spur	C05	musculoskeletal diseases
+pancreatitis	C06	digestive system diseases
+allergic rhinitis	C08	respiratory tract diseases
+allergic rhinitis	C09	otorhinolaryngologic diseases
+allergic rhinitis	C20	immune system diseases
+otitis media	C09	otorhinolaryngologic diseases
+haematochezia	C06	digestive system diseases
+haematochezia	C23	pathological conditions, signs and symptoms
+radiculopathy	C10	nervous system diseases
+dysphonia	C08	respiratory tract diseases
+dysphonia	C09	otorhinolaryngologic diseases
+dysphonia	C10	nervous system diseases
+dysphonia	C23	pathological conditions, signs and symptoms
+myelopathy	C10	nervous system diseases
+dysuria	C23	pathological conditions, signs and symptoms
+mitral valve prolapse	C14	cardiovascular diseases
+fatty liver	C06	digestive system diseases
+bipolar disorder	F	mental discorders
+embolism	C14	cardiovascular diseases
+duodenitis	C06	digestive system diseases
+malignant melanoma	C04	neoplasms
+ear infection	C09	otorhinolaryngologic diseases
+sinus bradycardia	C14	cardiovascular diseases
+sinus bradycardia	C23	pathological conditions, signs and symptoms
+atrial ectopic beats	C14	cardiovascular diseases
+atrial ectopic beats	C23	pathological conditions, signs and symptoms
+hydronephrosis	C12	male urogenital diseases
+hydronephrosis	C13	female urogenital diseases and pregnancy complications
+dental caries	C07	stomatognathic diseases
+mouth ulcer	C07	stomatognathic diseases
+gastroduodenal ulcer	C06	digestive system diseases
+fistula	C23	pathological conditions, signs and symptoms
+acute bronchitis	C01	infections
+acute bronchitis	C08	respiratory tract diseases
+gynaecomastia	C17	skin and connective tissue diseases
+hypophosphataemia	C18	nutritional and metabolic diseases
+renal tubular acidosis	C12	male urogenital diseases
+renal tubular acidosis	C13	female urogenital diseases and pregnancy complications
+renal tubular acidosis	C16	congenital, hereditary, and neonatal diseases and abnormalities
+renal tubular acidosis	C18	nutritional and metabolic diseases
+phlebothrombosis	C14	cardiovascular diseases
+dysaesthesia	C10	nervous system diseases
+dysaesthesia	C23	pathological conditions, signs and symptoms
+goiter	C19	endocrine system diseases
+adenopathy	C15	hemic and lymphatic diseases
+tympanic membrane perforation	C09	otorhinolaryngologic diseases
+tympanic membrane perforation	C26	wounds and injuries
+arrhythmia	C14	cardiovascular diseases
+arrhythmia	C23	pathological conditions, signs and symptoms
+hepatic failure	C06	digestive system diseases
+spinal fracture	C26	wounds and injuries
+movement disorder	C10	nervous system diseases
+musculoskeletal pain	C05	musculoskeletal diseases
+musculoskeletal pain	C23	pathological conditions, signs and symptoms
+ulcer	C23	pathological conditions, signs and symptoms
+rib fracture	C26	wounds and injuries
+angioedema	C14	cardiovascular diseases
+angioedema	C17	skin and connective tissue diseases
+angioedema	C20	immune system diseases
+sick sinus syndrome	C14	cardiovascular diseases
+sick sinus syndrome	C23	pathological conditions, signs and symptoms
+hyperthyroidism	C19	endocrine system diseases
+cardiac failure	C14	cardiovascular diseases
+adenoma	C04	neoplasms
+epilepsy	C10	nervous system diseases
+muscle disorder	C05	musculoskeletal diseases
+muscle disorder	C10	nervous system diseases
+bundle branch block	C14	cardiovascular diseases
+bundle branch block	C23	pathological conditions, signs and symptoms
+melanocytic naevus	C04	neoplasms
+cramp	C05	musculoskeletal diseases
+cramp	C10	nervous system diseases
+cramp	C23	pathological conditions, signs and symptoms
+atrial flutter	C14	cardiovascular diseases
+atrial flutter	C23	pathological conditions, signs and symptoms
+hypernatraemia	C18	nutritional and metabolic diseases
+streptococcal infection	C01	infections
+aspergillosis	C01	infections
+light sensitivity	C10	nervous system diseases
+light sensitivity	C11	eye diseases
+light sensitivity	C23	pathological conditions, signs and symptoms
+enteritis	C06	digestive system diseases
+colitis	C06	digestive system diseases
+glucose intolerance	C18	nutritional and metabolic diseases
+multiple myeloma	C04	neoplasms
+multiple myeloma	C14	cardiovascular diseases
+multiple myeloma	C15	hemic and lymphatic diseases
+multiple myeloma	C20	immune system diseases
+hemiparesis	C10	nervous system diseases
+hemiparesis	C23	pathological conditions, signs and symptoms
+polymyositis	C05	musculoskeletal diseases
+polymyositis	C10	nervous system diseases
+bacteraemia	C01	infections
+bacteraemia	C23	pathological conditions, signs and symptoms
+onychomycosis	C01	infections
+onychomycosis	C17	skin and connective tissue diseases
+myocarditis	C14	cardiovascular diseases
+endocarditis	C14	cardiovascular diseases
+ventricular fibrillation	C14	cardiovascular diseases
+ventricular fibrillation	C23	pathological conditions, signs and symptoms
+gangrene	C23	pathological conditions, signs and symptoms
+cirrhosis	C23	pathological conditions, signs and symptoms
+trigeminal neuralgia	C07	stomatognathic diseases
+trigeminal neuralgia	C10	nervous system diseases
+polyuria	C12	male urogenital diseases
+polyuria	C13	female urogenital diseases and pregnancy complications
+polyuria	C23	pathological conditions, signs and symptoms
+periodontal disease	C07	stomatognathic diseases
+obesity	C18	nutritional and metabolic diseases
+obesity	C23	pathological conditions, signs and symptoms
+glucosuria	C12	male urogenital diseases
+glucosuria	C13	female urogenital diseases and pregnancy complications
+glucosuria	C18	nutritional and metabolic diseases
+basal cell carcinoma	C04	neoplasms
+haematemesis	C06	digestive system diseases
+haematemesis	C23	pathological conditions, signs and symptoms
+granuloma	C15	hemic and lymphatic diseases
+granuloma	C23	pathological conditions, signs and symptoms
+failure to thrive	C23	pathological conditions, signs and symptoms
+cardiac tamponade	C14	cardiovascular diseases
+ankle fracture	C26	wounds and injuries
+diverticulitis	C06	digestive system diseases
+dermatitis exfoliative	C17	skin and connective tissue diseases
+thrombophlebitis	C14	cardiovascular diseases
+shoulder pain	C05	musculoskeletal diseases
+shoulder pain	C23	pathological conditions, signs and symptoms
+gouty arthritis	C05	musculoskeletal diseases
+gouty arthritis	C16	congenital, hereditary, and neonatal diseases and abnormalities
+gouty arthritis	C18	nutritional and metabolic diseases
+supraventricular tachycardia	C14	cardiovascular diseases
+supraventricular tachycardia	C23	pathological conditions, signs and symptoms
+respiratory alkalosis	C08	respiratory tract diseases
+respiratory alkalosis	C18	nutritional and metabolic diseases
+major depression	F	mental discorders
+lymphoma	C04	neoplasms
+lymphoma	C15	hemic and lymphatic diseases
+lymphoma	C20	immune system diseases
+dry eye	C11	eye diseases
+ovarian cyst	C04	neoplasms
+ovarian cyst	C13	female urogenital diseases and pregnancy complications
+ovarian cyst	C19	endocrine system diseases
+bone fracture	C26	wounds and injuries
+cyst	C04	neoplasms
+cyst	C23	pathological conditions, signs and symptoms
+abdominal hernia	C23	pathological conditions, signs and symptoms
+cor pulmonale	C14	cardiovascular diseases
+right heart failure	C14	cardiovascular diseases
+subarachnoid haemorrhage	C10	nervous system diseases
+subarachnoid haemorrhage	C14	cardiovascular diseases
+subarachnoid haemorrhage	C23	pathological conditions, signs and symptoms
+cancer	C04	neoplasms
+premature menopause	C13	female urogenital diseases and pregnancy complications
+umbilical hernia	C16	congenital, hereditary, and neonatal diseases and abnormalities
+umbilical hernia	C23	pathological conditions, signs and symptoms
+psoriasis	C17	skin and connective tissue diseases
+contact dermatitis	C17	skin and connective tissue diseases
+blepharoptosis	C11	eye diseases
+palsies	C10	nervous system diseases
+palsies	C23	pathological conditions, signs and symptoms
+gout	C05	musculoskeletal diseases
+gout	C16	congenital, hereditary, and neonatal diseases and abnormalities
+gout	C18	nutritional and metabolic diseases
+cerebral ischaemia	C10	nervous system diseases
+cerebral ischaemia	C14	cardiovascular diseases
+eyelid diseases	C11	eye diseases
+gastric ulcer	C06	digestive system diseases
+periodontitis	C07	stomatognathic diseases
+actinic keratosis	C04	neoplasms
+actinic keratosis	C17	skin and connective tissue diseases
+choking	C08	respiratory tract diseases
+aortic stenosis	C14	cardiovascular diseases
+glossitis	C07	stomatognathic diseases
+bacterial pneumonia	C01	infections
+bacterial pneumonia	C08	respiratory tract diseases
+alcohol consumption	F	mental discorders
+pancreatic cancer	C04	neoplasms
+pancreatic cancer	C06	digestive system diseases
+pancreatic cancer	C19	endocrine system diseases
+tenosynovitis	C05	musculoskeletal diseases
+liver abscess	C01	infections
+liver abscess	C06	digestive system diseases
+brain concussion	C10	nervous system diseases
+brain concussion	C26	wounds and injuries
+face pain	C23	pathological conditions, signs and symptoms
+atrioventricular block	C14	cardiovascular diseases
+atrioventricular block	C23	pathological conditions, signs and symptoms
+pelvic inflammatory disease	C01	infections
+pelvic inflammatory disease	C13	female urogenital diseases and pregnancy complications
+galactorrhea	C17	skin and connective tissue diseases
+schizoaffective disorder	F	mental discorders
+borderline personality disorder	F	mental discorders
+nephrogenic diabetes insipidus	C12	male urogenital diseases
+nephrogenic diabetes insipidus	C13	female urogenital diseases and pregnancy complications
+portal hypertension	C06	digestive system diseases
+diabetic neuropathy	C10	nervous system diseases
+diabetic neuropathy	C19	endocrine system diseases
+brain neoplasm	C04	neoplasms
+brain neoplasm	C10	nervous system diseases
+reflux esophagitis	C06	digestive system diseases
+breakthrough bleeding	C13	female urogenital diseases and pregnancy complications
+breakthrough bleeding	C23	pathological conditions, signs and symptoms
+seroma	C23	pathological conditions, signs and symptoms
+interstitial nephritis	C12	male urogenital diseases
+interstitial nephritis	C13	female urogenital diseases and pregnancy complications
+lichen planus	C17	skin and connective tissue diseases
+carotid artery stenosis	C10	nervous system diseases
+carotid artery stenosis	C14	cardiovascular diseases
+essential hypertension	C14	cardiovascular diseases
+hepatitis b	C01	infections
+hepatitis b	C06	digestive system diseases
+congenital heart disease	C14	cardiovascular diseases
+congenital heart disease	C16	congenital, hereditary, and neonatal diseases and abnormalities
+hyperprolactinaemia	C10	nervous system diseases
+hyperprolactinaemia	C19	endocrine system diseases
+ketoacidosis	C18	nutritional and metabolic diseases
+sarcoidosis	C15	hemic and lymphatic diseases
+hyperpigmentation	C17	skin and connective tissue diseases
+agoraphobia	F	mental discorders
+optic neuritis	C10	nervous system diseases
+optic neuritis	C11	eye diseases
+eye injury	C10	nervous system diseases
+eye injury	C11	eye diseases
+eye injury	C26	wounds and injuries
+scotoma	C10	nervous system diseases
+scotoma	C11	eye diseases
+scotoma	C23	pathological conditions, signs and symptoms
+eczema	C17	skin and connective tissue diseases
+erysipelas	C01	infections
+erysipelas	C17	skin and connective tissue diseases
+hepatorenal syndrome	C06	digestive system diseases
+hepatorenal syndrome	C12	male urogenital diseases
+hepatorenal syndrome	C13	female urogenital diseases and pregnancy complications
+hepatitis c	C01	infections
+hepatitis c	C06	digestive system diseases
+eye infection	C01	infections
+eye infection	C11	eye diseases
+ebv infection	C01	infections
+agranulocytoses	C15	hemic and lymphatic diseases
+pyoderma gangrenosum	C17	skin and connective tissue diseases
+hydrocephalus	C10	nervous system diseases
+acne	C17	skin and connective tissue diseases
+malignant hypertension	C14	cardiovascular diseases
+labyrinthitis	C09	otorhinolaryngologic diseases
+tracheitis	C01	infections
+tracheitis	C08	respiratory tract diseases
+vitamin d deficiency	C18	nutritional and metabolic diseases
+hyperuricaemia	C23	pathological conditions, signs and symptoms
+parotitis	C07	stomatognathic diseases
+pericarditis	C14	cardiovascular diseases
+paronychia	C01	infections
+paronychia	C17	skin and connective tissue diseases
+thyroid disease	C19	endocrine system diseases
+aortic aneurysm	C14	cardiovascular diseases
+dermatomyositis	C05	musculoskeletal diseases
+dermatomyositis	C10	nervous system diseases
+dermatomyositis	C17	skin and connective tissue diseases
+hyperaesthesia	C10	nervous system diseases
+hyperaesthesia	C23	pathological conditions, signs and symptoms
+bronchiectasis	C08	respiratory tract diseases
+aplasia pure red cell	C15	hemic and lymphatic diseases
+birth defect	C16	congenital, hereditary, and neonatal diseases and abnormalities
+polymyalgia rheumatica	C05	musculoskeletal diseases
+polymyalgia rheumatica	C17	skin and connective tissue diseases
+diaphragmatic hernia	C23	pathological conditions, signs and symptoms
+lymphedema	C15	hemic and lymphatic diseases
+temporal arteritis	C10	nervous system diseases
+temporal arteritis	C14	cardiovascular diseases
+temporal arteritis	C17	skin and connective tissue diseases
+temporal arteritis	C20	immune system diseases
+polyarthritis	C05	musculoskeletal diseases
+inflammatory bowel disease	C06	digestive system diseases
+tendon injury	C26	wounds and injuries
+hiccough	C23	pathological conditions, signs and symptoms
+serum sickness	C17	skin and connective tissue diseases
+serum sickness	C20	immune system diseases
+synovial cyst	C04	neoplasms
+ovarian cancer	C04	neoplasms
+ovarian cancer	C13	female urogenital diseases and pregnancy complications
+ovarian cancer	C19	endocrine system diseases
+gastric cancer	C04	neoplasms
+gastric cancer	C06	digestive system diseases
+varicose vein	C14	cardiovascular diseases
+aphthous stomatitis	C07	stomatognathic diseases
+volvulus	C06	digestive system diseases
+volvulus	C23	pathological conditions, signs and symptoms
+vaginal discharge	C13	female urogenital diseases and pregnancy complications
+left ventricular hypertrophy	C14	cardiovascular diseases
+left ventricular hypertrophy	C23	pathological conditions, signs and symptoms
+anosmia	C10	nervous system diseases
+anosmia	C23	pathological conditions, signs and symptoms
+haemangioma	C04	neoplasms
+incisional hernia	C23	pathological conditions, signs and symptoms
+splenic infarction	C14	cardiovascular diseases
+splenic infarction	C15	hemic and lymphatic diseases
+splenic infarction	C23	pathological conditions, signs and symptoms
+meningioma	C04	neoplasms
+meningioma	C10	nervous system diseases
+hepatic encephalopathy	C06	digestive system diseases
+hepatic encephalopathy	C10	nervous system diseases
+hepatic encephalopathy	C18	nutritional and metabolic diseases
+vitamin b 12 deficiency	C18	nutritional and metabolic diseases
+paraplegia	C10	nervous system diseases
+paraplegia	C23	pathological conditions, signs and symptoms
+aseptic meningitis	C10	nervous system diseases
+causalgia	C10	nervous system diseases
+bradyarrhythmia	C14	cardiovascular diseases
+bradyarrhythmia	C23	pathological conditions, signs and symptoms
+conversion disorder	F	mental discorders
+epidural abscess	C01	infections
+epidural abscess	C10	nervous system diseases
+hay fever	C08	respiratory tract diseases
+hay fever	C09	otorhinolaryngologic diseases
+hay fever	C20	immune system diseases
+myasthenia gravis	C04	neoplasms
+myasthenia gravis	C10	nervous system diseases
+myasthenia gravis	C20	immune system diseases
+fibroids	C04	neoplasms
+bladder cancer	C04	neoplasms
+bladder cancer	C12	male urogenital diseases
+bladder cancer	C13	female urogenital diseases and pregnancy complications
+histoplasmosis	C01	infections
+ganglion	C04	neoplasms
+ganglion	C17	skin and connective tissue diseases
+sjogrens syndrome	C05	musculoskeletal diseases
+sjogrens syndrome	C07	stomatognathic diseases
+sjogrens syndrome	C11	eye diseases
+sjogrens syndrome	C17	skin and connective tissue diseases
+sjogrens syndrome	C20	immune system diseases
+venous insufficiency	C14	cardiovascular diseases
+tension headache	C10	nervous system diseases
+pigmentation disorder	C17	skin and connective tissue diseases
+pigmentation disorder	C23	pathological conditions, signs and symptoms
+keratitis	C11	eye diseases
+diabetes insipidus	C12	male urogenital diseases
+diabetes insipidus	C13	female urogenital diseases and pregnancy complications
+diabetes insipidus	C19	endocrine system diseases
+folliculitis	C17	skin and connective tissue diseases
+empyema	C01	infections
+empyema	C23	pathological conditions, signs and symptoms
+esophageal cancer	C04	neoplasms
+esophageal cancer	C06	digestive system diseases
+neurogenic bladder	C10	nervous system diseases
+neurogenic bladder	C12	male urogenital diseases
+neurogenic bladder	C13	female urogenital diseases and pregnancy complications
+neurogenic bladder	C23	pathological conditions, signs and symptoms
+uterine bleeding	C13	female urogenital diseases and pregnancy complications
+uterine bleeding	C23	pathological conditions, signs and symptoms
+hyperacusia	C09	otorhinolaryngologic diseases
+hyperacusia	C10	nervous system diseases
+hyperacusia	C23	pathological conditions, signs and symptoms
+enterocolitis	C06	digestive system diseases
+cryptococcosis	C01	infections
+chronic hepatitis	C06	digestive system diseases
+food intolerance	C23	pathological conditions, signs and symptoms
+cluster headache	C10	nervous system diseases
+connective tissue disease	C17	skin and connective tissue diseases
+anisocoria	C10	nervous system diseases
+anisocoria	C11	eye diseases
+anisocoria	C23	pathological conditions, signs and symptoms
+pancreatic pseudocyst	C04	neoplasms
+pancreatic pseudocyst	C06	digestive system diseases
+hyperphosphatemia	C18	nutritional and metabolic diseases
+status epilepticus	C10	nervous system diseases
+status epilepticus	C23	pathological conditions, signs and symptoms
+sacroiliitis	C05	musculoskeletal diseases
+pyuria	C01	infections
+pyuria	C12	male urogenital diseases
+pyuria	C13	female urogenital diseases and pregnancy complications
+breast inflammation	C13	female urogenital diseases and pregnancy complications
+breast inflammation	C17	skin and connective tissue diseases
+mumps	C01	infections
+mumps	C07	stomatognathic diseases
+tinea pedis	C01	infections
+tinea pedis	C17	skin and connective tissue diseases
+tinea pedis	C23	pathological conditions, signs and symptoms
+hypogonadism	C19	endocrine system diseases
+esophageal stenosis	C06	digestive system diseases
+corneal abrasion	C10	nervous system diseases
+corneal abrasion	C11	eye diseases
+corneal abrasion	C26	wounds and injuries
+bunion	C05	musculoskeletal diseases
+asthenopia	C11	eye diseases

@@ -1,0 +1,51 @@
+side effect idx,side effect,clusters
+18,peritonitis,4
+27,sepsis,1
+34,appendicitis,4
+60,neumonia,0
+93,septic shock,2
+98,pneumonia staphylococcal,4
+101,lobar pneumonia,3
+115,pleurisy,2
+120,aspiration pneumonia,3
+128,candida infection,3
+133,cellulitis,3
+154,fungal disease,3
+170,mycobacterium tuberculosis infection,2
+176,abscess,3
+182,nasopharyngitis,3
+184,rhinitis,2
+223,pleural pain,0
+228,herpes zoster,3
+268,bronchitis,3
+270,osteomyelitis,3
+279,bacterial infection,3
+337,laryngitis,2
+347,sinusitis,3
+369,gingivitis,3
+370,soft tissue infection,4
+386,infection,1
+388,herpes simplex,2
+429,spondylitis,4
+496,acute bronchitis,3
+543,streptococcal infection,2
+544,aspergillosis,4
+556,bacteraemia,3
+557,onychomycosis,2
+645,bacterial pneumonia,4
+650,liver abscess,4
+660,pelvic inflammatory disease,4
+685,hepatitis b,4
+710,erysipelas,4
+712,hepatitis c,2
+713,eye infection,4
+714,ebv infection,4
+728,tracheitis,4
+737,paronychia,4
+793,epidural abscess,4
+801,histoplasmosis,4
+815,empyema,4
+828,cryptococcosis,4
+845,pyuria,4
+849,mumps,4
+850,tinea pedis,4
